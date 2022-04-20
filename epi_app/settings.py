@@ -28,7 +28,7 @@ PATH_TEMPLATES = str(BASE_DIR)+ "/gestion_fichas/templates"
 import os
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '-&03qn$6ni-2-zdv+#1w140kj%a+ff(e#-zafrlt@tpb-r5=$)')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 # DEBUG = bool( os.environ.get('DJANGO_DEBUG', False) )
 # CSRF_COOKIE_SECURE = True
 # SESSION_COOKIE_SECURE = True
