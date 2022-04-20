@@ -1,0 +1,103 @@
+
+{% extends 'gestion_fichas/base.html' %}
+
+{% load static %}
+{% load myfilters %}
+
+{% block title %}
+Hello World
+
+{% endblock %}
+
+{% block css_style %}
+
+<link href="{% static 'gestion_fichas/css/buscar_hv.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+
+
+{% block content_main %}
+
+
+<div class="content-main">
+            
+    <div class="card-body">
+
+        <h1 class="card-subtitle ">Buscar la hoja de vida de un equipo</h1>
+        <p >Ingrese el numero de producto del equipo para visualizar toda la información relacionada a su hoja de vida</p>
+        {% for message in messages %}
+
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                            <div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ message }}
+                            </div>
+                        
+                        {% else %}
+                           
+                            <div class="alert alert-success alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ message }}
+                            </div>
+                       
+                        {% endif %}
+                       
+                    
+        {% endfor %}
+        
+        <div class="line"></div>
+
+        <div class="container ">
+            <div class="row">
+                
+                <form  method="POST" class="form col-sm-12 col-md-12 col-lg-6 align-self-center">
+                
+                {% csrf_token %}
+                    <div class="form-group">
+                                <label>Seleccione el equipo de altura</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon11"><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_height_equipment.png' %}" alt =""></img> </span>
+                                    </div>
+                                    {{ form.equipo_alturas|add:'class="form-control" placeholder="Selección de equipo"' }}
+                                </div>
+                            </div>   
+                    <div class="form-group ">
+                        
+                        
+                        <label>Buscar Equipo</label>
+                        <div class="input-group ">
+                            
+                            
+                            <div class="input-group-prepend">
+                            
+                                <button type = "submit" class="btn" id="basic-addon11"><img src="{% static 'gestion_fichas/img/icon_search.svg' %}" alt="" class="ti-user search-icon"></button>
+                                
+                            </div> 
+                           
+                            {{ form.numero_producto|add:'class="form-control" placeholder="Número de lote"' }}
+                           
+            
+                        </div>
+                        
+                    </div>
+                    
+                 </form>
+                <div class="col-sm-12 col-md-12 col-lg-6  align-self-center">
+                    
+                    <div class ="image-buscar_hv img-fluid"></div>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+            
+    </div>
+            
+      
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,141 @@
+{% extends 'gestion_fichas/base.html' %}
+
+{% load static %}
+{% load myfilters %}
+{% block title %}
+Hello World
+
+{% endblock %}
+{% block css_style %}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    
+
+
+
+{% endblock %}
+{% block content_main%}
+
+
+<div class="content-main">
+            <h2>Registrar los equipos </h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            
+           
+            <div class="line"></div>
+            
+            {% for message in messages %}
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                            <div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ message }}
+                            </div>
+                        {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+
+                            <div class="alert alert-info alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ message }}
+                            </div>
+                        {% else %}
+                           
+                            <div class="alert alert-success alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ message }}
+                            </div>
+                       
+                        {% endif %}
+                        
+                    
+            {% endfor %}
+            <div class="container">
+                <div class="row">
+                
+                    <div class="col-xs-12 col-lg-6">
+                        <!--form-->
+                        <div class="card">
+                            <div class="card-body">
+
+                                <h4 class="card-subtitle">Actualización de datos de usuario inspector</h4>
+                                <h5 class="card-subtitle">Cambio de datos de inspector</h5>
+                                <form class="form pt-3" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                        <div class="form-group">
+                                            <label>Numero de teléfono del inspector</label>
+                                                <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon11"><i class="ti-user"></i></span>
+                                                </div>
+                                                {{ form.Phone_number|add:'class="form-control" placeholder="Numero de Teléfono"' }}
+                                            </div>
+                                        </div>
+                                    <div class="form-group">
+                                            <label  for="exampleInputEmail1">Nombre de la empresa del inspector</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon22"><i class="ti-email"></i></span>
+                                                </div>
+                                                {{ form.Enterprise|add:'class="form-control" placeholder="Empresa"' }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nueva contraseña</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon33"><i class="ti-lock"></i></span>
+                                                </div>
+                                                {{ form.NewPassword|add:'class="form-control" placeholder="Contraseña nueva"' }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Confirmar nueva contraseña</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon4"><i class="ti-lock"></i></span>
+                                                </div>
+                                                {{ form.NewPasswordConfirm|add:'class="form-control" placeholder="Confirmar contraseña nueva"' }}
+                                            </div>
+                                        </div>
+                                        <div class="form-row mt-4">
+                                            <div class="col">
+                                       
+                                                {{ form.foto_inspector.label_tag|add:'class="form-label"'}}
+                                                {{ form.foto_inspector|add:'class="form-control "' }}
+                                        
+                                    {% comment %} <label class="form-label" for="foto-cintas">Subir una foto de la cintas/ reatas del equipo</label>
+                                    <input type="file" class="form-control" id="foto-cintas" lang="es"/> {% endcomment %}
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                        <button type="reset" class="btn btn-dark col-sm-12 col-md-5 mt-2">Cancelar</button>
+                                        <button type="button" class="btn btn-success col-sm-12 col-md-6 mt-2" data-toggle="modal"
+                                        data-target="#exampleModalCenter">Actualizar datos</button>
+                                        </div>
+                                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">INFO</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                ¿Desea confirmar la actualización de los datos de inspector? 
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                    <button type="submit" class="btn btn-success mr-2">Si, actualizar </button>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>             
+                            </div>
+                <!--form-->
+                            </div>
+                    </div>
+            </div>
+            <!-- Card -->
+        </div>
+        <!--container-->
+</div>
+{% endblock %}

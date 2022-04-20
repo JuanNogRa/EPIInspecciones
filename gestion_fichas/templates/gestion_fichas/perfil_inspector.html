@@ -1,0 +1,39 @@
+
+{% extends 'gestion_fichas/base.html' %}
+{% load myfilters %}
+
+{% block title %}
+Hello World
+
+{% endblock %}
+
+{% block content_main%}
+
+<div class="content-main ">
+    <h1>Inspector {{full_name | title }}</h1>
+    <p>Información del inspector de productos de equipo de altura para la marca EPI.</p>
+    
+    
+    <div class="line"></div>
+
+    <div class="container bootstrap ">
+        <div class="row">
+        {% if is_activate %}   
+            <div class="card border-success text-black text-center col-sm-12 ">
+        {% else %}
+            <div class="card border-danger text-black text-center col-sm-12 ">
+        {% endif %}
+                <ul class="list-group  list-group-flush ">
+                    <li class="list-group-item text-muted">Perfil</li>
+                    <li class="list-group-item text-center"><img id="profile image"  class="img-thumbnail rounded" src="{{ MEDIA_URL }}{{inspector.foto_inspector}}" width="300" height="300"></li>
+                    <li class="list-group-item text-left"><span class="pull-left"><strong>Habilitado: </strong></span> {{is_activate| title }}</li>
+                    <li class="list-group-item text-left"><span class="pull-left"><strong>Nombre: </strong></span> {{full_name| title }}</li>
+                    <li class="list-group-item text-left"><span class="pull-left"><strong>Correo electrónico: </strong></span> {{email}}</li>
+                    <li class="list-group-item text-left"><span class="pull-left"><strong>Código de Inspector: </strong></span> {{inspector.codigo_inspector | title }}</li>
+                    <li class="list-group-item text-left"><span class="pull-left"><strong>Empresa: </strong></span> {{inspector.empresa}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

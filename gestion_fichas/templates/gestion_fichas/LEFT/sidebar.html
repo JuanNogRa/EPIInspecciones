@@ -1,0 +1,258 @@
+<!-- Sidebar  -->
+{% load static %}
+{% load myfilters %}
+<html>
+    <nav id="sidebar">
+                <div class="sidebar-header row-">
+                    
+                
+                    <span class = "list-bg--logo">  </span>
+                    <span class="sidebar-header_h3">Fichas de Inspección</span>
+                    
+                    
+                    
+                </div>
+
+                <ul class="list-unstyled components pt-0">
+                    {% comment %} <img class = "list-bg--logo"src="{% static 'gestion_fichas/img/logo_epi_new.png' %}" alt="..." > </div> {% endcomment %}
+                    {% comment %} <p>Dummy Heading</p> {% endcomment %}
+                    {% comment %} <li id="home" class="active home">
+                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu">
+                            <li>
+                                <a class ="side-bar--a" href="#">Home 1</a>
+                            </li>
+                            <li>
+                                <a class ="side-bar--a" href="#">Home 2</a>
+                            </li>
+                            <li>
+                                <a class ="side-bar--a" href="#">Home 3</a>
+                            </li>
+                        </ul>
+                    </li> {% endcomment %}
+                    
+                    <li>
+
+                    
+                    <div class="input-group icons">
+                
+                    
+                    {% if request.resolver_match.view_name == "home" %}
+                            <span class="p-2 col-2 icon-active icon-container" id="icon-menu"><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_home.png' %}" alt =""></img> </span>
+                            <a class ="side-bar--a active col-10" href="{% url 'home' %}">Home</a>
+                    {% else %}
+                            <span class="p-2 col-2 "><img class="icon-sidebar " id="icon-menu" src = "{% static 'gestion_fichas/img/icons/icon_home.png' %}" alt =""></img> </span>
+                            <a class ="side-bar--a col-10" href= "{% url 'home' %}" >Home</a>
+                    {% endif %}
+                    </div>
+                        
+                    <div class="input-group icons">
+                                        
+                        
+                        
+                    </li>
+                    <li>
+                    <!-- User Profile-->
+                    {% if user.is_authenticated %}
+                        <div class="input-group icons">
+                            {% if request.resolver_match.view_name == "profile" %}
+                                <span class="p-2 col-2 icon-active icon-container" ><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_profile.png' %}" alt =""></img> </span>
+                                {% if user.is_superuser %}
+                                    <a class ="side-bar--a active col-10" href="{% url 'admin:index' %}">{{request.user.get_full_name | title }}</a>
+                                {% else %}
+                                    <a class ="side-bar--a active col-10" href="{% url 'profile' %}">{{request.user.get_full_name | title }}</a>
+                                {% endif %}
+                            {% else %}
+                                <span class="p-2 col-2 "><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_profile.png' %}" alt =""></img> </span>
+                                {% if user.is_superuser %}
+                                    <a class ="side-bar--a col-10" href= "{% url 'admin:index' %}" >{{request.user.get_full_name | title }}</a>
+                                {% else %}
+                                    <a class ="side-bar--a col-10" href= "{% url 'profile' %}" >{{request.user.get_full_name | title }}</a>
+                                {% endif %}
+                                
+                            {% endif %}
+                        </div> 
+                    {% endif %}
+                    <!-- End User Profile-->
+                    </li>
+                    <li>
+                        <div class="input-group icons">
+                    
+                        {% if user.is_authenticated %}
+                            {% if request.resolver_match.view_name == "buscar_inspector" %}
+                                    <span class="p-2 col-2 icon-active icon-container" id="icon-menu"><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_search_profile.png' %}" alt =""></img> </span>
+                                    <a class ="side-bar--a active col-10" href="{% url 'buscar_inspector' %}">Buscar inspector</a>
+                            {% else %}
+                                    <span class="p-2 col-2 "><img class="icon-sidebar " id="icon-menu" src = "{% static 'gestion_fichas/img/icons/icon_search_profile.png' %}" alt =""></img> </span>
+                                    <a class ="side-bar--a col-10" href= "{% url 'buscar_inspector' %}" >Buscar inspector</a>
+                            
+                            {% endif %}
+                        {% else %}
+                            {% if request.resolver_match.view_name == "buscar_inspector" %}
+                                <span class="p-2 col-2 icon-active icon-container" id="icon-menu"><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_search_profile.png' %}" alt =""></img> </span>
+                                <a class ="side-bar--a active col-10" href="{% url 'buscar_inspector' %}">Buscar Inspector EPI</a>
+                            {% else %}
+                                <span class="p-2 col-2 "><img class="icon-sidebar " id="icon-menu" src = "{% static 'gestion_fichas/img/icons/icon_search_profile.png' %}" alt =""></img> </span>
+                                <a class ="side-bar--a col-10" href= "{% url 'buscar_inspector' %}" >Buscar Inspector EPI</a>
+                    
+                            {% endif %}
+                        {% endif %}
+                        </div>
+                         
+                    </li>
+
+
+                    <li>
+                        {% if user.is_authenticated %}
+                            <div class="input-group icons">
+                            <span class="p-2 col-2  icon-container" ><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_documents.png' %}" alt =""></img> </span>
+                            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle side-bar--a col-10">HV</a>
+                            </div>
+                            {% if request.resolver_match.view_name == "buscar_hv" or request.resolver_match.view_name == "crear_hv" %}
+                                    <ul class="collapse show list-unstyled" id="pageSubmenu">
+                            {% else %}
+                                <ul class="collapse  list-unstyled" id="pageSubmenu">
+                            {% endif %}
+                            
+                                <li>
+                                {% if request.resolver_match.view_name == "buscar_hv" %}
+                                    <a class ="side-bar--a active col-12 " href="{% url 'buscar_hv' %}">Buscar HV de un Equipo</a>
+                                {% else %}
+                                    <a class ="side-bar--a col-12" href= "{% url 'buscar_hv' %}" >Buscar HV de un Equipo</a>
+                                
+                                {% endif %}
+                                </li>
+                        {% else %}
+                        <div class="input-group icons">
+                            <span class="p-2 col-2  icon-container" ><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_documents.png' %}" alt =""></img> </span>
+                            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle side-bar--a col-10">Buscar equipo</a>
+                            </div>
+                            {% if request.resolver_match.view_name == "buscar_hv" or request.resolver_match.view_name == "crear_hv" %}
+                                    <ul class="collapse show list-unstyled" id="pageSubmenu">
+                            {% else %}
+                                <ul class="collapse  list-unstyled" id="pageSubmenu">
+                            {% endif %}
+                            
+                                <li>
+                                {% if request.resolver_match.view_name == "buscar_hv" %}
+                                    <a class ="side-bar--a active col-12 " href="{% url 'buscar_hv' %}">Buscar HV de un Equipo</a>
+                                {% else %}
+                                    <a class ="side-bar--a col-12" href= "{% url 'buscar_hv' %}" >Buscar HV de un Equipo</a>
+                                
+                                {% endif %}
+                                </li>
+                        {% endif %}    
+                            {% if user.is_authenticated %}
+                           
+                            <li> 
+
+                                {% if request.resolver_match.view_name == "crear_hv" %}
+                                <a class ="side-bar--a active col-12" href="{% url 'crear_hv' %}">Crear HV de un Equipo</a>
+                                
+                                {% else %}
+                                <a class ="side-bar--a col-12" href= "{% url 'crear_hv' %}" >Crear HV de un Equipo</a>
+                                {% endif %}
+                                </li>
+
+                            {% endif %}    
+                            </ul>
+                            </li>
+                            <li>
+                                <div class="input-group icons">
+                                {% if request.resolver_match.view_name == "contactanos" %}
+                                    <span class="p-2 col-2  icon-active icon-container" ><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_contact.png' %}" alt =""></img> </span>
+                                    <a class ="side-bar--a col-10 active " href="{% url 'contactanos' %}">Contáctanos</a>    
+                                {% else %}
+                                    <span class="p-2 col-2  icon-container" ><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_contact.png' %}" alt =""></img> </span>
+                                    <a class ="side-bar--a col-10" href="{% url 'contactanos' %}">Contáctanos</a>
+                                {% endif %}
+                                 
+                                    
+                                </div>
+                            </li>
+                            <li>
+                                <div class="input-group icons">
+                                    {% if request.resolver_match.view_name == "privacidad" %}
+                                        <span class="p-2 col-2 icon-active icon-container" ><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_privacy_policy.png' %}" alt =""></img> </span>
+
+                                        <a class ="side-bar--a col-10 active" href="{% url 'privacidad' %}">Política de tratamiento y protección de datos</a>
+                                    {% else %}
+                                        <span class="p-2 col-2 icon-container" ><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_privacy_policy.png' %}" alt =""></img> </span>
+
+                                        <a class ="side-bar--a col-10" href="{% url 'privacidad' %}">Política de tratamiento y protección de datos</a>
+                                    {% endif %}
+                                    
+                                </div>
+                            </li>
+                            <li>
+                                {% if user.is_authenticated %}
+
+                                    <div class="input-group icons">
+        
+                                        <span class="p-2 col-2 icon-container" ><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_shutdown.png' %}" alt =""></img> </span>
+
+                                        <a class ="side-bar--a col-10" href="{% url 'logout' %}">Cerrar sesión</a>
+                                        
+                                    </div>
+
+                                {% else %}
+
+                                    <div class="input-group icons">
+        
+                                        <span class="p-2 col-2 icon-container" ><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_login.png' %}" alt =""></img> </span>
+
+                                        <a class ="side-bar--a col-10" href="{% url 'ingresar' %}">Ingresar como inspector</a>
+                                        
+                                    </div>
+
+                                {% endif %}
+                            </li>
+                        </ul>
+                        
+                {% comment %} {% if user.is_authenticated %}
+                    <ul class="list-unstyled CTAs">
+                        
+
+                        <li>
+                            <a href="{% url 'agregar_inspeccion' %}" class="btn-cta blue">Realizar Inspección</a>
+                        </li>
+                    </ul>
+                {% endif %}
+                 {% endcomment %}
+                {% if user.is_superuser %} 
+                <ul class="list-unstyled CTAs pt-0">
+                        
+
+                        <li>
+                            <a href="{% url 'admin:index' %}" class="btn-cta blue">Administración</a>
+                        </li>
+                    </ul>
+                
+                {% endif %}
+                {% comment %} {% if user|is_group:"Registrador_equipos" %}  {% endcomment %}
+                {% if user.is_superuser %}
+                <ul class="list-unstyled CTAs pt-0">
+                        
+
+                        <li>
+                            <a href="{% url 'registrar' %}" class="btn-cta blue">Registrar Equipos</a>
+                        </li>
+                </ul>
+                
+                {% endif %}
+
+                {% if user|is_group:"Registrador_inspectores" %} 
+                <ul class="list-unstyled CTAs pt-0">
+                        
+
+                        <li>
+                            <a href="{% url 'buscar_inspector' %}" class="btn-cta blue">Registrar inspectores</a>
+                        </li>
+                </ul>
+                
+                {% endif %}
+    </nav>
+
+
+</html>
+       

@@ -1,0 +1,40 @@
+
+{% extends 'gestion_fichas/base.html' %}
+
+{% load static %}
+
+{% block title %}
+Hello World
+
+{% endblock %}
+{% block css_style %}
+
+    
+    <link href="{% static 'gestion_fichas/css/empty_state_hv.css' %}" rel="stylesheet">
+
+
+
+{% endblock %}
+{% block content_main%}
+<div class ="content-main">
+    <div class="container ">
+        <div class="row">
+          <div class="col-md-6 align-self-center image-crear_hv">
+            
+          </div>
+          <div class="col-md-6 align-self-center">
+            
+            <h2>La hoja de vida del equipo que estas buscando no existe.</h2>
+            <p> Sin embargo puedes crearla haciendo el click en el botón de abajo 
+            </p>
+            <div class="col text-center">
+            
+              <a  href="{% url 'crear_hv' %}" class="btn green ">Crear HV</a>
+           
+            </div>
+            
+          </div>
+        </div>
+      </div>
+</div>
+{% endblock %}

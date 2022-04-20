@@ -1,0 +1,68 @@
+@font-face {
+    font-family: Poppins-Regular;
+    src: url('../fonts/poppins/Poppins-Regular.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-Medium;
+    src: url('../fonts/poppins/Poppins-Medium.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-Bold;
+    src: url('../fonts/poppins/Poppins-Bold.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-SemiBold;
+    src: url('../fonts/poppins/Poppins-SemiBold.ttf'); 
+  }
+
+.img-header{
+
+   
+    width:60px;
+    height :60px;
+    padding-left: 150px;
+   
+    }
+
+#header{
+   
+    background: url("../img/bg_login_admin2.jpg") no-repeat center;
+    background-size: cover;
+    background-position: center;
+    
+
+}
+
+#site-name--a{
+
+
+    font-family: Poppins-Bold;
+    text-align: center;
+}
+
+.login{
+
+
+    background: #ebeeef;;
+}
+
+.required{
+
+
+    font-family: Poppins-Regular;
+}
+
+input{
+
+
+    font-family: Poppins-Regular;
+}
+
+/* #user-tools{
+
+
+    font-size: 85%;
+} */

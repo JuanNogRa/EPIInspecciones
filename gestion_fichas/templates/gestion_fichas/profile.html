@@ -1,0 +1,117 @@
+{% extends 'gestion_fichas/base.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% load myfilters %}
+
+{% block title %}
+Hello World
+
+{% endblock %}
+{% comment %} <link href="{% static 'gestion_fichas/css/profile.css' %}" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"> {% endcomment %}
+
+
+{% block css_style %}
+
+    <!--  This file has been downloaded from bootdey.com    @bootdey on twitter -->
+    <!--  All snippets are MIT license http://bootdey.com/license -->
+    <link href="{% static 'gestion_fichas/css/profile.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block content_main%}
+
+
+<div class="content-main" >
+            <h1>Perfil del inspector {{request.user.get_full_name | title }}</h1>
+            <p>Gestiona tu información de las inspecciones que has realizado, cambiar tus datos personales y cambiar la contraseña de acceso.</p>
+            
+            <div class="line"></div>
+            <div class ="cont-main">
+            {% for message in messages %}
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                            <div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ message }}
+                            </div>
+                        {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+
+                            <div class="alert alert-info alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ message }}
+                            </div>
+                        {% else %}
+                           
+                            <div class="alert alert-success alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ message }}
+                            </div>
+                       
+                        {% endif %}
+                        
+                    
+            {% endfor %}
+
+            <div class="container bootstrap snippets bootdey ">
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <!--left col-->
+
+                        <ul class="list-group">
+                            <li class="list-group-item text-muted">Perfil</li>
+                            <li class="list-group-item text-center"><img id="profile image"  class="img-thumbnail rounded" src="{{ MEDIA_URL }}{{inspectores.foto_inspector}}" width="150" height="150"></li>
+                            <li class="list-group-item text-left"><span class="pull-left"><strong>Nombre</strong></span> {{request.user.get_full_name | title }}</li>
+                            <li class="list-group-item text-left"><span class="pull-left"><strong>Correo electrónico</strong></span> {{request.user.email}}</li>
+                            <li class="list-group-item text-left"><span class="pull-left"><strong>Empresa</strong></span> {{inspectores.empresa}}</li>
+                            <li class="list-group-item text-left"><span class="pull-left"><strong>Numero de teléfono</strong></span> {{inspectores.phone | title }}</li>
+                            <li class="list-group-item text-left"><span class="pull-left"><strong>Ingreso: </strong></span>{{request.user.date_joined.date}}</li>
+                            <li class="list-group-item text-left"><span class="pull-left"><strong>Última visita: </strong></span> {{request.user.last_login.date }}</li>
+
+                        </ul>
+
+                
+                    </div>
+                    <div class="col-sm-9" id="settings">
+                        <div class="card">
+                            <div class="card-body">
+                                <form action="" method="POST" enctype="multipart/form-data">
+                                <h4 class="card-subtitle">Menú de usuario inspector</h4>
+                                {% csrf_token %}
+                                
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="UpdateConfirmation" tabindex="-1" role="dialog" aria-labelledby="UpdateConfirmationCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="UpdateConfirmationLongTitle">INFO</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                            ¿Desea confirmar la actualización de los datos? 
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                <button type="submit" class="btn btn-success mr-2">Si, actualizar</button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                     
+                                    </div>
+                                {% crispy form %}
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                    
+                    
+<body>
+</div>
+{% endblock %}

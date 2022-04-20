@@ -1,0 +1,42 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | Administración base de datos Inspección equipos{% endblock %}
+
+{% block extrastyle %}
+
+
+<style> 
+
+    
+</style>
+
+{% endblock %}
+
+
+{% block extrahead %}
+
+<link rel="shortcut icon" type="image/x-icon" href="{% static 'gestion_fichas/img/epi_icon.ico' %}">
+<link href="{% static 'gestion_fichas/css/admin.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a id = "site-name--a"href="{% url 'admin:index' %}">Administración Inspección equipos </a></h1>
+<div id="image-login"><img class= "img-header" src = "{% static 'gestion_fichas/img/logo_epi_new.png' %}"></div>
+
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+
+{% comment %} {% extends "admin/base.html" %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | helloworld{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">Hello</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %} {% endcomment %}

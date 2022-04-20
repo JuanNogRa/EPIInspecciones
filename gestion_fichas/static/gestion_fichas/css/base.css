@@ -1,0 +1,373 @@
+/*
+    DEMO STYLE
+*/
+@import url("https://fonts.googleapis.com/css?family=Nunito+Sans");
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+/* body {
+    font-family: 'Poppins', sans-serif;
+    background: #fafafa;
+} */
+:root {
+    --black: #0e0620;
+    --white: #fff;
+    --blue :#4fc3f7 ;
+  }
+
+
+body{
+    font-family: "Nunito Sans";
+    font-size: .900rem;
+    font-weight: 400;
+    
+    background:#ECF3F7;
+    
+}
+
+
+h1,h2,h3,h4{
+
+    color:#3e5569;
+
+}
+
+p {
+    font-family: "Nunito Sans";
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 1.7em;
+    color: #999;
+}
+
+a,
+a:hover,
+a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+
+.navbar {
+    padding: 15px 10px;
+    background: #fff;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 40px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px dashed #ddd;
+    margin: 40px 0;
+}
+
+.item-topbar a{
+    color:#3e5569 !important;
+    font-weight: bold ;
+}
+.btn-cta {
+    z-index: 1;
+    overflow: hidden;
+    position: relative;
+    padding: 8px 50px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 1em;
+    letter-spacing: 2px;
+    transition: 0.2s ease;
+    font-weight: bold;
+    margin: 5px 0px;
+}
+.btn-success{
+
+    background-color: #36bea6;
+}
+.btn-success:hover{
+
+    background-color: #2EA08C;
+}
+.freepik-ref{
+
+    font-family: "Nunito Sans";
+    font-size: 0.7em;
+    color: #414755;
+
+
+}
+
+.btn-cta.blue{
+font-family: "Nunito Sans";
+background: #fff;
+color: #414755;
+letter-spacing: 0px;
+font-weight: normal;
+border-radius: 5px ;
+
+
+}
+
+.btn-cta.blue:hover {
+color: var(--white);
+background: var(--blue);
+transition: 0.2s ease;
+}
+
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+#sidebarCollapse{
+
+    background-color: #DFDFDF;
+}
+
+
+
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+
+#sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0px;
+    left: 0;
+    height: 100%;
+    z-index: 999;
+    background: #414755;
+    color: #d8dbe2;
+    transition: all 0.3s;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+#sidebar .sidebar-header {
+    padding: 10px;
+    background: #3b404d;
+    /* background: #2f333d; */
+    font-size: 2pt;
+}
+
+.sidebar-header_h3{
+
+    font-size: small;
+    display: inline-block;
+    vertical-align: top;
+    width: 168px;
+    height: 37px;
+    padding-top: 8px;
+    padding-left: 8px;
+    color:#fff;
+}
+
+
+.list-bg--logo{
+    
+    background: url("../img/logo_epi_new.png") no-repeat center;
+    background-size: cover;
+    background-position: center;
+    
+    display: inline-block;
+    width: 40px;
+    height: 37px;
+    
+    }
+
+.content-main{
+    padding: 3%;
+    background-color: #fff;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid #9c9ea1;
+}
+
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+.user-sidebar{
+
+    
+    display: block;
+    font-size: 0.9em ;
+   
+    margin-top: 0%;
+
+}
+
+#sidebar ul li  .side-bar--a:hover {
+    color: #ffffff;
+    background: #2f333d;
+}
+.side-bar--a.active{
+
+    color: #ffffff;
+    background: #2f333d;
+}
+
+
+#sidebar ul li.active>a,
+a[aria-expanded="true"] {
+    color: #fff;
+    /* background: #2f333d; */
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+.nav-link.dropdown-toggle::after{
+    display: block;
+    position: absolute;
+    top: 0%;
+    right: 0px;
+    transform: translateY(-50%);
+}
+
+
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #414755;
+}
+
+ul.CTAs {
+    padding: 20px;
+}
+
+ul.CTAs a {
+    text-align: center;
+    font-size: 0.9em !important;
+    display: block;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+a.download {
+    background: #fff;
+    color: #414755;
+}
+a.download:hover{
+    background: var(--blue) !important;
+    color: var(--black) !important;
+
+}
+
+a.article,
+a.article:hover {
+    background: #4fc3f7 !important;
+    color: #fff !important;
+}
+img.icon-sidebar{
+
+    height:25px;
+    width: 25px;
+    
+}
+.card-img-complete{
+
+    height: 100%;
+}
+img.icon-bigger{
+
+    height:40px;
+    width: 40px;
+    
+}
+
+/* .img-responsive {
+    max-width: 90%; 
+    max-height: 60%;
+  } */
+
+.container-fluid {
+    max-height: 10%;
+} 
+span.icon-active{
+
+    background-color: #2f333d;
+
+}
+.input-group.icons:hover{
+
+    background-color: #2f333d;
+
+}
+.input-group.icons,
+.input-group.icons:hover ,
+.input-group.icons:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+
+#content {
+    width: calc(100% - 250px);
+    padding: 40px;
+    min-height: 100vh;
+    transition: all 0.3s;
+    position: absolute;
+    top: 0px;
+    right: 0;
+}
+
+#content.active {
+    width: 100%;
+}
+
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    #content {
+        width: 100%;
+    }
+    #content.active {
+        width: calc(100% - 250px);
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+    
+  
+    h1{
+        font-family: "Nunito Sans";
+        font-size: 1.7em;
+        
+    }
+}

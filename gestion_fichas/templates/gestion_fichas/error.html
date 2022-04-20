@@ -1,0 +1,37 @@
+
+{% extends 'gestion_fichas/base.html' %}
+
+{% load static %}
+
+{% block title %}
+Hello World
+
+{% endblock %}
+{% block css_style %}
+
+    
+    <link href="{% static 'gestion_fichas/css/empty_state.css' %}" rel="stylesheet">
+
+
+
+{% endblock %}
+{% block content_main%}
+<div class ="content-main">
+    <div class="container ">
+        <div class="row">
+          <div class="col-md-6 align-self-center">
+            
+          </div>
+          <div class="col-md-6 align-self-center">
+            <h1>404</h1>
+            <h2>UH OH! You're lost.</h2>
+            <p>The page you are looking for does not exist.
+              How you got here is a mystery. But you can click the button below
+              to go back to the homepage.
+            </p>
+            <button class="btn green">HOME</button>
+          </div>
+        </div>
+      </div>
+</div>
+{% endblock %}

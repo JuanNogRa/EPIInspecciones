@@ -1,0 +1,617 @@
+
+{% extends 'gestion_fichas/base.html' %}
+
+{% load static %}
+{% load myfilters %}
+{% block title %}
+
+Hello World
+
+{% endblock %}
+{% block css_style %}
+
+    <!--  This file has been downloaded from bootdey.com    @bootdey on twitter -->
+    <!--  All snippets are MIT license http://bootdey.com/license -->
+    <link href="{% static 'gestion_fichas/css/agregar_ficha_inspeccion.css' %}" rel="stylesheet">
+
+     
+
+{% endblock %}
+{% block content_main%}
+
+
+<div class="content-main">
+           <h1>Adicionar la ficha de inspección</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            
+            <div class="line"></div>
+            
+
+            <!--PEN CONTENT     -->
+            <div class="content">
+            <!--content inner-->
+            <div class="content__inner">
+                <div class="container">
+                <!--content title-->
+                <h4 class="text-center">Formulario para la ficha de inspección</h4>
+                {% comment %} <h3 class="content__title content__title--m-sm">Formulario para la ficha de inspección</h3> {% endcomment %}
+                <!--animations form-->
+                
+                <!--content title-->
+                <h6 class="content__title">Presione "Siguiente" para avanzar o "Anterior" para retroceder</h6>
+                </div>
+                <div class="container overflow-hidden">
+                <!--multisteps-form-->
+                <div class="multisteps-form">
+                    <!--progress bar-->
+                    <div class="row">
+                    <div class="col-12 col-lg-8 ml-auto mr-auto mb-4">
+                        <div class="multisteps-form__progress">
+                        <button class="multisteps-form__progress-btn js-active" type="button" title="User Info">Ficha Info</button>
+                        <button class="multisteps-form__progress-btn" type="button" title="Cintas/Reatas">Cintas/Reatas</button>
+                        <button class="multisteps-form__progress-btn" type="button" title="Costuras/etiquetas">Costuras/etiquetas</button>
+                        <button class="multisteps-form__progress-btn" type="button" title="Metálicas y plasticas">Metálicas y plasticas</button>
+                        
+                        </div>
+                    </div>
+                    </div>
+                    <!--form panels-->
+                    <div class="row">
+                    <div class="col-12 col-lg-8 m-auto">
+                        <form method="POST" enctype="multipart/form-data" class="multisteps-form__form" >
+                        {% csrf_token %} 
+                        <!--single form panel-->
+                            <div class="multisteps-form__panel shadow p-5 rounded bg-white js-active" data-animation="fadeIn">
+                                <h3 class="multisteps-form__title">Información de la Ficha</h3>
+                                <div class="multisteps-form__content">
+                                <div class="form-row mt-4 d-flex justify-content-center">
+                                    <div class="d-flex justify-content-center " style="width:600px;height: 300px;">
+                                    <div class="card text-justify" >
+                                        <img class="card-img-center border-black " style="height: 70px;width:50px;" src="{{ MEDIA_URL }}{{inspectores.foto_inspector}}" alt="Card image cap">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Inspector {{request.user.get_full_name|title}}</h5>
+                                            <div class="form-row mt-4">
+                                                <div class="col-12 col-sm-4 mt-4 mt-sm-0">
+                                                <label>Código interno</label>
+                                                {% comment %} <input class="multisteps-form__input form-control "  type="text" placeholder="código interno" required/> {% endcomment %}
+                                                </div>
+            
+                                                <div class="col-12 col-sm-6">
+                                                <label for="numero_producto">{{equipo.numero_producto}}</label>
+                                                {% comment %} <input id ="numero_producto" class="multisteps-form__input form-control" type="text" placeholder="Lote del producto"/> {% endcomment %}
+                                                </div>
+                                            </div>
+                                            <div class="form-row mt-2">
+                                                <div class="col-12 col-sm-4 mt-4 mt-sm-0">
+                                                <label>Referencia</label>
+                                                {% comment %} <input class="multisteps-form__input form-control "  type="text" placeholder="código interno" required/> {% endcomment %}
+                                                </div>
+            
+                                                <div class="col-12 col-sm-6">
+                                                    <label for="referencia_arnes">{{equipo.referencias_arnes.referencia}}</label>
+                                                {% comment %} <input id ="numero_producto" class="multisteps-form__input form-control" type="text" placeholder="Lote del producto"/> {% endcomment %}
+                                                </div>
+                                                <div class="col-12 col-sm-4 mt-4 mt-sm-0">
+                                                    <label>Despcripción</label>
+                                                    {% comment %} <input class="multisteps-form__input form-control "  type="text" placeholder="código interno" required/> {% endcomment %}
+                                                    </div>
+                
+                                                    <div class="col-12 col-sm-6">
+                                                        <label for="descripcion">{{equipo.referencias_arnes.descripcion}}</label>
+                                                    {% comment %} <input id ="numero_producto" class="multisteps-form__input form-control" type="text" placeholder="Lote del producto"/> {% endcomment %}
+                                                    </div>
+                                                <div class="col-12 col-sm-4 mt-4 mt-sm-0">
+                                                    <label>Línea</label>
+                                                    {% comment %} <input class="multisteps-form__input form-control "  type="text" placeholder="código interno" required/> {% endcomment %}
+                                                    </div>
+                
+                                                    <div class="col-12 col-sm-6">
+                                                        <label for="linea">{{equipo.referencias_arnes.linea}}</label>
+                                                    {% comment %} <input id ="numero_producto" class="multisteps-form__input form-control" type="text" placeholder="Lote del producto"/> {% endcomment %}
+                                                    </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    
+                                    {% comment %} <input class="multisteps-form__input form-control" type="text" placeholder="fecha"/> {% endcomment %}
+                                
+                                </div>
+                                
+                                <div class="button-row d-flex mt-4 col-12">
+                                    <button class="btn btn-dark" type="button" onClick="window.history.back();return false;" title="Prev">Anterior</button>
+                                    <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Siguiente</button>
+                                </div>
+                                </div>
+                            </div>
+                            <!--single form panel-->
+                            <div class="multisteps-form__panel shadow p-3 rounded bg-white" data-animation="fadeIn">
+                                <h4 class="multisteps-form__title">Partes: Cintas/Reatas</h4>
+                                <h6 class="multisteps-form__title">Aspectos a Inspeccionar</h6>
+                                <div class="multisteps-form__content">
+                                {% comment %} Lista de checkbox {% endcomment %}
+                                    <ul class="list-group list-group-flush">
+                                        
+                                        <li class="list-group-item">
+                                        <!-- Default checked -->
+                                            
+                                            {{ form.tienen_hoyos_agujeros.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left""'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.tienen_hoyos_agujeros %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                            
+                                            
+                                            {{ form.tienen_hoyos_agujeros_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+                                            {% comment %} <textarea class="multisteps-form__textarea form-control" placeholder="Observación"></textarea> {% endcomment %}
+
+                                        </li>
+
+                                        <li class="list-group-item">
+                                        <!-- Default checked -->
+                                            {{ form.deshilachadas.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left""'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.deshilachadas %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                            {{ form.deshilachadas_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+                                            {% comment %} <textarea class="multisteps-form__textarea form-control" placeholder="Observación"></textarea> {% endcomment %}
+
+                                        </li>
+                                        <li class="list-group-item">
+                                        <!-- Default checked -->
+                                            {{ form.cortadas_desgastadas.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left""'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.cortadas_desgastadas %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                            
+                                            {{ form.cortadas_desgastadas_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+                                            {% comment %} <textarea class="multisteps-form__textarea form-control" placeholder="Observación"></textarea> {% endcomment %}
+
+                                        </li>
+                                        <li class="list-group-item">
+                                        <!-- Default checked -->
+                                            
+                                            {{ form.talladuras.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left""'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.talladuras %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                            {{ form.talladuras_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+                                            {% comment %} <textarea class="multisteps-form__textarea form-control" placeholder="Observación"></textarea> {% endcomment %}
+
+                                        </li>
+
+                                        <li class="list-group-item">
+                                        <!-- Default checked -->
+                                            {{ form.torsion.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left""'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.torsion %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                            {{ form.torsion_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+                                            {% comment %} <textarea class="multisteps-form__textarea form-control" placeholder="Observación"></textarea> {% endcomment %}
+
+                                        </li>
+                                        <li class="list-group-item">
+                                        <!-- Default checked -->
+                                            {{ form.suciedad.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left""'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.suciedad %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                            {{ form.suciedad_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+                                            {% comment %} <textarea class="multisteps-form__textarea form-control" placeholder="Observación"></textarea> {% endcomment %}
+
+                                        </li>
+                                        <li class="list-group-item">
+                                        <!-- Default checked -->
+                                            {{ form.quemadura.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left""'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.quemadura %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                            {{ form.quemadura_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+                                            {% comment %} <textarea class="multisteps-form__textarea form-control" placeholder="Observación"></textarea> {% endcomment %}
+
+                                        </li>
+
+                                        <li class="list-group-item">
+                                        <!-- Default checked -->
+                                            {{ form.salpicadura_rigidez.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left""'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.salpicadura_rigidez %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                            {{ form.salpicadura_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+                                            {% comment %} <textarea class="multisteps-form__textarea form-control" placeholder="Observación"></textarea> {% endcomment %}
+
+                                        </li>
+
+                                        <li class="list-group-item">
+                                        <!-- Default checked -->
+                                            {{ form.sustancia_quimica.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left""'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.sustancia_quimica %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                           
+                                            {{ form.sustancia_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+                                            {% comment %} <textarea class="multisteps-form__textarea form-control" placeholder="Observación"></textarea> {% endcomment %}
+
+                                        </li>
+                                        <li class="list-group-item">
+                                        <!-- Default checked -->
+                                            {{ form.otros_arnes_cinta.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left""'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.otros_arnes_cinta %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                            
+                                            {{ form.otros_arnes_cinta_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+                                            {% comment %} <textarea class="multisteps-form__textarea form-control" placeholder="Observación"></textarea> {% endcomment %}
+
+                                        </li>
+                                    </ul>
+                                    
+                                <div class="form-row mt-4">
+                                    <div class="col">
+                                       
+                                        {{ form.imagen_arnes_cinta_reata.label_tag|add:'class="form-label"'}}
+                                        {{ form.imagen_arnes_cinta_reata|add:'class="form-control "' }}
+                                        
+                                    {% comment %} <label class="form-label" for="foto-cintas">Subir una foto de la cintas/ reatas del equipo</label>
+                                    <input type="file" class="form-control" id="foto-cintas" lang="es"/> {% endcomment %}
+                                    </div>
+                                </div>
+                                
+                                <div class="button-row d-flex mt-4">
+                                    <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Anterior</button>
+                                    <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Siguiente</button>
+                                </div>
+                                </div>
+                            </div>
+                            <!--single form panel-->
+                            <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="fadeIn">
+                                <h4 class="multisteps-form__title">Partes: Costuras/etiquetas</h4>
+                                <div class="multisteps-form__content">
+                                
+                                    <ul class="list-group list-group-flush">
+                                        
+                                        <li class="list-group-item">
+                                        <!-- checkbox -->
+                                            {{ form.costuras_completas_continuas.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left""'}}
+                                           
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.costuras_completas_continuas %}
+                                                
+                                                <div class="custom-control custom-radio custom-control-inline ">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                            {{ form.costuras_completas_continuas_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+
+                                        </li>
+
+                                        <li class="list-group-item">
+                                        <!-- checkbox -->
+                                            {{ form.visibles.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left"'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.visibles %}
+
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                            {{ form.visibles_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+
+                                        </li>
+
+                                        <li class="list-group-item">
+                                        <!-- checkbox -->
+                                            {{ form.indicador_impacto_activado.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left""'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.indicador_impacto_activado %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                            {{ form.indicador_impacto_activado_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+
+                                        </li>
+
+                                        <li class="list-group-item">
+                                        <!-- checkbox -->
+                                            {{ form.otros_arnes_costuras.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left"'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.otros_arnes_costuras %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                            {{ form.otros_arnes_costuras_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+
+                                        </li>
+
+                                    </ul>
+                                <div class="form-row mt-4">
+                                    <div class="col">
+                                        {{ form.imagen_arnes_costuras.label_tag|add:'class="form-label"'}}
+                                        {{ form.imagen_arnes_costuras|add:'class="form-control"' }}
+                                    </div>
+                                </div>
+
+                                
+                                <div class="row">
+                                    <div class="button-row d-flex mt-4 col-12">
+                                    <button class="btn btn-primary js-btn-prev" type="button" id ="btn-cintas-anterior" title="Prev">Anterior</button>
+                                    <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Siguiente</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <!--single form panel-->
+                            <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="fadeIn">
+                                <h3 class="multisteps-form__title">Partes metálicas y plasticas</h3>
+                                <div class="multisteps-form__content">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <!-- checkbox -->
+                                            {{ form.metalicas_completas.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left"'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.metalicas_completas %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                           
+                                            {{ form.metalicas_completas_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+
+                                    </li>
+                                    <li class="list-group-item">
+                                        <!-- checkbox -->
+                                            {{ form.corrosion_oxido.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left"'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.corrosion_oxido %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                           
+                                            
+                                            {{ form.corrosion_oxido_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+
+                                    </li>
+
+                                    <li class="list-group-item">
+                                        <!-- checkbox -->
+                                            {{ form.deformacion.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left"'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.deformacion %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                           
+                                            
+                                            {{ form.deformacion_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+
+                                    </li>
+
+                                    <li class="list-group-item">
+                                        <!-- checkbox -->
+                                            {{ form.fisuras_golpes.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left"'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.fisuras_golpes %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                           
+                                            </div>
+                                            {{ form.fisuras_golpes_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+
+                                    </li>
+
+                                    <li class="list-group-item">
+                                        <!-- checkbox -->
+                                            {{ form.otros_metalicas.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left"'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.otros_metalicas %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>  
+                                            
+                                            {{ form.otros_metalicas_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+
+                                    </li>
+                                    
+                                </ul>
+                                <div class="form-row mt-4">
+                                    <div class="col">
+                                        {{ form.imagen_arnes_metalicas.label_tag|add:'class="form-label"'}}
+                                        {{ form.imagen_arnes_metalicas|add:'class="form-control"' }}
+                                    </div>
+                                </div>
+
+                                <div class="form-row mt-4">
+                                
+                                        {{ form.fecha_proxima_inspeccion.label_tag|add:'class="form-label"'}}
+                                        {{ form.fecha_proxima_inspeccion|add:'class="form-control"' }}
+                                        
+                                    
+                                </div>
+                                
+                                <div class="form-row mt-4">
+                                    
+                                    {{ form.comentarios_adicionales|add:'class="multisteps-form__textarea form-control" placeholder="Comentarios adicionales"' }}
+
+                                </div>
+                                <div class="form-row mt-4">
+
+
+                                
+                                    {% comment %} radio select custom {% endcomment %}
+                                    {% for radio in form.veredicto %}
+                                    
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            {% comment %} {{ radio }} {% endcomment %}
+                                            {{ radio|add:'class="custom-radio"' }}
+                                            
+                                            
+                                        </div>
+                                    {% endfor %}
+                                    
+                                    {% comment %} <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input radio-apto" id="customRadio" name="example" value="customEx">
+                                        <label class="custom-control-label" for="customRadio">Apto y puede continuar</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="customRadio2" name="example" value="customEx">
+                                        <label class="custom-control-label" for="customRadio2">No apto y debe ser retirado</label>
+                                    </div> {% endcomment %}
+                                    
+                                </div>
+                                <div class="button-row d-sm-flex mt-4 ">
+                                    <button class="btn btn-primary button-before btn-sm js-btn-prev mt-2 " href="#btn-cintas-anterior" type="button" title="Prev">Anterior</button>
+                                    <button class="btn btn-success btn-sm ml-auto mt-2" type="submit" title="Send">Enviar ficha de inspección</button>
+                                </div>
+                                
+                                </div>
+                            </div>
+                        
+                        </form>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+            <!-- partial -->
+
+
+                        
+
+                        
+            </div>
+
+{% endblock %}
+
+{% block scripts %} 
+    <script type="text/javascript" src="{% static 'gestion_fichas/js/agregar_ficha_2.js' %}"></script>
+{% endblock %}

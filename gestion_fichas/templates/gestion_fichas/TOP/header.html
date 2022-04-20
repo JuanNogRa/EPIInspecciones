@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html>
+
+
+<head>
+    {% load static %}
+    
+    <title>
+    Nav
+    </title>
+    
+    <meta charset="utf-8">
+
+    <meta name ="viewport" content="width = device-width, initial-scale = 1, shrink-to-fit = no">
+    <meta http-equiv="x-ua-compatible" content="ie-edge">
+
+    <link href="{% static 'gestion_fichas/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'gestion_fichas/css/ficha_inspeccion.css' %}" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'gestion_fichas/img/epi_icon.ico' %}">
+
+</head>
+
+    <body>
+
+    <nav class ="navbar navbar-expand-sm bg-dark navbar-dark">
+            <a ref = "#" class ="navbar-brand"><img src = "{% static 'gestion_fichas/img/logo_epi_new.png' %}" style = "width:30px;"></a>
+           
+            <button class ="navbar-toggler" type = "button" data-toggle ="collapse" data-target ="#uno">
+               
+                <span class = "navbar-toggler-icon"></span>
+           
+            </button>
+            
+            <div class="collapse navbar-collapse" id ="uno" >
+                
+                <ul class = "navbar-nav">
+                    
+                    <li class = "nav-item"><a href="#" class = "nav-link">Link 1</a></li>
+                    <li class = "nav-item"><a href="#" class = "nav-link">Link 2</a></li>
+                    <li class = "nav-item"><a href="#" class = "nav-link">Link 3</a></li>
+
+
+                </ul>
+
+            </div>
+    </nav>
+
+
+
+
+
+
+    <script src = "{% static 'gestion_fichas/vendor/bootsrap/js/jquery-3.5.1.slim.min.js' %}"></script>
+    <script src = "{% static 'gestion_fichas/vendor/bootsrap/js/popper.min.js' %}"></script>
+    <script src = "{% static 'gestion_fichas/vendor/bootsrap/js/bootstrap.min.js' %}"></script>
+
+    </body>
+
+</html>

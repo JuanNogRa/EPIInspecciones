@@ -1,0 +1,642 @@
+
+{% extends 'gestion_fichas/base.html' %}
+
+{% load static %}
+{% load myfilters %}
+{% block title %}
+
+Hello World
+
+{% endblock %}
+{% block css_style %}
+
+    <!--  This file has been downloaded from bootdey.com    @bootdey on twitter -->
+    <!--  All snippets are MIT license http://bootdey.com/license -->
+    <link href="{% static 'gestion_fichas/css/agregar_ficha_inspeccion.css' %}" rel="stylesheet">
+
+     
+
+{% endblock %}
+{% block content_main%}
+
+
+<div class="content-main">
+           <h1>Adicionar la ficha de inspección</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            
+            <div class="line"></div>
+
+            <!--PEN CONTENT     -->
+            <div class="content">
+            <!--content inner-->
+            <div class="content__inner">
+                <div class="container">
+                <!--content title-->
+                <h4 class="text-center">Formulario para la ficha de inspección</h4>
+                {% comment %} <h3 class="content__title content__title--m-sm">Formulario para la ficha de inspección</h3> {% endcomment %}
+                <!--animations form-->
+                
+                <!--content title-->
+                <h6 class="content__title">Presione "Siguiente" para avanzar o "Anterior" para retroceder</h6>
+                </div>
+                <div class="container overflow-hidden">
+                <!--multisteps-form-->
+                <div class="multisteps-form">
+                    <!--progress bar-->
+                    <div class="row">
+                    <div class="col-12 col-lg-8 ml-auto mr-auto mb-4">
+                        <div class="multisteps-form__progress">
+                        <button class="multisteps-form__progress-btn js-active" type="button" title="User Info">Ficha Info</button>
+                        <button class="multisteps-form__progress-btn" type="button" title="Mosquetones">Mosquetones</button>
+                        <button class="multisteps-form__progress-btn" type="button" title="Arrestador y poleas">Arrestador de caidas y poleas</button>
+                        <button class="multisteps-form__progress-btn" type="button" title="Descendedores/Ascendedores y Anclajes">Descendedores/Ascendedores y Anclajes</button>
+                        </div>
+                    </div>
+                    </div>
+                    <!--form panels-->
+                    <div class="row">
+                        <div class="col-12 col-lg-8 m-auto">
+                            <form method="POST" enctype="multipart/form-data" class="multisteps-form__form" >
+                            {% csrf_token %} 
+                            <!--single form panel-->
+                                <div class="multisteps-form__panel shadow p-5 rounded bg-white js-active" data-animation="fadeIn">
+                                    <h3 class="multisteps-form__title">Información de la Ficha</h3>
+                                    <div class="multisteps-form__content">
+                                    <div class="form-row mt-4 d-flex justify-content-center">
+                                        <div class="d-flex justify-content-center " style="width:600px;height: 300px;">
+                                        <div class="card text-justify" >
+                                            <img class="card-img-center border-black " style="height: 70px;width:50px;" src="{{ MEDIA_URL }}{{inspectores.foto_inspector}}" alt="Card image cap">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Inspector {{request.user.get_full_name|title}}</h5>
+                                                <div class="form-row mt-4">
+                                                    <div class="col-12 col-sm-4 mt-4 mt-sm-0">
+                                                    <label>Código interno</label>
+                                                    {% comment %} <input class="multisteps-form__input form-control "  type="text" placeholder="código interno" required/> {% endcomment %}
+                                                    </div>
+                
+                                                    <div class="col-12 col-sm-6">
+                                                    <label for="numero_producto">{{equipo.numero_producto}}</label>
+                                                    {% comment %} <input id ="numero_producto" class="multisteps-form__input form-control" type="text" placeholder="Lote del producto"/> {% endcomment %}
+                                                    </div>
+                                                </div>
+                                                <div class="form-row mt-2">
+                                                    <div class="col-12 col-sm-4 mt-4 mt-sm-0">
+                                                    <label>Referencia</label>
+                                                    {% comment %} <input class="multisteps-form__input form-control "  type="text" placeholder="código interno" required/> {% endcomment %}
+                                                    </div>
+                
+                                                    <div class="col-12 col-sm-6">
+                                                        <label for="referencia_arnes">{{equipo.referencias_accesorio_metalicos.referencia}}</label>
+                                                    {% comment %} <input id ="numero_producto" class="multisteps-form__input form-control" type="text" placeholder="Lote del producto"/> {% endcomment %}
+                                                    </div>
+                                                    <div class="col-12 col-sm-4 mt-4 mt-sm-0">
+                                                        <label>Despcripción</label>
+                                                        {% comment %} <input class="multisteps-form__input form-control "  type="text" placeholder="código interno" required/> {% endcomment %}
+                                                        </div>
+                    
+                                                        <div class="col-12 col-sm-6">
+                                                            <label for="descripcion">{{equipo.referencias_accesorio_metalicos.descripcion}}</label>
+                                                        {% comment %} <input id ="numero_producto" class="multisteps-form__input form-control" type="text" placeholder="Lote del producto"/> {% endcomment %}
+                                                        </div>
+                                                    <div class="col-12 col-sm-4 mt-4 mt-sm-0">
+                                                        <label>Línea</label>
+                                                        {% comment %} <input class="multisteps-form__input form-control "  type="text" placeholder="código interno" required/> {% endcomment %}
+                                                        </div>
+                    
+                                                        <div class="col-12 col-sm-6">
+                                                            <label for="linea">{{equipo.referencias_accesorio_metalicos.linea}}</label>
+                                                        {% comment %} <input id ="numero_producto" class="multisteps-form__input form-control" type="text" placeholder="Lote del producto"/> {% endcomment %}
+                                                        </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        
+                                        {% comment %} <input class="multisteps-form__input form-control" type="text" placeholder="fecha"/> {% endcomment %}
+                                    
+                                    </div>
+                                    
+                                    <div class="button-row d-flex mt-4 col-12">
+                                        <button class="btn btn-dark" type="button" onClick="window.history.back();return false;" title="Prev">Anterior</button>
+                                        <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Siguiente</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--single form panel-->
+                            <div class="multisteps-form__panel shadow p-3 rounded bg-white" data-animation="fadeIn">
+                                <h4 class="multisteps-form__title">Mosquetones</h4>
+                                <h6 class="multisteps-form__title">Aspectos a Inspeccionar</h6>
+                                <div class="multisteps-form__content">
+                                {% comment %} Lista de checkbox {% endcomment %}
+                                    <ul class="list-group list-group-flush">
+                                        
+                                        <li class="list-group-item">
+                                        <!-- Default checked -->
+                                            
+                                            {{ form.fisuras_golpes_hundimientos_mosquetones.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left""'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.fisuras_golpes_hundimientos_mosquetones %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                            
+                                            
+                                            {{ form.fisuras_golpes_hundimientos_mosquetones_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+                                            {% comment %} <textarea class="multisteps-form__textarea form-control" placeholder="Observación"></textarea> {% endcomment %}
+
+                                        </li>
+
+                                        <li class="list-group-item">
+                                        <!-- Default checked -->
+                                            {{ form.quemaduras_deteriorquimicos.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left""'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.quemaduras_deteriorquimicos %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                            {{ form.quemaduras_deteriorquimicos_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+                                            {% comment %} <textarea class="multisteps-form__textarea form-control" placeholder="Observación"></textarea> {% endcomment %}
+
+                                        </li>
+                                        <li class="list-group-item">
+                                        <!-- Default checked -->
+                                            {{ form.oxidacion_corrocion_mosquetones.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left""'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.oxidacion_corrocion_mosquetones %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                            
+                                            {{ form.oxidacion_corrocion_mosquetones_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+                                            {% comment %} <textarea class="multisteps-form__textarea form-control" placeholder="Observación"></textarea> {% endcomment %}
+
+                                        </li>
+                                        <li class="list-group-item">
+                                        <!-- Default checked -->
+                                            {{ form.bordes_filosos_rugosos_mosquetones.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left""'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.bordes_filosos_rugosos_mosquetones %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                            
+                                            {{ form.bordes_filosos_rugosos_mosquetones_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+                                            {% comment %} <textarea class="multisteps-form__textarea form-control" placeholder="Observación"></textarea> {% endcomment %}
+
+                                        </li>
+                                        <li class="list-group-item">
+                                        <!-- Default checked -->
+                                            
+                                            {{ form.compuerta_libre_mosquetones.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left""'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.compuerta_libre_mosquetones %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                            {{ form.compuerta_libre_mosquetones_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+                                            {% comment %} <textarea class="multisteps-form__textarea form-control" placeholder="Observación"></textarea> {% endcomment %}
+
+                                        </li>
+
+                                        <li class="list-group-item">
+                                        <!-- Default checked -->
+                                            {{ form.deformaciones_mosquetones.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left""'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.deformaciones_mosquetones %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                            {{ form.deformaciones_mosquetones_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+                                            {% comment %} <textarea class="multisteps-form__textarea form-control" placeholder="Observación"></textarea> {% endcomment %}
+
+                                        </li>
+                                        <li class="list-group-item">
+                                        <!-- Default checked -->
+                                            {{ form.otros_mosquetones.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left""'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.otros_mosquetones %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                            {{ form.otros_mosquetones_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+                                            {% comment %} <textarea class="multisteps-form__textarea form-control" placeholder="Observación"></textarea> {% endcomment %}
+
+                                        </li>
+                                    </ul>
+                                    
+                                <div class="form-row mt-4">
+                                    <div class="col">
+                                       
+                                        {{ form.imagen_accesorio_mosquetones.label_tag|add:'class="form-label"'}}
+                                        {{ form.imagen_accesorio_mosquetones|add:'class="form-control "' }}
+                                        
+                                    {% comment %} <label class="form-label" for="foto-cintas">Subir una foto de la cintas/ reatas del equipo</label>
+                                    <input type="file" class="form-control" id="foto-cintas" lang="es"/> {% endcomment %}
+                                    </div>
+                                </div>
+                                
+                                <div class="button-row d-flex mt-4">
+                                    <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Anterior</button>
+                                    <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Siguiente</button>
+                                </div>
+                                </div>
+                            </div>
+                            <!--single form panel-->
+                            <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="fadeIn">
+                                <h4 class="multisteps-form__title">Arrestador de caidas y poleas</h4>
+                                <div class="multisteps-form__content">
+                                
+                                    <ul class="list-group list-group-flush">
+                                        
+                                        <li class="list-group-item">
+                                        <!-- checkbox -->
+                                            {{ form.fisuras_golpes_hundimientos_arrestador.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left""'}}
+                                           
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.fisuras_golpes_hundimientos_arrestador %}
+                                                
+                                                <div class="custom-control custom-radio custom-control-inline ">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                            {{ form.fisuras_golpes_hundimientos_arrestador_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+
+                                        </li>
+
+                                        <li class="list-group-item">
+                                        <!-- checkbox -->
+                                            {{ form.frenado_lisa.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left"'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.frenado_lisa %}
+
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                            {{ form.frenado_lisa_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+
+                                        </li>
+
+                                        <li class="list-group-item">
+                                        <!-- checkbox -->
+                                            {{ form.oxidacion_corrocion_arrestador.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left""'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.oxidacion_corrocion_arrestador %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                            {{ form.oxidacion_corrocion_arrestador_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+
+                                        </li>
+
+                                        <li class="list-group-item">
+                                        <!-- checkbox -->
+                                            {{ form.bordes_filosos_rugosos_arrestador.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left"'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.bordes_filosos_rugosos_arrestador %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                            {{ form.bordes_filosos_rugosos_arrestador_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+
+                                        </li>
+
+                                        <li class="list-group-item">
+                                        <!-- checkbox -->
+                                            {{ form.compuerta_libre_arrestador.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left"'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.compuerta_libre_arrestador %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                            {{ form.compuerta_libre_arrestador_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+
+                                        </li>
+                                        
+                                        <li class="list-group-item">
+                                        <!-- checkbox -->
+                                            {{ form.deformaciones_arrestador.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left"'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.deformaciones_arrestador %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                            {{ form.deformaciones_arrestador_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+
+                                        </li>
+                                        
+                                        <li class="list-group-item">
+                                        <!-- checkbox -->
+                                            {{ form.otros_arrestador.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left"'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.otros_arrestador %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                            {{ form.otros_arrestador_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+
+                                        </li>
+    
+                                    </ul>
+                                <div class="form-row mt-4">
+                                    <div class="col">
+                                        {{ form.imagen_accesorio_arrestador_polea.label_tag|add:'class="form-label"'}}
+                                        {{ form.imagen_accesorio_arrestador_polea|add:'class="form-control"' }}
+                                    </div>
+                                </div>
+
+                                
+                                <div class="row">
+                                    <div class="button-row d-flex mt-4 col-12">
+                                    <button class="btn btn-primary js-btn-prev" type="button" id ="btn-cintas-anterior" title="Prev">Anterior</button>
+                                    <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Siguiente</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <!--single form panel-->
+                            <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="fadeIn">
+                                <h3 class="multisteps-form__title">Descendedores/Ascendedores y Anclajes</h3>
+                                <div class="multisteps-form__content">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <!-- checkbox -->
+                                            {{ form.fisuras_golpes_hundimientos_descendedor.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left"'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.fisuras_golpes_hundimientos_descendedor %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                        
+                                            {{ form.fisuras_golpes_hundimientos_descendedor_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+
+                                    </li>
+                                    <li class="list-group-item">
+                                        <!-- checkbox -->
+                                            {{ form.contacto_lisa.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left"'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.contacto_lisa %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                        
+                                            
+                                            {{ form.contacto_lisa_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+
+                                    </li>
+
+                                    <li class="list-group-item">
+                                        <!-- checkbox -->
+                                            {{ form.oxidacion_corrocion_descendedor.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left"'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.oxidacion_corrocion_descendedor %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                        
+                                            
+                                            {{ form.oxidacion_corrocion_descendedor_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+
+                                    </li>
+
+                                    <li class="list-group-item">
+                                        <!-- checkbox -->
+                                            {{ form.bordes_filosos_rugosos_descendedor.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left"'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.bordes_filosos_rugosos_descendedor %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                        
+                                            </div>
+                                            {{ form.bordes_filosos_rugosos_descendedor_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+
+                                    </li>
+
+                                    <li class="list-group-item">
+                                        <!-- checkbox -->
+                                            {{ form.desgaste_disminucionmetal.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left"'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.desgaste_disminucionmetal %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>  
+                                            
+                                            {{ form.desgaste_disminucionmetal_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+
+                                    </li>
+
+                                    <li class="list-group-item">
+                                        <!-- checkbox -->
+                                            {{ form.deformaciones_descendedor.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left"'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.deformaciones_descendedor %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>  
+                                            
+                                            {{ form.deformaciones_descendedor_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+
+                                    </li>
+
+                                    <li class="list-group-item">
+                                        <!-- checkbox -->
+                                            {{ form.otros_descendedor.label_tag|add:'class="col-md-5 col-12  text-center text-sm-left"'}}
+                                            <div class="d-md-inline-block text-center">
+                                            {% for radio in form.otros_descendedor %}
+                                    
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    {% comment %} {{ radio }} {% endcomment %}
+                                                    {{ radio|add:'class="custom-radio"' }}
+                                                    
+                                                    
+                                                </div>
+                                            {% endfor %}
+                                            </div>  
+                                            
+                                            {{ form.otros_descendedor_observacion|add:'class="multisteps-form__textarea form-control" placeholder="Observación"' }}
+
+                                    </li>
+                                    
+                                </ul>
+                                <div class="form-row mt-4">
+                                    <div class="col">
+                                        {{ form.imagen_accesorio_descendedores_anclajes.label_tag|add:'class="form-label"'}}
+                                        {{ form.imagen_accesorio_descendedores_anclajes|add:'class="form-control"' }}
+                                    </div>
+                                </div>
+
+                                <div class="form-row mt-4">
+                                
+                                        {{ form.fecha_proxima_inspeccion.label_tag|add:'class="form-label"'}}
+                                        {{ form.fecha_proxima_inspeccion|add:'class="form-control"' }}
+                                        
+                                    
+                                </div>
+                                
+                                <div class="form-row mt-4">
+                                    
+                                    {{ form.comentarios_adicionales|add:'class="multisteps-form__textarea form-control" placeholder="Comentarios adicionales"' }}
+
+                                </div>
+                                <div class="form-row mt-4">
+
+
+                                
+                                    {% comment %} radio select custom {% endcomment %}
+                                    {% for radio in form.veredicto %}
+                                    
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            {% comment %} {{ radio }} {% endcomment %}
+                                            {{ radio|add:'class="custom-radio"' }}
+                                            
+                                            
+                                        </div>
+                                    {% endfor %}
+                                    
+                                    
+                                    
+                                </div>
+                                <div class="button-row d-sm-flex mt-4 ">
+                                    <button class="btn btn-primary button-before btn-sm js-btn-prev mt-2 " href="#btn-cintas-anterior" type="button" title="Prev">Anterior</button>
+                                    <button class="btn btn-success btn-sm ml-auto mt-2" type="submit" title="Send">Enviar ficha de inspección</button>
+                                </div>
+                                
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+            <!-- partial -->
+
+
+                        
+
+                        
+            </div>
+
+{% endblock %}
+
+{% block scripts %} 
+    <script type="text/javascript" src="{% static 'gestion_fichas/js/agregar_ficha_2.js' %}"></script>
+{% endblock %}

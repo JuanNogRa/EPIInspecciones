@@ -1,0 +1,74 @@
+
+{% extends 'gestion_fichas/base.html' %}
+
+{% load static %}
+
+{% block title %}
+Hello World
+
+{% endblock %}
+
+{% block css_style %}
+
+    <!--  This file has been downloaded from bootdey.com    @bootdey on twitter -->
+    <!--  All snippets are MIT license http://bootdey.com/license -->
+    <link href="{% static 'gestion_fichas/css/home.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block content_main%}
+ 
+<div class="content-main">
+
+            <h1>Home</h1>
+            <p>Pagina principal del aplicativo para las fichas de inspección</p>
+
+            {% comment %} <div class = "card-deck">
+            <!-- Card -->
+            <div class="card">
+                <img class="card-img-top img-responsive" src="{% static 'gestion_fichas/img/principal.jpg' %}"  alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">Card title</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="javascript:void(0)" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img class="card-img-top img-responsive" src="{% static 'gestion_fichas/img/principal.jpg' %}"  alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">Card title</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="javascript:void(0)" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top img-responsive" src="{% static 'gestion_fichas/img/principal.jpg' %}"  alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">Card title</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="javascript:void(0)" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img class="card-img-top img-responsive" src="{% static 'gestion_fichas/img/principal.jpg' %}"  alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">Card title</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="javascript:void(0)" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img class="card-img-top img-responsive" src="{% static 'gestion_fichas/img/principal.jpg' %}"  alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">Card title</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="javascript:void(0)" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+            </div> {% endcomment %}
+</div>     
+{% endblock %}
+

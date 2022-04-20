@@ -1,0 +1,27 @@
+.image-buscar_hv{
+
+    background: url("../img/img_search_hv.webp");
+    min-width: 140px;
+    min-height: 140px;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+   
+}
+.search-icon{
+
+    width: 20px;
+
+
+}
+
+.image-search{
+
+    
+    min-width: 140px;
+    min-height: 140px;
+    max-width:  450px;
+    max-height: 450px;
+  
+   
+}
