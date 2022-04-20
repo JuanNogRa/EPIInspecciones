@@ -100,7 +100,7 @@ WSGI_APPLICATION = 'epi_app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'epiDataBase', ##anme of db
+        'NAME': 'epi_app', ##anme of db
         'USER': 'EPI',
         'PASSWORD': 'basededatosdiseno1234',
         'HOST': 'localhost', 
