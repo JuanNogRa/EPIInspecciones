@@ -99,15 +99,12 @@ WSGI_APPLICATION = 'epi_app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'epiDataBase', ##anme of db
-        'USER': 'root',
-        'PASSWORD': '1234',
-        'HOST': '/opt/lampp/var/mysql/mysql.sock', 
-        'PORT': '3306',
-        'OPTIONS':{
-            'init_command':"SET sql_mode = 'STRICT_TRANS_TABLES'"
-                }
+        'USER': 'EPI',
+        'PASSWORD': 'basededatosdiseno1234',
+        'HOST': 'localhost', 
+        'PORT': '',
     }
 }
 
