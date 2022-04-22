@@ -16,12 +16,12 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib.units import inch
 
-pdfmetrics.registerFont(TTFont('Monotype Corsiva', 'staticfiles/gestion_fichas/fonts/MTCORSVA.TTF'))
-pdfmetrics.registerFont(TTFont('Amiri', 'staticfiles/gestion_fichas/fonts/Amiri-Regular.ttf'))
-pdfmetrics.registerFont(TTFont('Angsa', 'staticfiles/gestion_fichas/fonts/angsa.ttf'))
-pdfmetrics.registerFont(TTFont('MyriadPro Semibold', 'staticfiles/gestion_fichas/fonts/MyriadPro-Semibold.ttf'))
-pdfmetrics.registerFont(TTFont('MyriadPro Regular', 'staticfiles/gestion_fichas/fonts/MyriadPro-Regular.ttf'))
-pdfmetrics.registerFont(TTFont('ArialMT', 'staticfiles/gestion_fichas/fonts/ARIALMT.ttf'))
+pdfmetrics.registerFont(TTFont('Monotype Corsiva', 'static/gestion_fichas/fonts/MTCORSVA.TTF'))
+pdfmetrics.registerFont(TTFont('Amiri', 'static/gestion_fichas/fonts/Amiri-Regular.ttf'))
+pdfmetrics.registerFont(TTFont('Angsa', 'static/gestion_fichas/fonts/angsa.ttf'))
+pdfmetrics.registerFont(TTFont('MyriadPro Semibold', 'static/gestion_fichas/fonts/MyriadPro-Semibold.ttf'))
+pdfmetrics.registerFont(TTFont('MyriadPro Regular', 'static/gestion_fichas/fonts/MyriadPro-Regular.ttf'))
+pdfmetrics.registerFont(TTFont('ArialMT', 'static/gestion_fichas/fonts/ARIALMT.ttf'))
 class Certificado:
 	def foot2(self,pdf,doc):
 		width,height = B4
