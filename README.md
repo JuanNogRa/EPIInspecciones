@@ -55,3 +55,7 @@ Los archivos de configuración de NGINX debe de cambiarse el path para que apunt
 1. Se regresa a que la inspección ya no se almacena en disco sino que siempre que se genere el reporte se consume recursos de CPU y RAM.
 # EPI-APP Actualizaciones realizadas por Juan Carlos Noguera Ramirez-UPDATE 13/04/2022
 1. Genera el certificado y el carnet después de guardar los datos de inspector.
+# EPI-APP Actualizaciones realizadas por Juan Carlos Noguera Ramirez-UPDATE 19/04/2022
+1. Correos enviados automaticamente al crear o actualizar los datos de un usuario.
+# EPI-APP Actualizaciones realizadas por Juan Carlos Noguera Ramirez-UPDATE 21/04/2022
+1. Montaje de la APP en estado ALPHA en la plataforma Digitalocean siguiendo el procedimiento del siguiente link https://www.digitalocean.com/community/tutorials/como-configurar-django-con-postgres-nginx-y-gunicorn-en-ubuntu-18-04-es cambiando el database MySQL a Pogrest.
