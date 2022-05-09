@@ -59,3 +59,6 @@ Los archivos de configuración de NGINX debe de cambiarse el path para que apunt
 1. Correos enviados automaticamente al crear o actualizar los datos de un usuario.
 # EPI-APP Actualizaciones realizadas por Juan Carlos Noguera Ramirez-UPDATE 21/04/2022
 1. Montaje de la APP en estado ALPHA en la plataforma Digitalocean siguiendo el procedimiento del siguiente link https://www.digitalocean.com/community/tutorials/como-configurar-django-con-postgres-nginx-y-gunicorn-en-ubuntu-18-04-es cambiando el database MySQL a Pogrest.
+# EPI-APP Actualizaciones realizadas por Juan Carlos Noguera Ramirez-UPDATE 07/05/2022
+1. Arreglos de interfaz y errores del sistema. Se configura para que el inspector pueda actualizar la información del equipo puesto en marcha.
+2. Se restringe que solo se pueda trabajar con equipos de costura y se arregla la herramienta para que sea posible registrar los equipos que salen de producción.
