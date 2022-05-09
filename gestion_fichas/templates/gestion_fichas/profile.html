@@ -6,7 +6,7 @@
 {% load myfilters %}
 
 {% block title %}
-Hello World
+Perfil inspector
 
 {% endblock %}
 {% comment %} <link href="{% static 'gestion_fichas/css/profile.css' %}" rel="stylesheet">
@@ -64,6 +64,7 @@ Hello World
                             <li class="list-group-item text-muted">Perfil</li>
                             <li class="list-group-item text-center"><img id="profile image"  class="img-thumbnail rounded" src="{{ MEDIA_URL }}{{inspectores.foto_inspector}}" width="150" height="150"></li>
                             <li class="list-group-item text-left"><span class="pull-left"><strong>Nombre</strong></span> {{request.user.get_full_name | title }}</li>
+                            <li class="list-group-item text-left"><span class="pull-left"><strong>Código inspector</strong></span> {{inspectores.codigo_inspector}}</li>
                             <li class="list-group-item text-left"><span class="pull-left"><strong>Correo electrónico</strong></span> {{request.user.email}}</li>
                             <li class="list-group-item text-left"><span class="pull-left"><strong>Empresa</strong></span> {{inspectores.empresa}}</li>
                             <li class="list-group-item text-left"><span class="pull-left"><strong>Numero de teléfono</strong></span> {{inspectores.phone | title }}</li>

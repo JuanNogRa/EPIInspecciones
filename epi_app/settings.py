@@ -32,7 +32,7 @@ DEBUG = False
 # DEBUG = bool( os.environ.get('DJANGO_DEBUG', False) )
 # CSRF_COOKIE_SECURE = True
 # SESSION_COOKIE_SECURE = True
-ALLOWED_HOSTS = ['epihv.com', '164.92.73.232','localhost']
+ALLOWED_HOSTS = ['164.92.73.232', 'localhost']
 #ALLOWED_HOSTS = ["*"]
 # Application definition
 
@@ -100,8 +100,8 @@ WSGI_APPLICATION = 'epi_app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'epiapp', ##anme of db
-        'USER': 'epiuser',
+        'NAME': 'epidb', ##anme of db
+        'USER': 'epiadmin',
         'PASSWORD': '1234',
         'HOST': 'localhost', 
         'PORT': '',
@@ -163,5 +163,15 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'njuanr@gmail.com'
-EMAIL_HOST_PASSWORD = 'stiqnofslwaffqao'
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'stiqnofslwaffqao')
 EMAIL_USE_TLS = True
+
+INTERNAL_IPS = [
+    '0.0.0.0',
+]
+
+"""def show_toolbar(request):
+    return True
+DEBUG_TOOLBAR_CONFIG = {
+    "SHOW_TOOLBAR_CALLBACK" : show_toolbar,
+}"""

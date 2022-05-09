@@ -4,7 +4,7 @@
 {% load myfilters %}
 
 {% block title %}
-Hello World
+Datos equipo
 
 {% endblock %}
 {% block css_style %}
@@ -20,7 +20,7 @@ Hello World
 
 <div class="content-main ">
     
-    <h1>Hoja de vida del equipo</h1>
+    <h1>Datos del equipo</h1>
     {% comment %} <p>Digite el numero del equipo para buscar su hoja de vida</p> {% endcomment %}
     
     {% for message in messages %}
@@ -77,15 +77,18 @@ Hello World
         {% if equipo.veredicto %}   
             {% if warning_inspeccion %}
             <div class="card border-warning text-white text-center mb-3 " style="max-width: 30rem;">
-                <div class="card-header bg-warning">{{equipo.numero_producto}}</div>
+                <div class="card-header bg-warning"> <b> PENDIENTE DE INSPECCIÓN </b> </div>
+                <div class="card-header bg-warning">{{internal_code|stringformat:"07d"}}</div>
                 
             {% else %}
                 <div class="card border-success text-white text-center mb-3 " style="max-width: 30rem;">
-                        <div class="card-header bg-success">{{equipo.numero_producto}}</div>
+                        <div class="card-header bg-success"> <b> APTO </b> </div>
+                        <div class="card-header bg-success">{{internal_code|stringformat:"07d"}}</div>
             {% endif %}
         {% else %}
             <div class="card border-danger text-white text-center mb-3 " style="max-width: 30rem;">
-                    <div class="card-header bg-danger">{{equipo.numero_producto}}</div>
+                    <div class="card-header bg-danger"> <b> NO APTO </b> </div>
+                    <div class="card-header bg-danger">{{internal_code|stringformat:"07d"}}</div>
         {% endif %}
                     
                     <div id = "container-zoom" class="img-zoom-container">
@@ -101,43 +104,52 @@ Hello World
                     {% if user.is_authenticated %}
                         {% if equipo_alturas == '1' %}
                         <a  href = {% url 'agregar_inspeccion' equipo.id %} class="btn btn-color btn-primary m-1">Realizar Inspección</a>
-                        {% elif equipo_alturas == '2' %}
+                        {% elif equipo_alturas == '2' or equipo_alturas == '5'%}
                         <a  href = {% url 'agregar_inspeccion_eslinga' equipo.id %} class="btn btn-color btn-primary m-1">Realizar Inspección</a>
-                        {% elif equipo_alturas == '3' %}
+                        {% elif equipo_alturas == '6' or equipo_alturas == '8' or equipo_alturas == '9'%}
                         <a  href = {% url 'agregar_inspeccion_lineas' equipo.id %} class="btn btn-color btn-primary m-1">Realizar Inspección</a>
-                        {% elif equipo_alturas == '4' %}
+                        {% comment %} {% elif equipo_alturas == '4' %}
                         <a  href = {% url 'agregar_inspeccion_casco' equipo.id %} class="btn btn-color btn-primary m-1">Realizar Inspección</a>
                         {% elif equipo_alturas == '5' %}
-                        <a  href = {% url 'agregar_inspeccion_accesorio' equipo.id %} class="btn btn-color btn-primary m-1">Realizar Inspección</a>
-                        {% elif equipo_alturas == '6' %}
+                        <a  href = {% url 'agregar_inspeccion_accesorio' equipo.id %} class="btn btn-color btn-primary m-1">Realizar Inspección</a> {% endcomment %}
+                        {% elif equipo_alturas == '7' or equipo_alturas == '9'%}
                         <a  href = {% url 'agregar_inspeccion_silla' equipo.id %} class="btn btn-color btn-primary m-1">Realizar Inspección</a>
                         {% endif %}
                     {% endif %}
                     <ul class="list-group  list-group-flush ">
                         <li class="list-group-item  text-left"><span> Referencia: </span><a id = "a-link" href="{{ MEDIA_URL }}{{referencia_arnes.pdf}}" >{{referencia_arnes.referencia}}</a> </li>
-                       
-                        <li class="list-group-item  text-left"><span> Fecha puesta en marcha:</span> {{equipo.fecha_puesta_en_uso}}</li>
-                        <li class="list-group-item  text-left"><span> Personal a cargo: </span>{{equipo.personal_a_cargo}}</li>
-                        <li class="list-group-item  text-left"><span> Código interno: </span>{{equipo.codigo_interno}}</li>
+                        <li class="list-group-item  text-left"><span> Número de lote: </span>{{ internal_code|stringformat:"07d" }}</li>
                         <li class="list-group-item  text-left"><span> Número de inspecciones: </span>{{numero_inspecciones}}</li>
+                        <li class="list-group-item  text-left"><span> Fecha puesta en marcha:</span> {{equipo.fecha_puesta_en_uso}}</li>
+                        <li class="list-group-item  text-left"><span> Responsable del equipo: </span>{{equipo.personal_a_cargo}}</li>
+                        <li class="list-group-item  text-left"><span> Empresa del responsable: </span>{{equipo.empresa}}</li>
+                        <li class="list-group-item  text-left"><span> Correo del responsable: </span>{{equipo.correo}}</li>
+                        <li class="list-group-item  text-left"><span> Teléfono del responsable: </span>{{equipo.telefono}}</li>
+                        
                         
                         <!--group collaps-->
                         
                         <!--end group-->
+                        
                         <li class="list-group-item  text-left"><div class="text-center"> <a class = "pl-0 m-0" href="{% url 'reporte_ficha_pdf' equipo.id 0 0 equipo_alturas False%}" class="btn">
                         <img class="icon-bigger pl-7"  src = "{% static 'gestion_fichas/img/icons/icon_pdf.png' %}" alt =""></img>
-                        </a><div> 
+                        </a>
+                        
+                        <div> 
                         </li>
                        
                         {% if equipo.veredicto %}  
                             {% if warning_inspeccion %}
-                                <li class="list-group-item "> PENDIENTE DE INSPECCIÓN </li>
+                            <div class="card border-warning text-white text-center mb-3 " style="max-width: 30rem;">
+                                <div class="card-header bg-warning"> <b> PENDIENTE DE INSPECCIÓN </b> </div>
                             {% else %}
-                                <li class="list-group-item "> APTO </li>
+                            <div class="card border-success text-white text-center mb-3 " style="max-width: 30rem;">
+                                <div class="card-header bg-success"> <b> APTO </b> </div>
                             {% endif %}
                         {% else %}
                             
-                            <li class="list-group-item "> NO APTO </li>
+                            <div class="card border-danger text-white text-center mb-3 " style="max-width: 30rem;">
+                                <div class="card-header bg-danger"> <b> NO APTO </b> </div>
 
                         {% endif %}
 
@@ -157,10 +169,12 @@ Hello World
                             <div class="dropdown">
                             <button class="btn-sm btn-info dropdown-toggle" type="button" data-toggle="dropdown">Inspecciones
                             <span class="caret"></span></button>
-                            <ul class="dropdown-menu"> 
+                            <ul class="dropdown-menu">
+                                
                                 {% for inspeccion in inspecciones %}
                                 <li ><a href="{% url 'reporte_ficha_pdf' equipo.id 1 inspeccion.numero_inspeccion equipo_alturas False%}">{{inspeccion.numero_inspeccion}}-{{inspeccion.user|title}}: {{inspeccion.fecha_inspeccion|title}}</a></li>
                                 {% endfor %}
+                                
                             </ul>
                         </div>
                         
@@ -170,10 +184,12 @@ Hello World
                             <div class="dropdown">
                             <button class="btn-sm btn-info dropdown-toggle" type="button" data-toggle="dropdown">Inspecciones con foto
                             <span class="caret"></span></button>
-                            <ul class="dropdown-menu"> 
+                            <ul class="dropdown-menu">
+                                
                                 {% for inspeccion in inspecciones %}
                                 <li ><a href="{% url 'reporte_ficha_pdf' equipo.id 1 inspeccion.numero_inspeccion equipo_alturas True%}">{{inspeccion.numero_inspeccion}}-{{inspeccion.user|title}}: {{inspeccion.fecha_inspeccion|title}}</a></li>
                                 {% endfor %}
+                                
                             </ul>
                         </div>
                         

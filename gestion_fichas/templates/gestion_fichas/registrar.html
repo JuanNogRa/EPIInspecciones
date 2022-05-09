@@ -4,7 +4,7 @@
 {% load static %}
 {% load myfilters %}
 {% block title %}
-Hello World
+Registrador
 
 {% endblock %}
 {% block css_style %}
@@ -19,7 +19,7 @@ Hello World
 
 <div class="content-main">
             <h2>Registrar los equipos </h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>Esta es la herramienta para registrar los productos por parte del departamento de producción.</p>
             
            
             <div class="line"></div>
@@ -59,15 +59,7 @@ Hello World
                                 {% comment %} <h5 class="card-subtitle">made with bootstrap elements</h5> {% endcomment %}
                                 <form class="form pt-3" method = "POST">
                                     {% csrf_token %}
-                                    <div class="form-group">
-                                     <label>Seleccione el equipo de altura</label>
-                                        <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon11"><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_height_equipment.png' %}" alt =""></img> </span>
-                                        </div>
-                                            {{ form.equipo_alturas|add:'class="form-control" placeholder="Selección de equipo"' }}
-                                     </div>
-                                </div>   
+                                       
                                     <div class="form-group">
                                         <label>Lote de fabricación</label>
                                         <div class="input-group mb-3">

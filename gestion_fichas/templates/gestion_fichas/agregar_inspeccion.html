@@ -5,7 +5,7 @@
 {% load myfilters %}
 {% block title %}
 
-Hello World
+Inspección arnés
 
 {% endblock %}
 {% block css_style %}
@@ -21,8 +21,7 @@ Hello World
 
 
 <div class="content-main">
-           <h1>Adicionar la ficha de inspección</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+           <h1>Adicionar la ficha de inspección para arnés</h1>
             
             <div class="line"></div>
             
@@ -72,7 +71,7 @@ Hello World
                                             <h5 class="card-title">Inspector {{request.user.get_full_name|title}}</h5>
                                             <div class="form-row mt-4">
                                                 <div class="col-12 col-sm-4 mt-4 mt-sm-0">
-                                                <label>Código interno</label>
+                                                <label>Numero de lote</label>
                                                 {% comment %} <input class="multisteps-form__input form-control "  type="text" placeholder="código interno" required/> {% endcomment %}
                                                 </div>
             
@@ -101,12 +100,12 @@ Hello World
                                                     {% comment %} <input id ="numero_producto" class="multisteps-form__input form-control" type="text" placeholder="Lote del producto"/> {% endcomment %}
                                                     </div>
                                                 <div class="col-12 col-sm-4 mt-4 mt-sm-0">
-                                                    <label>Línea</label>
+                                                    <label>Tipo</label>
                                                     {% comment %} <input class="multisteps-form__input form-control "  type="text" placeholder="código interno" required/> {% endcomment %}
                                                     </div>
                 
                                                     <div class="col-12 col-sm-6">
-                                                        <label for="linea">{{equipo.referencias_arnes.linea}}</label>
+                                                        <label for="linea">{{equipo.referencias_arnes.tipo}}</label>
                                                     {% comment %} <input id ="numero_producto" class="multisteps-form__input form-control" type="text" placeholder="Lote del producto"/> {% endcomment %}
                                                     </div>
                                                 

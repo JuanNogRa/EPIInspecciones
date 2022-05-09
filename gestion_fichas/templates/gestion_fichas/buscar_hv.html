@@ -5,7 +5,7 @@
 {% load myfilters %}
 
 {% block title %}
-Hello World
+Buscar Equipo
 
 {% endblock %}
 
@@ -24,8 +24,8 @@ Hello World
             
     <div class="card-body">
 
-        <h1 class="card-subtitle ">Buscar la hoja de vida de un equipo</h1>
-        <p >Ingrese el numero de producto del equipo para visualizar toda la información relacionada a su hoja de vida</p>
+        <h1 class="card-subtitle ">Buscar el equipo registrado en la plataforma</h1>
+        <p >Ingrese el numero de producto del equipo para visualizar toda la información relacionada al producto.</p>
         {% for message in messages %}
 
                         {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
@@ -54,15 +54,6 @@ Hello World
                 <form  method="POST" class="form col-sm-12 col-md-12 col-lg-6 align-self-center">
                 
                 {% csrf_token %}
-                    <div class="form-group">
-                                <label>Seleccione el equipo de altura</label>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon11"><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_height_equipment.png' %}" alt =""></img> </span>
-                                    </div>
-                                    {{ form.equipo_alturas|add:'class="form-control" placeholder="Selección de equipo"' }}
-                                </div>
-                            </div>   
                     <div class="form-group ">
                         
                         

@@ -16,31 +16,23 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib.units import inch
 
-pdfmetrics.registerFont(TTFont('Monotype Corsiva', 'static/gestion_fichas/fonts/MTCORSVA.TTF'))
-pdfmetrics.registerFont(TTFont('Amiri', 'static/gestion_fichas/fonts/Amiri-Regular.ttf'))
-pdfmetrics.registerFont(TTFont('Angsa', 'static/gestion_fichas/fonts/angsa.ttf'))
-pdfmetrics.registerFont(TTFont('MyriadPro Semibold', 'static/gestion_fichas/fonts/MyriadPro-Semibold.ttf'))
-pdfmetrics.registerFont(TTFont('MyriadPro Regular', 'static/gestion_fichas/fonts/MyriadPro-Regular.ttf'))
-pdfmetrics.registerFont(TTFont('ArialMT', 'static/gestion_fichas/fonts/ARIALMT.ttf'))
+pdfmetrics.registerFont(TTFont('Monotype Corsiva', 'staticfiles/gestion_fichas/fonts/MTCORSVA.TTF'))
+pdfmetrics.registerFont(TTFont('Amiri', 'staticfiles/gestion_fichas/fonts/Amiri-Regular.ttf'))
+pdfmetrics.registerFont(TTFont('Angsa', 'staticfiles/gestion_fichas/fonts/angsa.ttf'))
+pdfmetrics.registerFont(TTFont('MyriadPro Semibold', 'staticfiles/gestion_fichas/fonts/MyriadPro-Semibold.ttf'))
+pdfmetrics.registerFont(TTFont('MyriadPro Regular', 'staticfiles/gestion_fichas/fonts/MyriadPro-Regular.ttf'))
+pdfmetrics.registerFont(TTFont('ArialMT', 'staticfiles/gestion_fichas/fonts/ARIALMT.ttf'))
 class Certificado:
-	def foot2(self,pdf,doc):
-		width,height = B4
-		pdf.saveState()
-		pdf.setFont('Times-Roman',9)
-		if self.flagShape=='0':
-			pdf.drawString(width-1*inch, 0.1 * inch,'Página '+"%d" % doc.page+' de '+"%d" % 1)
-		elif self.flagShape=='1':
-			pdf.drawString(width-1*inch, 0.1 * inch,'Página '+"%d" % doc.page+' de '+"%d" % 3)
-	
+
 	def chunks(self, lst, n):
 		for i in range(0, len(lst), n):
 			yield lst[i:i + n]
 	
 	def get_doc(self, pdf, buffer, inspector):
 		name=str(inspector.user.first_name)+' '+str(inspector.user.last_name)
-		cedula=int(str(inspector.user))
-		ciudad=str(inspector.ciudad.ciudad)
+		cedula=int(str(inspector.user.username))
 		lugar=str(inspector.lugar)
+		ciudad=str(inspector.ciudad.ciudad)
 		fecha=inspector.fecha
 		codigo=str(inspector.ciudad.codigo)
 
@@ -81,14 +73,6 @@ class Certificado:
 		c.save()
 
 class Carnet:
-	def foot2(self,pdf,doc):
-		width,height = B4
-		pdf.saveState()
-		pdf.setFont('Times-Roman',9)
-		if self.flagShape=='0':
-			pdf.drawString(width-1*inch, 0.1 * inch,'Página '+"%d" % doc.page+' de '+"%d" % 1)
-		elif self.flagShape=='1':
-			pdf.drawString(width-1*inch, 0.1 * inch,'Página '+"%d" % doc.page+' de '+"%d" % 3)
 	
 	def chunks(self, lst, n):
 		for i in range(0, len(lst), n):
@@ -96,7 +80,7 @@ class Carnet:
 	
 	def get_doc(self, pdf, buffer, inspector):
 		name=str(inspector.user.first_name)+' '+str(inspector.user.last_name)
-		cedula=int(str(inspector.user))
+		cedula=int(str(inspector.user.username))
 		fecha=inspector.fecha
 		codigo=str(inspector.ciudad.codigo)
 

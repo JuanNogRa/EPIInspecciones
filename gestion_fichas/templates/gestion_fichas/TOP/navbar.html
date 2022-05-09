@@ -29,7 +29,7 @@
                                 <li class="nav-item ">
                             {% endif %}
 
-                                    <a class="nav-link" href="{% url 'buscar_hv' %}">Buscar HV de un Equipo</a>
+                                    <a class="nav-link" href="{% url 'buscar_hv' %}">Buscar Equipo</a>
                                 </li>
                             {% if user.is_authenticated %}    
                                 {% if request.resolver_match.view_name == "buscar_inspector"%}
@@ -56,13 +56,13 @@
                             {% endif %}
                             {% if user.is_authenticated %}
                                 
-                                {% if request.resolver_match.view_name == "crear_hv"%}   
+                                {% if request.resolver_match.view_name == "buscar_hv"%}   
 
                                 <li class="nav-item active item-topbar">
                                 {% else %}   
                                     <li class="nav-item ">
                                 {% endif %}
-                                        <a class="nav-link" href="{% url 'crear_hv' %}">Crear HV de un Equipo</a>
+                                        <a class="nav-link" href="{% url 'buscar_hv' %}">Inspeccionar Equipo</a>
                                 </li>
                             
                             {% else %}

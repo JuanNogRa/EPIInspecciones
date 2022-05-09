@@ -4,7 +4,7 @@ from django.utils.safestring import mark_safe
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Layout, ButtonHolder, Button, Reset
 from crispy_forms.bootstrap import TabHolder, Tab
-
+from gestion_fichas.models import LineaProducionConfeccion
 
 # class HorizontalRadioRenderer(forms.RadioSelect.renderer):
 #     def render(self):
@@ -28,63 +28,38 @@ class NumberInput(forms.NumberInput):
     input_type = 'number'
 
 class CrearHvForm (forms.Form):
-    #codigo_interno = forms.CharField(widget= NumberInput())
-    numero_producto  = forms.IntegerField(min_value=0)
-    cantidad_productos_agregar  = forms.IntegerField(min_value=1, initial=1)
+    codigo_interno = forms.CharField()
+    numero_producto  = forms.CharField(max_length=7,widget= NumberInput())
+    #cantidad_productos_agregar  = forms.IntegerField(min_value=1, initial=1)
     personal_a_cargo = forms.CharField()
-    codigo_interno = forms.IntegerField(min_value=0)
+    #codigo_interno = forms.IntegerField(min_value=0)
     fecha_puesta_en_uso = forms.DateField(widget= DateInput())
     empresa = forms.CharField()
-    correo =forms.CharField()
-    telefono=forms.CharField()
-    SELECCION_EQUIPOS = [
-        ('1', 'Arnes'),
-        ('2', 'Eslinga detención de caidas, restrición y posicionamiento'),
-        ('3', 'Lineas de vida y Anclaje'),
-        ('4', 'Casco de seguridad'),
-        ('5', 'Accesorios Metalicos'),
-        ('6', 'Sillas y perchas'),
-    ]
-    equipo_alturas  = forms.ChoiceField(
-            choices=SELECCION_EQUIPOS,
-            widget=forms.Select,
-            )
+    correo =forms.CharField(required=False)
+    telefono=forms.CharField(required=False,widget= NumberInput())
+
+class UpdateHvForm (forms.Form):
+    codigo_interno = forms.CharField()
+    numero_producto  = forms.CharField(max_length=7,widget= NumberInput())
+    #cantidad_productos_agregar  = forms.IntegerField(min_value=1, initial=1)
+    personal_a_cargo = forms.CharField()
+    #codigo_interno = forms.IntegerField(min_value=0)
+    empresa = forms.CharField()
+    correo =forms.CharField(required=False)
+    telefono=forms.CharField(required=False,widget= NumberInput())
+
 
 class SearchEquipmentForm(forms.Form):
-    numero_producto  = forms.IntegerField(min_value=0)
-    SELECCION_EQUIPOS = [
-        ('1', 'Arnes'),
-        ('2', 'Eslinga detención de caidas, restrición y posicionamiento'),
-        ('3', 'Lineas de vida y Anclaje'),
-        ('4', 'Casco de seguridad'),
-        ('5', 'Accesorios Metalicos'),
-        ('6', 'Sillas y perchas'),
-    ]
-    equipo_alturas  = forms.ChoiceField(
-            choices=SELECCION_EQUIPOS,
-            widget=forms.Select,
-            )
+    numero_producto  = forms.CharField()
 
 class RegisterEquipmentForm (forms.Form):
     #codigo_interno = forms.CharField(widget= NumberInput())
-    numero_producto = forms.IntegerField(min_value=0,initial=0, max_value=99)
+    numero_producto = forms.CharField()
     lote_fabricacion = forms.IntegerField(min_value=0)
-    linea_produccion = forms.IntegerField(min_value=1, max_value=9)
-    cantidad_productos_agregar  = forms.IntegerField(min_value=1, initial=100,max_value=100)
+    linea_produccion = forms.ModelChoiceField(queryset=LineaProducionConfeccion.objects.all())
+    cantidad_productos_agregar  = forms.IntegerField(min_value=1, initial=100, max_value=100)
     fecha_fabricacion = forms.DateField(widget= DateInput())
     referencia  = forms.CharField()
-    SELECCION_EQUIPOS = [
-        ('1', 'Arnes'),
-        ('2', 'Eslinga detención de caidas, restrición y posicionamiento'),
-        ('3', 'Lineas de vida y Anclaje'),
-        ('4', 'Casco de seguridad'),
-        ('5', 'Accesorios Metalicos'),
-        ('6', 'Sillas y perchas'),
-    ]
-    equipo_alturas  = forms.ChoiceField(
-            choices=SELECCION_EQUIPOS,
-            widget=forms.Select,
-            )
 
 class InspectionSheetForm(forms.Form):
     arnes_cinta_reata_fields = [
@@ -295,13 +270,13 @@ class UserForm(forms.Form):
                             </nav>""")
                 ),
                 Tab(
-                    'Certificado de inspección',
+                    'Certificado inspector',
                     #Para poder visualizar el certificado en el Viewer PDF por defecto.
                     HTML("""<embed src="{{ MEDIA_URL }}{{inspectores.certificado_inspector}}#zoom=40&scrollbar=0&navpanes=0" 
                     content_type="application/pdf" width="700" height="600"></embed>"""),  #style="pointer-events: none"-Para evitar que l usuario pueda interactuar con el PDF
                 ),
                 Tab(
-                    'Carnet',
+                    'Carnet inspector',
                     #Para poder visualizar el certificado en el Viewer PDF por defecto.
                     HTML("""<embed src="{{ MEDIA_URL }}{{inspectores.carnet_inspector}}#zoom=90&scrollbar=0&navpanes=0" 
                     content_type="application/pdf" width="700" height="600"></embed>"""),  #style="pointer-events: none"-Para evitar que l usuario pueda interactuar con el PDF
@@ -326,7 +301,7 @@ class UserForm(forms.Form):
 
 
 class SearchInspectorForm(forms.Form):
-    codigo_inspector  = forms.CharField(widget=forms.NumberInput, label='Código de inspector')
+    codigo_inspector  = forms.CharField(label='Código de inspector')
 
 
 class InspectionSheetFormEslingas(forms.Form):

@@ -31,9 +31,9 @@ import six
 now = datetime.datetime.now()
 only_date = now.date()
 date = only_date.strftime("/%Y/%m")
-LINK = 'http://0.0.0.0/hv/'
+LINK = 'http://164.92.73.232/hv/'
 
-LINL_PDF = 'http://0.0.0.0/media'
+LINL_PDF = 'http://164.92.73.232/media'
 
 # LINK = 'http://andrewgomz.pythonanywhere.com/hv/'
 
@@ -108,6 +108,15 @@ class LoadDataQuerySet(models.QuerySet):
 #      def label_from_instance(self, obj):
 #          return "Referencia: {}".format(obj.referencia)
 
+class LineaProducionConfeccion(models.Model):
+    linea_numero = models.PositiveIntegerField(unique=True)
+    nombre = models.CharField(max_length=255, unique=True)
+
+    class Meta:
+        db_table = 'linea_produccion_confeccion'
+
+    def __str__(self):
+        return self.nombre
 
 class EquiposArnes(models.Model):
 
@@ -117,7 +126,7 @@ class EquiposArnes(models.Model):
     date_now = only_date.strftime("%d/%m/%Y")
     date_now_default = only_date.strftime("%Y-%m-%d")
     user = models.ForeignKey(settings.AUTH_USER_MODEL,models.DO_NOTHING,default=None)
-    numero_producto = models.PositiveIntegerField(unique=True)
+    numero_producto = models.CharField(max_length=7,unique=True)
     fecha_puesta_en_uso = models.DateField(default=date_now_default, blank=True)
     fecha_fabricacion = models.DateField()
     veredicto = models.BooleanField(default=True)
@@ -125,8 +134,9 @@ class EquiposArnes(models.Model):
     personal_a_cargo = models.CharField(max_length=255,default=None, blank=True)
     codigo_qr = models.ImageField(upload_to='codigos_qr'+str(date), default = ' ')
     referencias_arnes = models.ForeignKey('ReferenciasArnes', models.DO_NOTHING,default=None)
-    
-
+    empresa = models.CharField(max_length=255, default=None, blank=True)
+    telefono = models.CharField(max_length=255, default=None, blank=True)
+    correo = models.CharField(max_length=255, default=None, blank=True)
     #pdf = models.FileField(upload_to= 'PDF'+str(date), default = '/media/Ficha_inspeccion.pdf' )
 
     def save(self, *args, **kwargs):
@@ -166,7 +176,7 @@ class EquiposEslinga(models.Model):
     date_now = only_date.strftime("%d/%m/%Y")
     date_now_default = only_date.strftime("%Y-%m-%d")
     user = models.ForeignKey(settings.AUTH_USER_MODEL,models.DO_NOTHING,default=None)
-    numero_producto = models.PositiveIntegerField(unique=True)
+    numero_producto = models.CharField(max_length=7,unique=True)
     fecha_puesta_en_uso = models.DateField(default=date_now_default, blank=True)
     fecha_fabricacion = models.DateField()
     veredicto = models.BooleanField(default=True)
@@ -174,9 +184,10 @@ class EquiposEslinga(models.Model):
     personal_a_cargo = models.CharField(max_length=255,default=None, blank=True)
     referencias_eslingas = models.ForeignKey('ReferenciasEslingas', models.DO_NOTHING,default=None)
     codigo_qr = models.ImageField(upload_to='codigos_qr'+str(date), default = ' ')
-
-
-
+    empresa = models.CharField(max_length=255,default=None, blank=True)
+    empresa = models.CharField(max_length=255,default=None, blank=True)
+    telefono = models.CharField(max_length=255,default=None, blank=True)
+    correo = models.CharField(max_length=255,default=None, blank=True)
     #pdf = models.FileField(upload_to= 'PDF'+str(date), default = '/media/Ficha_inspeccion.pdf' )
 
     def save(self, *args, **kwargs):
@@ -216,18 +227,18 @@ class EquiposLineasAnclajes(models.Model):
     date_now = only_date.strftime("%d/%m/%Y")
     date_now_default = only_date.strftime("%Y-%m-%d")
     user = models.ForeignKey(settings.AUTH_USER_MODEL,models.DO_NOTHING,default=None)
-    numero_producto = models.PositiveIntegerField(unique=True)
+    numero_producto = models.CharField(max_length=7,unique=True)
     fecha_puesta_en_uso = models.DateField(default=date_now_default, blank=True)
     fecha_fabricacion = models.DateField()
     veredicto = models.BooleanField(default=True)
     codigo_interno = models.CharField(max_length=255,default=None, blank=True)
     personal_a_cargo = models.CharField(max_length=255,default=None, blank=True)
     referencias_anclajes = models.ForeignKey('ReferenciasLineasAnclajes', models.DO_NOTHING,default=None)
-    
+    empresa = models.CharField(max_length=255,default=None, blank=True)
     codigo_qr = models.ImageField(upload_to='codigos_qr'+str(date), default = ' ')
-
-
-
+    empresa = models.CharField(max_length=255,default=None, blank=True)
+    telefono = models.CharField(max_length=255,default=None, blank=True)
+    correo = models.CharField(max_length=255,default=None, blank=True)
     #pdf = models.FileField(upload_to= 'PDF'+str(date), default = '/media/Ficha_inspeccion.pdf' )
 
     def save(self, *args, **kwargs):
@@ -268,7 +279,7 @@ class EquiposCascoSegurida(models.Model):
     date_now = only_date.strftime("%d/%m/%Y")
     date_now_default = only_date.strftime("%Y-%m-%d")
     user = models.ForeignKey(settings.AUTH_USER_MODEL,models.DO_NOTHING,default=None)
-    numero_producto = models.PositiveIntegerField(unique=True)
+    numero_producto = models.CharField(max_length=7,unique=True)
     fecha_puesta_en_uso = models.DateField(default=date_now_default, blank=True)
     fecha_fabricacion = models.DateField()
     veredicto = models.BooleanField(default=True)
@@ -276,11 +287,11 @@ class EquiposCascoSegurida(models.Model):
     personal_a_cargo = models.CharField(max_length=255,default=None, blank=True)
     referencias_casco = models.ForeignKey('ReferenciasCascoSeguridad', models.DO_NOTHING,default=None)
     codigo_qr = models.ImageField(upload_to='codigos_qr'+str(date), default = ' ')
-
-
-
     #pdf = models.FileField(upload_to= 'PDF'+str(date), default = '/media/Ficha_inspeccion.pdf' )
-
+    empresa = models.CharField(max_length=255,default=None, blank=True)
+    telefono = models.CharField(max_length=255,default=None, blank=True)
+    correo = models.CharField(max_length=255,default=None, blank=True)
+    
     def save(self, *args, **kwargs):
 
         url = LINK+str(self.numero_producto)+"/4"
@@ -319,19 +330,18 @@ class EquiposAccesorioMetalicos(models.Model):
     date_now = only_date.strftime("%d/%m/%Y")
     date_now_default = only_date.strftime("%Y-%m-%d")
     user = models.ForeignKey(settings.AUTH_USER_MODEL,models.DO_NOTHING,default=None)
-    numero_producto = models.PositiveIntegerField(unique=True)
+    numero_producto = models.CharField(max_length=7,unique=True)
     fecha_puesta_en_uso = models.DateField(default=date_now_default, blank=True)
     fecha_fabricacion = models.DateField()
     veredicto = models.BooleanField(default=True)
     codigo_interno = models.CharField(max_length=255,default=None, blank=True)
     personal_a_cargo = models.CharField(max_length=255,default=None, blank=True)
     referencias_accesorio_metalicos = models.ForeignKey('ReferenciasAccesorioMetalicos', models.DO_NOTHING,default=None)
-    
-
     codigo_qr = models.ImageField(upload_to='codigos_qr'+str(date), default = ' ')
-
-
-
+    empresa = models.CharField(max_length=255,default=None, blank=True)
+    empresa = models.CharField(max_length=255,default=None, blank=True)
+    telefono = models.CharField(max_length=255,default=None, blank=True)
+    correo = models.CharField(max_length=255,default=None, blank=True)
     #pdf = models.FileField(upload_to= 'PDF'+str(date), default = '/media/Ficha_inspeccion.pdf' )
 
     def save(self, *args, **kwargs):
@@ -371,21 +381,19 @@ class EquiposSillasPerchas(models.Model):
     date_now = only_date.strftime("%d/%m/%Y")
     date_now_default = only_date.strftime("%Y-%m-%d")
     user = models.ForeignKey(settings.AUTH_USER_MODEL,models.DO_NOTHING,default=None)
-    numero_producto = models.PositiveIntegerField(unique=True)
+    numero_producto = models.CharField(max_length=7,unique=True)
     fecha_puesta_en_uso = models.DateField(default=date_now_default, blank=True)
     fecha_fabricacion = models.DateField()
     veredicto = models.BooleanField(default=True)
     codigo_interno = models.CharField(max_length=255,default=None, blank=True)
     personal_a_cargo = models.CharField(max_length=255,default=None, blank=True)
     referencias_sillas = models.ForeignKey('ReferenciasSillasPerchas', models.DO_NOTHING,default=None)
-    
-
     codigo_qr = models.ImageField(upload_to='codigos_qr'+str(date), default = ' ')
-
-
-
     #pdf = models.FileField(upload_to= 'PDF'+str(date), default = '/media/Ficha_inspeccion.pdf' )
-
+    empresa = models.CharField(max_length=255,default=None, blank=True)
+    telefono = models.CharField(max_length=255,default=None, blank=True)
+    correo = models.CharField(max_length=255,default=None, blank=True)
+    
     def save(self, *args, **kwargs):
 
         url = LINK+str(self.numero_producto)+"/6"
@@ -476,7 +484,7 @@ class InspeccionArnes(models.Model):
 
     codigo_qr_pdf = models.ImageField(upload_to='codigos_qr_inspecciones/', default = ' ')
     def save(self, *args, **kwargs):
-
+        
         url = LINL_PDF+str(self.equipos_arnes.id)+'/1/'+str(self.numero_inspeccion)+'/reporte_ficha_pdf/'
         qrcode_img = qrcode.make(url)
         canvas = Image.new('RGB', (410, 410), 'white')
@@ -488,7 +496,15 @@ class InspeccionArnes(models.Model):
         self.codigo_qr_pdf.save(fname, File(buffer), save=False)
         canvas.close()
         super().save(*args,**kwargs)
-
+        new_image = compress(self.reata_foto)
+        # set self.image to new_image
+        self.reata_foto = new_image
+        new_image = compress(self.costuras_foto)
+        # set self.image to new_image
+        self.costuras_foto = new_image
+        new_image = compress(self.metalicas_foto)
+        # set self.image to new_image
+        self.metalicas_foto = new_image
 
     def image_tag(self):
 
@@ -580,7 +596,18 @@ class InspeccionEslinga(models.Model):
         self.codigo_qr_pdf.save(fname, File(buffer), save=False)
         canvas.close()
         super().save(*args,**kwargs)
-        print(url)
+        new_image = compress(self.absorbedor_foto)
+        # set self.image to new_image
+        self.absorbedor_foto = new_image
+        new_image = compress(self.reata_foto)
+        # set self.image to new_image
+        self.reata_foto = new_image
+        new_image = compress(self.metalicas_foto)
+        # set self.image to new_image
+        self.metalicas_foto = new_image
+        new_image = compress(self.costuras_foto)
+        # set self.image to new_image
+        self.costuras_foto = new_image
 
 
     def image_tag(self):
@@ -658,7 +685,15 @@ class InspeccionLineasAnclajes(models.Model):
         self.codigo_qr_pdf.save(fname, File(buffer), save=False)
         canvas.close()
         super().save(*args,**kwargs)
-
+        new_image = compress(self.metalicas_foto)
+        # set self.image to new_image
+        self.metalicas_foto = new_image
+        new_image = compress(self.reata_foto)
+        # set self.image to new_image
+        self.reata_foto = new_image
+        new_image = compress(self.costuras_foto)
+        # set self.image to new_image
+        self.costuras_foto = new_image
 
     def image_tag(self):
 
@@ -729,8 +764,16 @@ class InspeccionCascoSeguridad(models.Model):
         self.codigo_qr_pdf.save(fname, File(buffer), save=False)
         canvas.close()
         super().save(*args,**kwargs)
-
-
+        new_image = compress(self.casquete_foto)
+        # set self.image to new_image
+        self.casquete_foto = new_image
+        new_image = compress(self.suspencion_foto)
+        # set self.image to new_image
+        self.suspencion_foto = new_image
+        # set self.image to new_image
+        new_image = compress(self.barbuquejo_foto)
+        # set self.image to new_image
+        self.barbuquejo_foto = new_image
     def image_tag(self):
 
         return format_html('<img src="{}" / width="100" height="50">'.format(self.codigo_qr_pdf.url))
@@ -819,8 +862,15 @@ class InspeccionAccesorioMetalicos(models.Model):
         self.codigo_qr_pdf.save(fname, File(buffer), save=False)
         canvas.close()
         super().save(*args,**kwargs)
-
-
+        new_image = compress(self.mosquetones_foto)
+        # set self.image to new_image
+        self.mosquetones_foto = new_image
+        new_image = compress(self.arrestador_poleas_foto)
+        # set self.image to new_image
+        self.arrestador_poleas_foto = new_image
+        new_image = compress(self.descendedores_anclajes_foto)
+        # set self.image to new_image
+        self.descendedores_anclajes_foto = new_image
     def image_tag(self):
 
         return format_html('<img src="{}" / width="100" height="50">'.format(self.codigo_qr_pdf.url))
@@ -910,7 +960,18 @@ class InspeccionSillasPerchas(models.Model):
         self.codigo_qr_pdf.save(fname, File(buffer), save=False)
         canvas.close()
         super().save(*args,**kwargs)
-
+        new_image = compress(self.cinta_reata_foto)
+        # set self.image to new_image
+        self.cinta_reata_foto = new_image
+        new_image = compress(self.costuras_foto)
+        # set self.image to new_image
+        self.costuras_foto = new_image
+        new_image = compress(self.metalicas_foto)
+        # set self.image to new_image
+        self.metalicas_foto = new_image
+        new_image = compress(self.madera_foto)
+        # set self.image to new_image
+        self.madera_foto = new_image
 
     def image_tag(self):
 
@@ -922,17 +983,7 @@ class InspeccionSillasPerchas(models.Model):
 
         db_table = 'inspeccion_sillas_perchas'
 
-class LineasTipo(models.Model):
-    nombre = models.CharField(max_length=255, unique=True)
-    descripcion = models.CharField(max_length=255)
 
-    class Meta:
-
-        db_table = 'lineas_tipo'
-
-    def __str__(self):
-
-        return self.nombre
 
 class ReferenciasArnes(models.Model):
     referencia = models.CharField(max_length=255, unique=True)
@@ -945,7 +996,6 @@ class ReferenciasArnes(models.Model):
     # default = /media/empty.jpg
     referencia_imagen = models.ImageField(upload_to='Referencias/Imagenes',default='empty.jpg')
     pdf = models.FileField(upload_to= 'Referencias/PDF',default=None)
-
     def image_tag(self):
 
         return format_html('<img src="{}" / width="100" height="50">'.format(self.referencia_imagen.url))
@@ -967,7 +1017,6 @@ class ReferenciasEslingas(models.Model):
     # default = /media/empty.jpg
     referencia_imagen = models.ImageField(upload_to='Referencias/Imagenes',default='empty.jpg')
     pdf = models.FileField(upload_to= 'Referencias/PDF',default=None)
-
     def image_tag(self):
 
         return format_html('<img src="{}" / width="100" height="50">'.format(self.referencia_imagen.url))
@@ -991,7 +1040,6 @@ class ReferenciasLineasAnclajes(models.Model):
     # default = /media/empty.jpg
     referencia_imagen = models.ImageField(upload_to='Referencias/Imagenes',default='empty.jpg')
     pdf = models.FileField(upload_to= 'Referencias/PDF',default=None)
-
     def image_tag(self):
 
         return format_html('<img src="{}" / width="100" height="50">'.format(self.referencia_imagen.url))
@@ -1011,7 +1059,6 @@ class ReferenciasCascoSeguridad(models.Model):
     # default = /media/empty.jpg
     referencia_imagen = models.ImageField(upload_to='Referencias/Imagenes',default='empty.jpg')
     pdf = models.FileField(upload_to= 'Referencias/PDF',default=None)
-
     def image_tag(self):
 
         return format_html('<img src="{}" / width="100" height="50">'.format(self.referencia_imagen.url))
@@ -1033,7 +1080,6 @@ class ReferenciasAccesorioMetalicos(models.Model):
     # default = /media/empty.jpg
     referencia_imagen = models.ImageField(upload_to='Referencias/Imagenes',default='empty.jpg')
     pdf = models.FileField(upload_to= 'Referencias/PDF',default=None)
-
     def image_tag(self):
 
         return format_html('<img src="{}" / width="100" height="50">'.format(self.referencia_imagen.url))
@@ -1052,7 +1098,7 @@ class ReferenciasSillasPerchas(models.Model):
     # default = /media/empty.jpg
     referencia_imagen = models.ImageField(upload_to='Referencias/Imagenes',default='empty.jpg')
     pdf = models.FileField(upload_to= 'Referencias/PDF',default=None)
-
+    linea_producion = models.ForeignKey(LineaProducionConfeccion, on_delete=models.CASCADE, null=True)
     def image_tag(self):
 
         return format_html('<img src="{}" / width="100" height="50">'.format(self.referencia_imagen.url))
@@ -1063,7 +1109,7 @@ class ReferenciasSillasPerchas(models.Model):
     class Meta:
 
         db_table = 'referencias_sillas_perchas'
-
+"""
 class Usuario(models.Model):
     usuario_priv_tipo = models.ForeignKey('UsuarioPrivTipo', models.DO_NOTHING,default=None)
     nombre = models.CharField(max_length=255)
@@ -1093,7 +1139,7 @@ class UsuarioPrivTipo(models.Model):
 
         db_table = 'usuario_priv_tipo'
 
-
+"""
 from django.core.exceptions import ValidationError
 def only_int(value): 
     if value.isdigit()==False:
@@ -1145,24 +1191,20 @@ class CustomUser(AbstractUser):
     def __str__(self):
 
         return self.username
-#Por medio de Signals despues de guardar se envia un correo con los datos https://www.youtube.com/watch?v=7dBbbIqWdCk y 
-# https://localcoder.org/sending-emails-when-a-user-is-activated-in-the-django-admin#solution_2
+# Por medio de Signals despues de guardar se envia un correo con los datos https://www.youtube.com/watch?v=7dBbbIqWdCk y 
+# https://localcoder.org/sending-emails-when-a-user-is-activated-in-the-django-admin#solution_2 y sobre todo siguiendo 
+# https://ordinarycoders.com/blog/article/html-password-reset-email-template para poder enviar correos personalizados
 from django.db.models.signals import post_save
-from django.core.mail import EmailMessage
-def send_user_email(sender, instance=None, **kwargs):
-    print(kwargs)
-    if instance.is_inspector:
-        first_name = instance.first_name
-        last_name = instance.last_name
-        username = instance.username
-        password = instance.password
+from django import template
+from django.utils.http import urlsafe_base64_encode
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
+from django.core.mail import EmailMultiAlternatives
+from email.mime.image import MIMEImage
+from email.mime.application import MIMEApplication
+from pathlib import Path
+from django.contrib.staticfiles import finders
 
-        email = instance.email
-        html_content = "Buen día %s %s, <br> Tenemos el agrado de informarle que usted ha aprobado satisfactoriamente el curso de Inspección de Equipos marca EPI. Su usuario de acceso es el nuḿero de cedula %s y contraseña %s"
-        message=EmailMessage(subject='CERTIFICACIÓN CURSO DE INSPECCIÓN EPI',body=html_content %(first_name,last_name, username, password),to=[email])
-        message.content_subtype='html'
-        message.send()
-post_save.connect(send_user_email, sender=CustomUser)
 
 class CiudadCodigo(models.Model):
     ciudad = models.CharField(max_length=50, unique=True)
@@ -1199,7 +1241,7 @@ class Inspectores(models.Model):
     lugar = models.CharField (max_length=255, default='Salón de Capacitación de EPI S.A.S', blank=True)
     fecha = models.DateField(verbose_name='Fecha del curso',default=date_now_default, blank=True)
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    
+    codigo_inspector = models.CharField(max_length=255, unique=True, blank=True)
     #Metodo de compresión de imagenes https://stackoverflow.com/questions/33077804/losslessly-compressing-images-on-django/33989023, la foto de perfil 
     #es guardada en la DB comprimida, una imagen que pesa 129kb pasa a pesar 14kb
     def save(self, *args, **kwargs):
@@ -1208,9 +1250,39 @@ class Inspectores(models.Model):
             
             new_image = compress(self.foto_inspector)
             # set self.image to new_image
-            if os.path.exists(self.foto_inspector.name):
-                os.remove(os.path.join(settings.MEDIA_ROOT, self.foto_inspector.name))
             self.foto_inspector = new_image
+            
+            subject = "CERTIFICACIÓN CURSO DE INSPECCIÓN EPI Y HABILITACIÓN DE LA PLATAFORMA EPI"
+            plaintext = template.loader.get_template('admin/password_reset_email.txt')
+            htmltemp = template.loader.get_template('admin/account_creation_subject.html')
+            image_path = 'media/iconos_imagenes/image002.jpg'
+            self.codigo_inspector=str(self.ciudad.codigo)+'-'+str(self.user.username)+'-'+self.fecha.strftime('%m%y')
+            c = { 
+            "email":self.user.email,
+            'domain':'164.92.73.232',
+            'site_name': 'Inspecciones EPI',
+            "uid": urlsafe_base64_encode(force_bytes(self.user.pk)),
+            "user": self.user,
+            'token': default_token_generator.make_token(self.user),
+            'full_name': str(self.user.first_name)+" "+str(self.user.last_name),
+            'username':self.user.username,
+            'codigo':self.user.inspectores.codigo_inspector,
+            'protocol': 'http',
+            }
+            text_content = plaintext.render(c)
+            html_content = htmltemp.render(c)
+            
+            msg = EmailMultiAlternatives(subject, text_content, 'EPI Inspecciones', [self.user.email])
+            msg.attach_alternative(html_content, "text/html")
+            msg.content_subtype = 'html'  # set the primary content to be text/html
+            msg.mixed_subtype = 'related' # it is an important part that ensures embedding of an image
+            #Para añadir la imagen de la firma 
+            #https://stackoverflow.com/questions/920910/sending-multipart-html-emails-which-contain-embedded-images
+            #https://www.workaround.cz/howto-send-html-email-embedded-image-django/
+            with open(image_path, mode='rb') as f:
+                image = MIMEImage(f.read())
+                msg.attach(image)
+                image.add_header('Content-ID', f"<image_name>")
             # save
             fname=f'Certificados-{self.user.first_name}-{self.user.last_name}.pdf'
             if os.path.exists(fname):
@@ -1227,6 +1299,7 @@ class Inspectores(models.Model):
                         )
             pdf = buffer.getvalue()
             self.certificado_inspector.save(fname, File(buffer), save=False)
+            msg.attach(fname, pdf,'application/pdf')
             buffer.close()
             fname=f'Carnet-{self.user.first_name}-{self.user.last_name}.pdf'
             if os.path.exists(fname):
@@ -1243,10 +1316,15 @@ class Inspectores(models.Model):
                         )
             pdf = buffer.getvalue()
             self.carnet_inspector.save(fname, File(buffer), save=False)
+            msg.attach(fname, pdf,'application/pdf')
             buffer.close()
+            
+            #Archivos comprimidos en email https://djangocentral.com/sending-email-with-zip-files-using-python/
+            with open('media/Curso_Inspeccion_Info.zip','rb') as file:
+            # Attach the file with filename to the email
+                msg.attach(MIMEApplication(file.read(), Name='Curso_Inspeccion_Info.zip'))
+            msg.send()
             super().save(*args, **kwargs)
-
-
     def image_tag(self):
 
         return format_html('<img src="{}" / width="100" height="100">'.format(self.foto_inspector.url))
@@ -1257,6 +1335,67 @@ class Inspectores(models.Model):
     class Meta:
 
         db_table = 'inspectores'
+
+#https://stackoverflow.com/questions/16041232/django-delete-filefield
+from django.dispatch import receiver
+@receiver(models.signals.post_delete, sender=Inspectores)
+def auto_delete_file_on_delete(sender, instance, **kwargs):
+    """
+    Deletes file from filesystem
+    when corresponding `MediaFile` object is deleted.
+    """
+    if instance.foto_inspector:
+        if os.path.isfile(instance.foto_inspector.path):
+            os.remove(instance.foto_inspector.path)
+    
+    if instance.certificado_inspector:
+        if os.path.isfile(instance.certificado_inspector.path):
+            os.remove(instance.certificado_inspector.path)
+
+    if instance.carnet_inspector:
+        if os.path.isfile(instance.carnet_inspector.path):
+            os.remove(instance.carnet_inspector.path)
+
+@receiver(models.signals.pre_save, sender=Inspectores)
+def auto_delete_file_on_change(sender, instance, **kwargs):
+    """
+    Deletes old file from filesystem
+    when corresponding `MediaFile` object is updated
+    with new file.
+    """
+    if not instance.pk:
+        return False
+
+    try:
+        old_file = sender.objects.get(pk=instance.pk).foto_inspector
+    except sender.DoesNotExist:
+        return False
+
+    new_file = instance.foto_inspector
+    if not old_file == new_file:
+        if os.path.isfile(old_file.path):
+            os.remove(old_file.path)
+
+    try:
+        old_file = sender.objects.get(pk=instance.pk).certificado_inspector
+    except sender.DoesNotExist:
+        return False
+
+    new_file = instance.certificado_inspector
+    if not old_file == new_file:
+        if os.path.isfile(old_file.path):
+            os.remove(old_file.path)
+
+    try:
+        old_file = sender.objects.get(pk=instance.pk).carnet_inspector
+    except sender.DoesNotExist:
+        return False
+
+    new_file = instance.carnet_inspector
+    if not old_file == new_file:
+        if os.path.isfile(old_file.path):
+            os.remove(old_file.path)
+
 
 def compress(image):
     im = Image.open(image)

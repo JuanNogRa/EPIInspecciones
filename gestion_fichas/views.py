@@ -6,7 +6,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.urls.base import reverse_lazy
 from gestion_fichas.forms import InspectionSheetFormAccesorios, InspectionSheetFormCascos, InspectionSheetFormEslingas, InspectionSheetFormLineasAnclajes, InspectionSheetFormSillas, LoginForm, CrearHvForm, SearchEquipmentForm, \
-    InspectionSheetForm, RegisterEquipmentForm, UserForm, SearchInspectorForm 
+    InspectionSheetForm, RegisterEquipmentForm, UserForm, SearchInspectorForm, UpdateHvForm
 from gestion_fichas.models import (EquiposAccesorioMetalicos, EquiposCascoSegurida, \
     EquiposEslinga, EquiposLineasAnclajes, EquiposSillasPerchas, InspeccionAccesorioMetalicos, InspeccionCascoSeguridad, InspeccionLineasAnclajes, InspeccionSillasPerchas, ReferenciasAccesorioMetalicos, ReferenciasArnes, EquiposArnes,
     InspeccionArnes as InspeccionArnesModel, InspeccionEslinga ,CustomUser, Inspectores, ReferenciasCascoSeguridad, ReferenciasEslingas, ReferenciasLineasAnclajes, ReferenciasSillasPerchas
@@ -88,7 +88,7 @@ class ReporteFichaPDF(View):
                         inspection_info = ReporteFichaPDF.dictfetchall(cursor)
 
                 object_pdf =ReportSheet()
-            elif(equipo_alturas=='2'):
+            elif(equipo_alturas=='2' or equipo_alturas == '5'):
                 with transaction.atomic():
 
                     with connection.cursor() as cursor:
@@ -103,7 +103,7 @@ class ReporteFichaPDF(View):
                         inspection_info = ReporteFichaPDF.dictfetchall(cursor)
 
                 object_pdf =ReportSheet_eslingas()
-            elif(equipo_alturas=='3'):
+            elif(equipo_alturas=='6' or equipo_alturas == '8' or equipo_alturas == '9'):
                 with transaction.atomic():
 
                     with connection.cursor() as cursor:
@@ -118,47 +118,47 @@ class ReporteFichaPDF(View):
                         inspection_info = ReporteFichaPDF.dictfetchall(cursor)
 
                 object_pdf =ReportSheet_lineas_anclajes()
-            elif (equipo_alturas=='4'):
-                with transaction.atomic():
+            # elif (equipo_alturas=='4'):
+            #     with transaction.atomic():
 
-                    with connection.cursor() as cursor:
+            #         with connection.cursor() as cursor:
 
-                        cursor.execute("SELECT equipos.numero_producto, equipos.fecha_fabricacion, equipos.codigo_interno FROM equipos_cascos equipos where equipos.id = %s", [id_equipo])
-                        equip_info = ReporteFichaPDF.dictfetchall(cursor)
+            #             cursor.execute("SELECT equipos.numero_producto, equipos.fecha_fabricacion, equipos.codigo_interno FROM equipos_cascos equipos where equipos.id = %s", [id_equipo])
+            #             equip_info = ReporteFichaPDF.dictfetchall(cursor)
 
-                        if Activate_photo:
-                            cursor.execute("SELECT IC.comentarios_adicionales, IC.codigo_qr_pdf, IC.fecha_inspeccion, users.first_name, users.last_name, IC.proxima_inspeccion, IC.veredicto, IC.casquete_foto, IC.suspencion_foto, IC.barbuquejo_foto, inspectores.foto_inspector, IC.casquete_fisuras_golpes_hundimiento, IC.casquete_quemaduras_deterioro_quimicos, IC.casquete_rayadura_decoloracion, IC.otros_casquete, IC.suspencion_completo, IC.suspencion_fisuras_golpes_hundimientos, IC.suspencion_torsion_estiramiento, IC.otros_suspencion, IC.barbuquejo_completo, IC.barbuquejo_cinta_deshilachada_rotas, IC.barbuquejo_salpicadura_pintura_rigidez_cinta, IC.otros_barbuquejo, IC.observacion_casquete_fisuras_golpes_hundimiento, IC.observacion_casquete_quemaduras_deterioro_quimicos, IC.observacion_casquete_rayadura_decoloracion, IC.observacion_casquete_otros, IC.observacion_suspencion_completo, IC.observacion_suspencion_fisuras_golpes_hundimientos, IC.observacion_suspencion_torsion_estiramiento, IC.observacion_suspencion_otros, IC.observacion_barbuquejo_completo, IC.observacion_barbuquejo_cinta_deshilachada_rotas, IC.observacion_barbuquejo_salpicadura_pintura_rigidez_cinta, IC.observacion_barbuquejo_otros FROM  inspeccion_casco IC, gestion_fichas_customuser users, inspectores WHERE IC.equipos_cascos_id = %s AND users.id = IC.user_id AND inspectores.user_id = users.id AND numero_inspeccion = %s", [id_equipo, inspeccion_numero]) 
-                        else:
-                            cursor.execute("SELECT IC.comentarios_adicionales, IC.codigo_qr_pdf, IC.fecha_inspeccion, users.first_name, users.last_name, IC.proxima_inspeccion, IC.veredicto, IC.casquete_foto, IC.suspencion_foto, IC.barbuquejo_foto, IC.casquete_fisuras_golpes_hundimiento, IC.casquete_quemaduras_deterioro_quimicos, IC.casquete_rayadura_decoloracion, IC.otros_casquete, IC.suspencion_completo, IC.suspencion_fisuras_golpes_hundimientos, IC.suspencion_torsion_estiramiento, IC.otros_suspencion, IC.barbuquejo_completo, IC.barbuquejo_cinta_deshilachada_rotas, IC.barbuquejo_salpicadura_pintura_rigidez_cinta, IC.otros_barbuquejo, IC.observacion_casquete_fisuras_golpes_hundimiento, IC.observacion_casquete_quemaduras_deterioro_quimicos, IC.observacion_casquete_rayadura_decoloracion, IC.observacion_casquete_otros, IC.observacion_suspencion_completo, IC.observacion_suspencion_fisuras_golpes_hundimientos, IC.observacion_suspencion_torsion_estiramiento, IC.observacion_suspencion_otros, IC.observacion_barbuquejo_completo, IC.observacion_barbuquejo_cinta_deshilachada_rotas, IC.observacion_barbuquejo_salpicadura_pintura_rigidez_cinta, IC.observacion_barbuquejo_otros FROM  inspeccion_casco IC, gestion_fichas_customuser users WHERE IC.equipos_cascos_id = %s AND users.id = IC.user_id AND numero_inspeccion = %s", [id_equipo, inspeccion_numero]) 
-                        inspection_info = ReporteFichaPDF.dictfetchall(cursor)
+            #             if Activate_photo:
+            #                 cursor.execute("SELECT IC.comentarios_adicionales, IC.codigo_qr_pdf, IC.fecha_inspeccion, users.first_name, users.last_name, IC.proxima_inspeccion, IC.veredicto, IC.casquete_foto, IC.suspencion_foto, IC.barbuquejo_foto, inspectores.foto_inspector, IC.casquete_fisuras_golpes_hundimiento, IC.casquete_quemaduras_deterioro_quimicos, IC.casquete_rayadura_decoloracion, IC.otros_casquete, IC.suspencion_completo, IC.suspencion_fisuras_golpes_hundimientos, IC.suspencion_torsion_estiramiento, IC.otros_suspencion, IC.barbuquejo_completo, IC.barbuquejo_cinta_deshilachada_rotas, IC.barbuquejo_salpicadura_pintura_rigidez_cinta, IC.otros_barbuquejo, IC.observacion_casquete_fisuras_golpes_hundimiento, IC.observacion_casquete_quemaduras_deterioro_quimicos, IC.observacion_casquete_rayadura_decoloracion, IC.observacion_casquete_otros, IC.observacion_suspencion_completo, IC.observacion_suspencion_fisuras_golpes_hundimientos, IC.observacion_suspencion_torsion_estiramiento, IC.observacion_suspencion_otros, IC.observacion_barbuquejo_completo, IC.observacion_barbuquejo_cinta_deshilachada_rotas, IC.observacion_barbuquejo_salpicadura_pintura_rigidez_cinta, IC.observacion_barbuquejo_otros FROM  inspeccion_casco IC, gestion_fichas_customuser users, inspectores WHERE IC.equipos_cascos_id = %s AND users.id = IC.user_id AND inspectores.user_id = users.id AND numero_inspeccion = %s", [id_equipo, inspeccion_numero]) 
+            #             else:
+            #                 cursor.execute("SELECT IC.comentarios_adicionales, IC.codigo_qr_pdf, IC.fecha_inspeccion, users.first_name, users.last_name, IC.proxima_inspeccion, IC.veredicto, IC.casquete_foto, IC.suspencion_foto, IC.barbuquejo_foto, IC.casquete_fisuras_golpes_hundimiento, IC.casquete_quemaduras_deterioro_quimicos, IC.casquete_rayadura_decoloracion, IC.otros_casquete, IC.suspencion_completo, IC.suspencion_fisuras_golpes_hundimientos, IC.suspencion_torsion_estiramiento, IC.otros_suspencion, IC.barbuquejo_completo, IC.barbuquejo_cinta_deshilachada_rotas, IC.barbuquejo_salpicadura_pintura_rigidez_cinta, IC.otros_barbuquejo, IC.observacion_casquete_fisuras_golpes_hundimiento, IC.observacion_casquete_quemaduras_deterioro_quimicos, IC.observacion_casquete_rayadura_decoloracion, IC.observacion_casquete_otros, IC.observacion_suspencion_completo, IC.observacion_suspencion_fisuras_golpes_hundimientos, IC.observacion_suspencion_torsion_estiramiento, IC.observacion_suspencion_otros, IC.observacion_barbuquejo_completo, IC.observacion_barbuquejo_cinta_deshilachada_rotas, IC.observacion_barbuquejo_salpicadura_pintura_rigidez_cinta, IC.observacion_barbuquejo_otros FROM  inspeccion_casco IC, gestion_fichas_customuser users WHERE IC.equipos_cascos_id = %s AND users.id = IC.user_id AND numero_inspeccion = %s", [id_equipo, inspeccion_numero]) 
+            #             inspection_info = ReporteFichaPDF.dictfetchall(cursor)
 
 
-                object_pdf =ReportSheet_casco()
-            elif (equipo_alturas=='5'):
-                with transaction.atomic():
+            #     object_pdf =ReportSheet_casco()
+            # elif (equipo_alturas=='5'):
+            #     with transaction.atomic():
 
-                    with connection.cursor() as cursor:
+            #         with connection.cursor() as cursor:
 
-                        cursor.execute("SELECT equipos.numero_producto, equipos.fecha_fabricacion, equipos.codigo_interno FROM equipos_accesorios_metalicos equipos where equipos.id = %s", [id_equipo])
-                        equip_info = ReporteFichaPDF.dictfetchall(cursor)
+            #             cursor.execute("SELECT equipos.numero_producto, equipos.fecha_fabricacion, equipos.codigo_interno FROM equipos_accesorios_metalicos equipos where equipos.id = %s", [id_equipo])
+            #             equip_info = ReporteFichaPDF.dictfetchall(cursor)
 
                         
 
-                        if Activate_photo:
-                            cursor.execute("SELECT IAM.comentarios_adicionales, IAM.codigo_qr_pdf, IAM.fecha_inspeccion, users.first_name, users.last_name, IAM.proxima_inspeccion, IAM.veredicto, IAM.mosquetones_foto, IAM.arrestador_poleas_foto, IAM.descendedores_anclajes_foto , inspectores.foto_inspector, IAM.mosquetones_fisuras_golpes_hundimiento, IAM.mosquetones_quemaduras_deterioro_quimicos, IAM.mosquetones_oxidacion_corrocion_mosquetones, IAM.mosquetones_bordes_filosos_rugosos, IAM.mosquetones_compuerta_libre, IAM.mosquetones_deformaciones, IAM.otros_mosquetones, IAM.arrestador_poleas_fisuras_golpes_hundimientos, IAM.arrestador_poleas_frenado_lisa, IAM.arrestador_poleas_oxidacion_corrocion, IAM.arrestador_poleas_bordes_filosos_rugosos, IAM.arrestador_poleas_compuerta_libre, \
-                            IAM.arrestador_poleas_deformaciones, IAM.otros_arrestador_poleas, IAM.descendedores_anclajes_fisuras_golpes_hundimientos, IAM.descendedores_anclajes_contacto_lisa, IAM.descendedores_anclajes_oxidacion_corrocion, IAM.descendedores_anclajes_bordes_filosos_rugosos, IAM.descendedores_anclajes_desgaste_disminucion_metal, IAM.descendedores_anclajes_deformaciones, IAM.otros_descendedores_anclajes, IAM.observacion_mosquetones_fisuras_golpes_hundimiento, IAM.observacion_mosquetones_quemaduras_deterioro_quimicos, IAM.observacion_mosquetones_oxidacion_corrocion_mosquetones, IAM.observacion_mosquetones_bordes_filosos_rugosos, IAM.observacion_mosquetones_compuerta_libre, IAM.observacion_mosquetones_deformaciones, IAM.observacion_mosquetones_otros, \
-                            IAM.observacion_arrestador_poleas_fisuras_golpes_hundimientos, IAM.observacion_arrestador_poleas_frenado_lisa, IAM.observacion_arrestador_poleas_oxidacion_corrocion, IAM.observacion_arrestador_poleas_bordes_filosos_rugosos, IAM.observacion_arrestador_poleas_compuerta_libre, IAM.observacion_arrestador_poleas_deformaciones, IAM.observacion_arrestador_poleas_otros, IAM.observacion_descendedores_anclajes_fisuras_golpes_hundimientos, IAM.observacion_descendedores_anclajes_frenado_lisa, IAM.observacion_descendedores_anclajes_oxidacion_corrocion, IAM.observacion_descendedores_anclajes_bordes_filosos_rugosos, IAM.observacion_descendedores_anclajes_desgaste_disminucion_metal, IAM.observacion_descendedores_anclajes_deformaciones, \
-                            IAM.observacion_descendedores_anclajes_otros FROM  inspeccion_accesorio_metalicos IAM, gestion_fichas_customuser users, inspectores WHERE IAM.equipos_accesorios_metalicos_id = %s AND users.id = IAM.user_id AND inspectores.user_id = users.id AND numero_inspeccion = %s", [id_equipo, inspeccion_numero]) 
-                        else:
-                            cursor.execute("SELECT IAM.comentarios_adicionales, IAM.codigo_qr_pdf, IAM.fecha_inspeccion, users.first_name, users.last_name, IAM.proxima_inspeccion, IAM.veredicto, IAM.mosquetones_foto, IAM.arrestador_poleas_foto, IAM.descendedores_anclajes_foto ,IAM.mosquetones_fisuras_golpes_hundimiento, IAM.mosquetones_quemaduras_deterioro_quimicos, IAM.mosquetones_oxidacion_corrocion_mosquetones, IAM.mosquetones_bordes_filosos_rugosos, IAM.mosquetones_compuerta_libre, IAM.mosquetones_deformaciones, IAM.otros_mosquetones, IAM.arrestador_poleas_fisuras_golpes_hundimientos, IAM.arrestador_poleas_frenado_lisa, IAM.arrestador_poleas_oxidacion_corrocion, IAM.arrestador_poleas_bordes_filosos_rugosos, IAM.arrestador_poleas_compuerta_libre, \
-                            IAM.arrestador_poleas_deformaciones, IAM.otros_arrestador_poleas, IAM.descendedores_anclajes_fisuras_golpes_hundimientos, IAM.descendedores_anclajes_contacto_lisa, IAM.descendedores_anclajes_oxidacion_corrocion, IAM.descendedores_anclajes_bordes_filosos_rugosos, IAM.descendedores_anclajes_desgaste_disminucion_metal, IAM.descendedores_anclajes_deformaciones, IAM.otros_descendedores_anclajes, IAM.observacion_mosquetones_fisuras_golpes_hundimiento, IAM.observacion_mosquetones_quemaduras_deterioro_quimicos, IAM.observacion_mosquetones_oxidacion_corrocion_mosquetones, IAM.observacion_mosquetones_bordes_filosos_rugosos, IAM.observacion_mosquetones_compuerta_libre, IAM.observacion_mosquetones_deformaciones, IAM.observacion_mosquetones_otros, \
-                            IAM.observacion_arrestador_poleas_fisuras_golpes_hundimientos, IAM.observacion_arrestador_poleas_frenado_lisa, IAM.observacion_arrestador_poleas_oxidacion_corrocion, IAM.observacion_arrestador_poleas_bordes_filosos_rugosos, IAM.observacion_arrestador_poleas_compuerta_libre, IAM.observacion_arrestador_poleas_deformaciones, IAM.observacion_arrestador_poleas_otros, IAM.observacion_descendedores_anclajes_fisuras_golpes_hundimientos, IAM.observacion_descendedores_anclajes_frenado_lisa, IAM.observacion_descendedores_anclajes_oxidacion_corrocion, IAM.observacion_descendedores_anclajes_bordes_filosos_rugosos, IAM.observacion_descendedores_anclajes_desgaste_disminucion_metal, IAM.observacion_descendedores_anclajes_deformaciones, \
-                            IAM.observacion_descendedores_anclajes_otros FROM  inspeccion_accesorio_metalicos IAM, gestion_fichas_customuser users WHERE IAM.equipos_accesorios_metalicos_id = %s AND users.id = IAM.user_id AND numero_inspeccion = %s", [id_equipo, inspeccion_numero])
-                        inspection_info = ReporteFichaPDF.dictfetchall(cursor)
+            #             if Activate_photo:
+            #                 cursor.execute("SELECT IAM.comentarios_adicionales, IAM.codigo_qr_pdf, IAM.fecha_inspeccion, users.first_name, users.last_name, IAM.proxima_inspeccion, IAM.veredicto, IAM.mosquetones_foto, IAM.arrestador_poleas_foto, IAM.descendedores_anclajes_foto , inspectores.foto_inspector, IAM.mosquetones_fisuras_golpes_hundimiento, IAM.mosquetones_quemaduras_deterioro_quimicos, IAM.mosquetones_oxidacion_corrocion_mosquetones, IAM.mosquetones_bordes_filosos_rugosos, IAM.mosquetones_compuerta_libre, IAM.mosquetones_deformaciones, IAM.otros_mosquetones, IAM.arrestador_poleas_fisuras_golpes_hundimientos, IAM.arrestador_poleas_frenado_lisa, IAM.arrestador_poleas_oxidacion_corrocion, IAM.arrestador_poleas_bordes_filosos_rugosos, IAM.arrestador_poleas_compuerta_libre, \
+            #                 IAM.arrestador_poleas_deformaciones, IAM.otros_arrestador_poleas, IAM.descendedores_anclajes_fisuras_golpes_hundimientos, IAM.descendedores_anclajes_contacto_lisa, IAM.descendedores_anclajes_oxidacion_corrocion, IAM.descendedores_anclajes_bordes_filosos_rugosos, IAM.descendedores_anclajes_desgaste_disminucion_metal, IAM.descendedores_anclajes_deformaciones, IAM.otros_descendedores_anclajes, IAM.observacion_mosquetones_fisuras_golpes_hundimiento, IAM.observacion_mosquetones_quemaduras_deterioro_quimicos, IAM.observacion_mosquetones_oxidacion_corrocion_mosquetones, IAM.observacion_mosquetones_bordes_filosos_rugosos, IAM.observacion_mosquetones_compuerta_libre, IAM.observacion_mosquetones_deformaciones, IAM.observacion_mosquetones_otros, \
+            #                 IAM.observacion_arrestador_poleas_fisuras_golpes_hundimientos, IAM.observacion_arrestador_poleas_frenado_lisa, IAM.observacion_arrestador_poleas_oxidacion_corrocion, IAM.observacion_arrestador_poleas_bordes_filosos_rugosos, IAM.observacion_arrestador_poleas_compuerta_libre, IAM.observacion_arrestador_poleas_deformaciones, IAM.observacion_arrestador_poleas_otros, IAM.observacion_descendedores_anclajes_fisuras_golpes_hundimientos, IAM.observacion_descendedores_anclajes_frenado_lisa, IAM.observacion_descendedores_anclajes_oxidacion_corrocion, IAM.observacion_descendedores_anclajes_bordes_filosos_rugosos, IAM.observacion_descendedores_anclajes_desgaste_disminucion_metal, IAM.observacion_descendedores_anclajes_deformaciones, \
+            #                 IAM.observacion_descendedores_anclajes_otros FROM  inspeccion_accesorio_metalicos IAM, gestion_fichas_customuser users, inspectores WHERE IAM.equipos_accesorios_metalicos_id = %s AND users.id = IAM.user_id AND inspectores.user_id = users.id AND numero_inspeccion = %s", [id_equipo, inspeccion_numero]) 
+            #             else:
+            #                 cursor.execute("SELECT IAM.comentarios_adicionales, IAM.codigo_qr_pdf, IAM.fecha_inspeccion, users.first_name, users.last_name, IAM.proxima_inspeccion, IAM.veredicto, IAM.mosquetones_foto, IAM.arrestador_poleas_foto, IAM.descendedores_anclajes_foto ,IAM.mosquetones_fisuras_golpes_hundimiento, IAM.mosquetones_quemaduras_deterioro_quimicos, IAM.mosquetones_oxidacion_corrocion_mosquetones, IAM.mosquetones_bordes_filosos_rugosos, IAM.mosquetones_compuerta_libre, IAM.mosquetones_deformaciones, IAM.otros_mosquetones, IAM.arrestador_poleas_fisuras_golpes_hundimientos, IAM.arrestador_poleas_frenado_lisa, IAM.arrestador_poleas_oxidacion_corrocion, IAM.arrestador_poleas_bordes_filosos_rugosos, IAM.arrestador_poleas_compuerta_libre, \
+            #                 IAM.arrestador_poleas_deformaciones, IAM.otros_arrestador_poleas, IAM.descendedores_anclajes_fisuras_golpes_hundimientos, IAM.descendedores_anclajes_contacto_lisa, IAM.descendedores_anclajes_oxidacion_corrocion, IAM.descendedores_anclajes_bordes_filosos_rugosos, IAM.descendedores_anclajes_desgaste_disminucion_metal, IAM.descendedores_anclajes_deformaciones, IAM.otros_descendedores_anclajes, IAM.observacion_mosquetones_fisuras_golpes_hundimiento, IAM.observacion_mosquetones_quemaduras_deterioro_quimicos, IAM.observacion_mosquetones_oxidacion_corrocion_mosquetones, IAM.observacion_mosquetones_bordes_filosos_rugosos, IAM.observacion_mosquetones_compuerta_libre, IAM.observacion_mosquetones_deformaciones, IAM.observacion_mosquetones_otros, \
+            #                 IAM.observacion_arrestador_poleas_fisuras_golpes_hundimientos, IAM.observacion_arrestador_poleas_frenado_lisa, IAM.observacion_arrestador_poleas_oxidacion_corrocion, IAM.observacion_arrestador_poleas_bordes_filosos_rugosos, IAM.observacion_arrestador_poleas_compuerta_libre, IAM.observacion_arrestador_poleas_deformaciones, IAM.observacion_arrestador_poleas_otros, IAM.observacion_descendedores_anclajes_fisuras_golpes_hundimientos, IAM.observacion_descendedores_anclajes_frenado_lisa, IAM.observacion_descendedores_anclajes_oxidacion_corrocion, IAM.observacion_descendedores_anclajes_bordes_filosos_rugosos, IAM.observacion_descendedores_anclajes_desgaste_disminucion_metal, IAM.observacion_descendedores_anclajes_deformaciones, \
+            #                 IAM.observacion_descendedores_anclajes_otros FROM  inspeccion_accesorio_metalicos IAM, gestion_fichas_customuser users WHERE IAM.equipos_accesorios_metalicos_id = %s AND users.id = IAM.user_id AND numero_inspeccion = %s", [id_equipo, inspeccion_numero])
+            #             inspection_info = ReporteFichaPDF.dictfetchall(cursor)
 
-                object_pdf =ReportSheet_accesorios()
+            #     object_pdf =ReportSheet_accesorios()
 
-            elif (equipo_alturas=='6'):
+            elif (equipo_alturas=='7' or equipo_alturas == '9'):
                 with transaction.atomic():
 
                     with connection.cursor() as cursor:
@@ -212,7 +212,7 @@ class ReporteFichaPDF(View):
                         cursor.execute("SELECT IA.fecha_inspeccion, users.first_name, users.last_name, IA.proxima_inspeccion, IA.veredicto, IA.reata_tienen_hoyos_agujeros, IA.reata_deshilachadas, IA.reata_cortadas_desgastadas, IA.reata_talladuras, IA.reata_torsion, IA.reata_suciedad, IA.reata_quemadura, IA.reata_salpicadura_rigidez, IA.reata_sustancia_quimica, IA.otros_arnes_cinta, IA.costuras_completas_continuas, IA.costuras_visibles, IA.costuras_indicador_impacto_activado,  IA.otros_arnes_costuras, IA.metalicas_completas, IA.metalicas_corrosion_oxido, IA.metalicas_deformacion, IA.metalicas_fisuras_golpes_hundimiento, IA.otros_metalicas FROM  inspeccion_arnes IA, gestion_fichas_customuser users WHERE IA.equipos_arnes_id= %s AND users.id = IA.user_id", [id_equipo])
                         inspection_info = ReporteFichaPDF.dictfetchall(cursor)
                 object_pdf =ReportSheet()
-            elif(equipo_alturas=='2'):
+            elif(equipo_alturas=='2' or equipo_alturas == '5'):
                 with transaction.atomic():
 
                     with connection.cursor() as cursor:
@@ -223,7 +223,7 @@ class ReporteFichaPDF(View):
                         cursor.execute("SELECT IE.fecha_inspeccion, users.first_name, users.last_name, IE.proxima_inspeccion, IE.veredicto, IE.absorbedor_hoyos_desgarres, IE.absorbedor_costuras_sueltas_reventadas, IE.absorbedor_deterioro, IE.absorbedor_suciedad, IE.absorbedor_quemaduras_soldadura_cigarrillo, IE.absorbedor_salpicadura_rigidez, IE.otros_absorbedor, IE.reata_deshilachadas, IE.reata_desgastadas, IE.reata_talladuras, IE.reata_salpicadura_rigidez, IE.reata_torsion, IE.otros_cinta,  IE.metalicas_completas, IE.metalicas_corrosion_oxido, IE.metalicas_compuertas, IE.metalicas_deformacion_fisuras_golpes_hundimiento, IE.otros_metalicas, IE.costuras_completas_continuas, IE.costuras_visibles, IE.otros_costuras FROM  inspeccion_eslingas IE, gestion_fichas_customuser users WHERE IE.equipos_eslingas_id = %s AND users.id = IE.user_id", [id_equipo]) 
                         inspection_info = ReporteFichaPDF.dictfetchall(cursor)
                 object_pdf =ReportSheet_eslingas()
-            elif(equipo_alturas=='3'):
+            elif(equipo_alturas=='6' or equipo_alturas == '8' or equipo_alturas == '9'):
                 with transaction.atomic():
 
                     with connection.cursor() as cursor:
@@ -234,31 +234,31 @@ class ReporteFichaPDF(View):
                         cursor.execute("SELECT IL.fecha_inspeccion, users.first_name, users.last_name, IL.proxima_inspeccion, IL.veredicto, IL.metalicas_completas, IL.metalicas_fisuras, IL.metalicas_corrosion_oxido, IL.metalicas_golpes_hundimiento, IL.metalicas_compuertas_ganchos, IL.otros_metalicas, IL.reata_deshilachadas, IL.reata_quemadura, IL.reata_torsion_talladuras, IL.reata_salpicadura_rigidez, IL.reata_ruptura, IL.otros_lineas_cinta, IL.costuras_completas_continuas, IL.costuras_visibles, IL.otros_lineas_costuras FROM  inspeccion_lineas_anclajes IL, gestion_fichas_customuser users WHERE IL.equipos_lineas_anclajes_id = %s AND users.id = IL.user_id", [id_equipo]) 
                         inspection_info = ReporteFichaPDF.dictfetchall(cursor)
                 object_pdf =ReportSheet_lineas_anclajes()
-            elif (equipo_alturas=='4'):
-                with transaction.atomic():
+            # elif (equipo_alturas=='4'):
+            #     with transaction.atomic():
 
-                    with connection.cursor() as cursor:
+            #         with connection.cursor() as cursor:
 
-                        cursor.execute("SELECT equipos.codigo_qr, equipos.numero_producto, equipos.fecha_fabricacion, equipos.codigo_interno FROM equipos_cascos equipos where equipos.id = %s", [id_equipo])
-                        equip_info = ReporteFichaPDF.dictfetchall(cursor)
+            #             cursor.execute("SELECT equipos.codigo_qr, equipos.numero_producto, equipos.fecha_fabricacion, equipos.codigo_interno FROM equipos_cascos equipos where equipos.id = %s", [id_equipo])
+            #             equip_info = ReporteFichaPDF.dictfetchall(cursor)
 
-                        cursor.execute("SELECT IC.fecha_inspeccion, users.first_name, users.last_name, IC.proxima_inspeccion, IC.veredicto, IC.casquete_fisuras_golpes_hundimiento, IC.casquete_quemaduras_deterioro_quimicos, IC.casquete_rayadura_decoloracion, IC.otros_casquete, IC.suspencion_completo, IC.suspencion_fisuras_golpes_hundimientos, IC.suspencion_torsion_estiramiento, IC.otros_suspencion, IC.barbuquejo_completo, IC.barbuquejo_cinta_deshilachada_rotas, IC.barbuquejo_salpicadura_pintura_rigidez_cinta, IC.otros_barbuquejo FROM  inspeccion_casco IC, gestion_fichas_customuser users WHERE IC.equipos_cascos_id = %s AND users.id = IC.user_id", [id_equipo])
-                        inspection_info = ReporteFichaPDF.dictfetchall(cursor)
-                object_pdf =ReportSheet_casco()
-            elif (equipo_alturas=='5'):
-                with transaction.atomic():
+            #             cursor.execute("SELECT IC.fecha_inspeccion, users.first_name, users.last_name, IC.proxima_inspeccion, IC.veredicto, IC.casquete_fisuras_golpes_hundimiento, IC.casquete_quemaduras_deterioro_quimicos, IC.casquete_rayadura_decoloracion, IC.otros_casquete, IC.suspencion_completo, IC.suspencion_fisuras_golpes_hundimientos, IC.suspencion_torsion_estiramiento, IC.otros_suspencion, IC.barbuquejo_completo, IC.barbuquejo_cinta_deshilachada_rotas, IC.barbuquejo_salpicadura_pintura_rigidez_cinta, IC.otros_barbuquejo FROM  inspeccion_casco IC, gestion_fichas_customuser users WHERE IC.equipos_cascos_id = %s AND users.id = IC.user_id", [id_equipo])
+            #             inspection_info = ReporteFichaPDF.dictfetchall(cursor)
+            #     object_pdf =ReportSheet_casco()
+            # elif (equipo_alturas=='5'):
+            #     with transaction.atomic():
 
-                    with connection.cursor() as cursor:
+            #         with connection.cursor() as cursor:
 
-                        cursor.execute("SELECT equipos.codigo_qr, equipos.numero_producto, equipos.fecha_fabricacion, equipos.codigo_interno FROM equipos_accesorios_metalicos equipos where equipos.id = %s", [id_equipo])
-                        equip_info = ReporteFichaPDF.dictfetchall(cursor)
+            #             cursor.execute("SELECT equipos.codigo_qr, equipos.numero_producto, equipos.fecha_fabricacion, equipos.codigo_interno FROM equipos_accesorios_metalicos equipos where equipos.id = %s", [id_equipo])
+            #             equip_info = ReporteFichaPDF.dictfetchall(cursor)
 
-                        cursor.execute("SELECT IAM.fecha_inspeccion, users.first_name, users.last_name, IAM.proxima_inspeccion, IAM.veredicto, IAM.mosquetones_fisuras_golpes_hundimiento, IAM.mosquetones_quemaduras_deterioro_quimicos, IAM.mosquetones_oxidacion_corrocion_mosquetones, IAM.mosquetones_bordes_filosos_rugosos, IAM.mosquetones_compuerta_libre, IAM.mosquetones_deformaciones, IAM.otros_mosquetones, IAM.arrestador_poleas_fisuras_golpes_hundimientos, IAM.arrestador_poleas_frenado_lisa, IAM.arrestador_poleas_oxidacion_corrocion, IAM.arrestador_poleas_bordes_filosos_rugosos, IAM.arrestador_poleas_compuerta_libre, \
-                            IAM.arrestador_poleas_deformaciones, IAM.otros_arrestador_poleas, IAM.descendedores_anclajes_fisuras_golpes_hundimientos, IAM.descendedores_anclajes_contacto_lisa, IAM.descendedores_anclajes_oxidacion_corrocion, IAM.descendedores_anclajes_bordes_filosos_rugosos, IAM.descendedores_anclajes_desgaste_disminucion_metal, IAM.descendedores_anclajes_deformaciones, IAM.otros_descendedores_anclajes\
-                            FROM  inspeccion_accesorio_metalicos IAM, gestion_fichas_customuser users WHERE IAM.equipos_accesorios_metalicos_id = %s AND users.id = IAM.user_id", [id_equipo])
-                        inspection_info = ReporteFichaPDF.dictfetchall(cursor)
-                object_pdf =ReportSheet_accesorios()
-            elif (equipo_alturas=='6'):
+            #             cursor.execute("SELECT IAM.fecha_inspeccion, users.first_name, users.last_name, IAM.proxima_inspeccion, IAM.veredicto, IAM.mosquetones_fisuras_golpes_hundimiento, IAM.mosquetones_quemaduras_deterioro_quimicos, IAM.mosquetones_oxidacion_corrocion_mosquetones, IAM.mosquetones_bordes_filosos_rugosos, IAM.mosquetones_compuerta_libre, IAM.mosquetones_deformaciones, IAM.otros_mosquetones, IAM.arrestador_poleas_fisuras_golpes_hundimientos, IAM.arrestador_poleas_frenado_lisa, IAM.arrestador_poleas_oxidacion_corrocion, IAM.arrestador_poleas_bordes_filosos_rugosos, IAM.arrestador_poleas_compuerta_libre, \
+            #                 IAM.arrestador_poleas_deformaciones, IAM.otros_arrestador_poleas, IAM.descendedores_anclajes_fisuras_golpes_hundimientos, IAM.descendedores_anclajes_contacto_lisa, IAM.descendedores_anclajes_oxidacion_corrocion, IAM.descendedores_anclajes_bordes_filosos_rugosos, IAM.descendedores_anclajes_desgaste_disminucion_metal, IAM.descendedores_anclajes_deformaciones, IAM.otros_descendedores_anclajes\
+            #                 FROM  inspeccion_accesorio_metalicos IAM, gestion_fichas_customuser users WHERE IAM.equipos_accesorios_metalicos_id = %s AND users.id = IAM.user_id", [id_equipo])
+            #             inspection_info = ReporteFichaPDF.dictfetchall(cursor)
+            #     object_pdf =ReportSheet_accesorios()
+            elif (equipo_alturas=='7' or equipo_alturas == '9'):
                 with transaction.atomic():
 
                     with connection.cursor() as cursor:
@@ -292,7 +292,7 @@ class ReporteFichaPDF(View):
         return response
 
 def home(request):
-
+    
     #tipo_usuario = request.user.has_perm('gestion_fichas.can_view_hv')
     return render(request,'gestion_fichas/home.html')
 
@@ -336,7 +336,7 @@ def buscar_hv(request):
         # Si el formulario es válido...
         if form.is_valid():
             numero_producto  = form.cleaned_data['numero_producto']
-            equipo_alturas = form.cleaned_data['equipo_alturas']
+            equipo_alturas = str(numero_producto)[4]
             form = SearchEquipmentForm()
             if equipo_alturas == '1':
                 ficha_inspeccion  = EquiposArnes.objects.filter(numero_producto = numero_producto).exists()
@@ -351,7 +351,7 @@ def buscar_hv(request):
 
                     return render(request, "gestion_fichas/buscar_hv.html", {'form': form})
 
-            elif equipo_alturas == '2':
+            elif equipo_alturas == '2' or equipo_alturas == '5':
                 ficha_inspeccion  = EquiposEslinga.objects.filter(numero_producto = numero_producto).exists()
 
                 if ficha_inspeccion:
@@ -364,7 +364,7 @@ def buscar_hv(request):
 
                     return render(request, "gestion_fichas/buscar_hv.html", {'form': form})
             
-            elif equipo_alturas == '3':
+            elif equipo_alturas == '6' or equipo_alturas == '8' or equipo_alturas == '9':
                 ficha_inspeccion  = EquiposLineasAnclajes.objects.filter(numero_producto = numero_producto).exists()
 
                 if ficha_inspeccion:
@@ -377,33 +377,33 @@ def buscar_hv(request):
 
                     return render(request, "gestion_fichas/buscar_hv.html", {'form': form})
 
-            elif equipo_alturas == '4':
-                ficha_inspeccion  = EquiposCascoSegurida.objects.filter(numero_producto = numero_producto).exists()
+            # elif equipo_alturas == '4':
+            #     ficha_inspeccion  = EquiposCascoSegurida.objects.filter(numero_producto = numero_producto).exists()
 
-                if ficha_inspeccion:
+            #     if ficha_inspeccion:
 
-                    return HttpResponseRedirect(reverse('hv_sheet', args=(numero_producto,equipo_alturas)))
+            #         return HttpResponseRedirect(reverse('hv_sheet', args=(numero_producto,equipo_alturas)))
 
-                else:
+            #     else:
 
-                    messages.error(request,'El casco de seguridad con este numero de lote no existe')
+            #         messages.error(request,'El casco de seguridad con este numero de lote no existe')
 
-                    return render(request, "gestion_fichas/buscar_hv.html", {'form': form})
+            #         return render(request, "gestion_fichas/buscar_hv.html", {'form': form})
             
-            elif equipo_alturas == '5':
-                ficha_inspeccion  = EquiposAccesorioMetalicos.objects.filter(numero_producto = numero_producto).exists()
+            # elif equipo_alturas == '5':
+            #     ficha_inspeccion  = EquiposAccesorioMetalicos.objects.filter(numero_producto = numero_producto).exists()
 
-                if ficha_inspeccion:
+            #     if ficha_inspeccion:
 
-                    return HttpResponseRedirect(reverse('hv_sheet', args=(numero_producto,equipo_alturas)))
+            #         return HttpResponseRedirect(reverse('hv_sheet', args=(numero_producto,equipo_alturas)))
 
-                else:
+            #     else:
             
-                    messages.error(request,'El accesorio metalico con este numero de lote no existe')
+            #         messages.error(request,'El accesorio metalico con este numero de lote no existe')
 
-                    return render(request, "gestion_fichas/buscar_hv.html", {'form': form})
+            #         return render(request, "gestion_fichas/buscar_hv.html", {'form': form})
 
-            elif equipo_alturas == '6':
+            elif equipo_alturas == '7' or equipo_alturas == '9':
                 ficha_inspeccion  = EquiposSillasPerchas.objects.filter(numero_producto = numero_producto).exists()
 
                 if ficha_inspeccion:
@@ -436,7 +436,6 @@ def hv_sheet(request, numero_producto, equipo_alturas):
     inspecciones = None
     numero_inspecciones = 0
     warning_inspeccion = False
-
     #if request.method == "POST":
 
         # Añadimos los datos recibidos al formulario
@@ -453,18 +452,15 @@ def hv_sheet(request, numero_producto, equipo_alturas):
     # que tengan en el campo el numero_producto escrito en el formulario, fk=equipo.referencias_arnes si se quita el select_related se genera una nueva
     # consulta en la base de datos, aumentando el acceso en disco, y aumentando el tiempo de respuesta del servidor.
     if equipo_alturas == '1':
-        equipo = EquiposArnes.objects.select_related().get(numero_producto = numero_producto)
-
-        if equipo.numero_producto != 0:
+        equipo = EquiposArnes.objects.select_related().get(numero_producto = str(numero_producto).zfill(7))
+        if int(equipo.numero_producto) != 0:
             fk = equipo.referencias_arnes
             internal_code = equipo.codigo_interno
-            
             inspecciones = InspeccionArnesModel.objects.select_related().filter(
                     equipos_arnes = equipo
                     )
 
             ultima_inspeccion = inspecciones.last()
-    
             if  ultima_inspeccion:
 
                 numero_inspecciones = int(ultima_inspeccion.numero_inspeccion)
@@ -482,10 +478,10 @@ def hv_sheet(request, numero_producto, equipo_alturas):
 
             messages.error(request,'El equipo con este numero de lote no existe')
     
-    elif equipo_alturas == '2':
-        equipo = EquiposEslinga.objects.select_related().get(numero_producto = numero_producto)
+    elif equipo_alturas == '2' or equipo_alturas == '5':
+        equipo = EquiposEslinga.objects.select_related().get(numero_producto = str(numero_producto).zfill(7))
         
-        if equipo.numero_producto != 0:
+        if int(equipo.numero_producto) != 0:
             fk = equipo.referencias_eslingas
             internal_code = equipo.codigo_interno
 
@@ -512,13 +508,13 @@ def hv_sheet(request, numero_producto, equipo_alturas):
 
             messages.error(request,'El equipo con este numero de lote no existe')
 
-    elif equipo_alturas == '3':
-        equipo = EquiposLineasAnclajes.objects.select_related().get(numero_producto = numero_producto)
+    elif equipo_alturas == '6' or equipo_alturas == '8' or equipo_alturas == '9':
+        equipo = EquiposLineasAnclajes.objects.select_related().get(numero_producto = str(numero_producto).zfill(7))
         
-        if equipo.numero_producto != 0:
+        if int(equipo.numero_producto) != 0:
             fk = equipo.referencias_anclajes
             internal_code = equipo.codigo_interno
-
+            
             inspecciones = InspeccionLineasAnclajes.objects.select_related().filter(
                     equipos_lineas_anclajes = equipo
                     )
@@ -532,7 +528,7 @@ def hv_sheet(request, numero_producto, equipo_alturas):
                 print("ELLL NUMERO ES",numero_inspecciones)
 
                 warning_inspeccion=warning_inspeccion_f(only_date,ultima_inspeccion.proxima_inspeccion)
-                InspeccionSinObservacion=ultima_inspeccion.pdf_sinObservacion
+                
             else:
                 warning_inspeccion=warning_inspeccion_f(only_date,equipo.fecha_puesta_en_uso)
 
@@ -544,74 +540,74 @@ def hv_sheet(request, numero_producto, equipo_alturas):
 
             messages.error(request,'El equipo con este numero de lote no existe')
 
-    elif equipo_alturas == '4':
-        equipo = EquiposCascoSegurida.objects.select_related().get(numero_producto = numero_producto)
+    # elif equipo_alturas == '4':
+    #     equipo = EquiposCascoSegurida.objects.select_related().get(numero_producto = numero_producto)
 
-        if equipo.numero_producto != 0:
-            fk = equipo.referencias_casco
-            internal_code = equipo.codigo_interno
+    #     if equipo.numero_producto != 0:
+    #         fk = equipo.referencias_casco
+    #         internal_code = equipo.numero_producto
 
-            inspecciones = InspeccionCascoSeguridad.objects.select_related().filter(
-                    equipos_cascos = equipo
-                    )
+    #         inspecciones = InspeccionCascoSeguridad.objects.select_related().filter(
+    #                 equipos_cascos = equipo
+    #                 )
 
-            ultima_inspeccion = inspecciones.last()
+    #         ultima_inspeccion = inspecciones.last()
 
 
-            if  ultima_inspeccion:
+    #         if  ultima_inspeccion:
 
-                numero_inspecciones = int(ultima_inspeccion.numero_inspeccion)
-                print("ELLL NUMERO ES",numero_inspecciones)
+    #             numero_inspecciones = int(ultima_inspeccion.numero_inspeccion)
+    #             print("ELLL NUMERO ES",numero_inspecciones)
 
-                warning_inspeccion=warning_inspeccion_f(only_date,ultima_inspeccion.proxima_inspeccion)
-            else:
-                warning_inspeccion=warning_inspeccion_f(only_date,equipo.fecha_puesta_en_uso)
+    #             warning_inspeccion=warning_inspeccion_f(only_date,ultima_inspeccion.proxima_inspeccion)
+    #         else:
+    #             warning_inspeccion=warning_inspeccion_f(only_date,equipo.fecha_puesta_en_uso)
 
-            if not internal_code:
+    #         if not internal_code:
 
-                return render(request,'gestion_fichas/hv_por_crear.html')
+    #             return render(request,'gestion_fichas/hv_por_crear.html')
             
-        else:
+    #     else:
 
-            messages.error(request,'El equipo con este numero de lote no existe')
+    #         messages.error(request,'El equipo con este numero de lote no existe')
     
-    elif equipo_alturas == '5':
-        equipo = EquiposAccesorioMetalicos.objects.select_related().get(numero_producto = numero_producto)
+    # elif equipo_alturas == '5':
+    #     equipo = EquiposAccesorioMetalicos.objects.select_related().get(numero_producto = numero_producto)
 
-        if equipo.numero_producto != 0:
-            fk = equipo.referencias_accesorio_metalicos
-            internal_code = equipo.codigo_interno
+    #     if equipo.numero_producto != 0:
+    #         fk = equipo.referencias_accesorio_metalicos
+    #         internal_code = equipo.numero_producto
 
-            inspecciones = InspeccionAccesorioMetalicos.objects.select_related().filter(
-                    equipos_accesorios_metalicos = equipo
-                    )
+    #         inspecciones = InspeccionAccesorioMetalicos.objects.select_related().filter(
+    #                 equipos_accesorios_metalicos = equipo
+    #                 )
 
-            ultima_inspeccion = inspecciones.last()
+    #         ultima_inspeccion = inspecciones.last()
 
 
 
-            if  ultima_inspeccion:
+    #         if  ultima_inspeccion:
 
-                numero_inspecciones = int(ultima_inspeccion.numero_inspeccion)
-                print("ELLL NUMERO ES",numero_inspecciones)
+    #             numero_inspecciones = int(ultima_inspeccion.numero_inspeccion)
+    #             print("ELLL NUMERO ES",numero_inspecciones)
 
                 
-                warning_inspeccion=warning_inspeccion_f(only_date,ultima_inspeccion.proxima_inspeccion)
-            else:
-                warning_inspeccion=warning_inspeccion_f(only_date,equipo.fecha_puesta_en_uso)
+    #             warning_inspeccion=warning_inspeccion_f(only_date,ultima_inspeccion.proxima_inspeccion)
+    #         else:
+    #             warning_inspeccion=warning_inspeccion_f(only_date,equipo.fecha_puesta_en_uso)
 
-            if not internal_code:
+    #         if not internal_code:
 
-                return render(request,'gestion_fichas/hv_por_crear.html')
+    #             return render(request,'gestion_fichas/hv_por_crear.html')
             
-        else:
+    #     else:
 
-            messages.error(request,'El equipo con este numero de lote no existe')
+    #         messages.error(request,'El equipo con este numero de lote no existe')
     
-    elif equipo_alturas == '6':
-        equipo = EquiposSillasPerchas.objects.select_related().get(numero_producto = numero_producto)
+    elif equipo_alturas == '7' or equipo_alturas == '9':
+        equipo = EquiposSillasPerchas.objects.select_related().get(numero_producto = str(numero_producto).zfill(7))
 
-        if equipo.numero_producto != 0:
+        if int(equipo.numero_producto) != 0:
             fk = equipo.referencias_sillas
             internal_code = equipo.codigo_interno
 
@@ -834,7 +830,7 @@ def hv_sheet(request, numero_producto, equipo_alturas):
     # if request.method == "POST" and 'inspection' in request.POST:
     #     return HttpResponseRedirect('agregar_inspeccion', args=(numero_producto,))
     return render(request,'gestion_fichas/hoja_de_vida_equipo.html', {
-        "equipo": equipo, "referencia_arnes": fk,
+        "equipo": equipo, "referencia_arnes": fk, "internal_code":numero_producto,
         "numero_inspecciones": numero_inspecciones, "inspecciones":inspecciones,
         "warning_inspeccion":warning_inspeccion,
         "equipo_alturas":equipo_alturas,
@@ -899,8 +895,11 @@ def crear_hv(request):
             personal_a_cargo = form.cleaned_data['personal_a_cargo']
             fecha_puesta_en_uso  = form.cleaned_data['fecha_puesta_en_uso']
             codigo_interno = form.cleaned_data['codigo_interno']
-            equipo_alturas = form.cleaned_data.get('equipo_alturas')
-            
+            empresa = form.cleaned_data['empresa']
+            correo = form.cleaned_data['correo']
+            telefono = form.cleaned_data['telefono']
+            #equipo_alturas = form.cleaned_data.get('equipo_alturas')
+            equipo_alturas = str(numero_producto)[4]
             form = CrearHvForm()
 
             # articulos = EquiposArnes.objects.filter(nombre__icontains =producto)
@@ -917,19 +916,20 @@ def crear_hv(request):
 
                     if internal_code:
 
-                        messages.info(request, 'La hoja de vida del arnes con número de serie '+str(numero_serie)+' ya existe')
+                        messages.info(request, 'El registro de datos del equipo arnes con número de serie '+str(numero_serie)+' ya existe')
 
                     else:
 
-                        EquiposArnes.objects.filter(numero_producto=numero_producto ).update(personal_a_cargo = personal_a_cargo, fecha_puesta_en_uso = fecha_puesta_en_uso, codigo_interno = codigo_interno, user = request.user )
-                        messages.success(request, 'Hoja de vida del arnes con número de serie '+str(numero_serie)+' creada con exito')
+                        EquiposArnes.objects.filter(numero_producto=numero_producto ).update(personal_a_cargo = personal_a_cargo, fecha_puesta_en_uso = fecha_puesta_en_uso, codigo_interno = codigo_interno, empresa = empresa, correo = correo, telefono = telefono,user = request.user)
+                        messages.success(request, 'El registro de datos del equipo arnes con número de serie '+str(numero_serie)+' creada con exito')
+                        return HttpResponseRedirect(reverse('hv_sheet', args=(numero_producto,equipo_alturas)))
                     # object = EquiposArnes.objects.get(numero_producto = numero_producto)
 
                 else:
 
                     messages.error(request,'El arnes con este numero de lote no existe')
 
-            elif equipo_alturas == '2':
+            elif equipo_alturas == '2' or equipo_alturas == '5':
                 ficha_inspeccion = EquiposEslinga.objects.filter(numero_producto = numero_producto).exists()
                 # Si existe un usuario con ese nombre y contraseña
 
@@ -941,19 +941,20 @@ def crear_hv(request):
 
                     if internal_code:
 
-                        messages.info(request, 'La hoja de vida de la eslinga con número de serie '+str(numero_serie)+' ya existe')
+                        messages.info(request, 'El registro de datos del equipo eslinga con número de serie '+str(numero_serie)+' ya existe')
 
                     else:
 
-                        EquiposEslinga.objects.filter(numero_producto=numero_producto ).update(personal_a_cargo = personal_a_cargo, fecha_puesta_en_uso = fecha_puesta_en_uso, codigo_interno = codigo_interno, user = request.user )
-                        messages.success(request, 'Hoja de vida de la eslinga con número de serie '+str(numero_serie)+' creada con exito')
+                        EquiposEslinga.objects.filter(numero_producto=numero_producto ).update(personal_a_cargo = personal_a_cargo, fecha_puesta_en_uso = fecha_puesta_en_uso, codigo_interno = codigo_interno, empresa = empresa, correo = correo, telefono = telefono,user = request.user)
+                        messages.success(request, 'El registro de datos del equipo eslinga con número de serie '+str(numero_serie)+' creada con exito')
+                        return HttpResponseRedirect(reverse('hv_sheet', args=(numero_producto,equipo_alturas)))
                     # object = EquiposArnes.objects.get(numero_producto = numero_producto)
 
                 else:
 
                     messages.error(request,'La eslinga con este numero de lote no existe')
             
-            elif equipo_alturas == '3':
+            elif equipo_alturas == '6' or equipo_alturas == '8' or equipo_alturas == '9':
                 ficha_inspeccion = EquiposLineasAnclajes.objects.filter(numero_producto = numero_producto).exists()
                 # Si existe un usuario con ese nombre y contraseña
 
@@ -965,67 +966,68 @@ def crear_hv(request):
 
                     if internal_code:
 
-                        messages.info(request, 'La hoja de vida de la linea ó el anclaje con número de serie '+str(numero_serie)+' ya existe')
+                        messages.info(request, 'El registro de datos del equipo linea ó el anclaje con número de serie '+str(numero_serie)+' ya existe')
 
                     else:
 
-                        EquiposLineasAnclajes.objects.filter(numero_producto=numero_producto ).update(personal_a_cargo = personal_a_cargo, fecha_puesta_en_uso = fecha_puesta_en_uso, codigo_interno = codigo_interno, user = request.user )
-                        messages.success(request, 'Hoja de vida de la linea ó el anclaje con número de serie '+str(numero_serie)+' creada con exito')
+                        EquiposLineasAnclajes.objects.filter(numero_producto=numero_producto ).update(personal_a_cargo = personal_a_cargo, fecha_puesta_en_uso = fecha_puesta_en_uso, codigo_interno = codigo_interno, empresa = empresa, correo = correo, telefono = telefono,user = request.user)
+                        messages.success(request, 'El registro de datos del equipo linea ó el anclaje con número de serie '+str(numero_serie)+' creada con exito')
+                        return HttpResponseRedirect(reverse('hv_sheet', args=(numero_producto,equipo_alturas)))
                     # object = EquiposArnes.objects.get(numero_producto = numero_producto)
 
                 else:
 
                     messages.error(request,'La linea ó el anclaje arnes con este numero de lote no existe')
             
-            elif equipo_alturas == '4':
-                ficha_inspeccion = EquiposCascoSegurida.objects.filter(numero_producto = numero_producto).exists()
-                # Si existe un usuario con ese nombre y contraseña
+            # elif equipo_alturas == '4':
+            #     ficha_inspeccion = EquiposCascoSegurida.objects.filter(numero_producto = numero_producto).exists()
+            #     # Si existe un usuario con ese nombre y contraseña
 
-                if ficha_inspeccion:
+            #     if ficha_inspeccion:
 
-                    equipo = EquiposCascoSegurida.objects.get(numero_producto = numero_producto)
-                    internal_code = equipo.codigo_interno
-                    numero_serie = equipo.numero_producto
+            #         equipo = EquiposCascoSegurida.objects.get(numero_producto = numero_producto)
+            #         internal_code = equipo.codigo_interno
+            #         numero_serie = equipo.numero_producto
 
-                    if internal_code:
+            #         if internal_code:
 
-                        messages.info(request, 'La hoja de vida del casco con número de serie '+str(numero_serie)+' ya existe')
+            #             messages.info(request, 'La hoja de vida del casco con número de serie '+str(numero_serie)+' ya existe')
 
-                    else:
+            #         else:
 
-                        EquiposCascoSegurida.objects.filter(numero_producto=numero_producto ).update(personal_a_cargo = personal_a_cargo, fecha_puesta_en_uso = fecha_puesta_en_uso, codigo_interno = codigo_interno, user = request.user )
-                        messages.success(request, 'Hoja de vida del casco con número de serie '+str(numero_serie)+' creada con exito')
-                    # object = EquiposArnes.objects.get(numero_producto = numero_producto)
+            #             EquiposCascoSegurida.objects.filter(numero_producto=numero_producto ).update(personal_a_cargo = personal_a_cargo, fecha_puesta_en_uso = fecha_puesta_en_uso, user = request.user )
+            #             messages.success(request, 'Hoja de vida del casco con número de serie '+str(numero_serie)+' creada con exito')
+            #         # object = EquiposArnes.objects.get(numero_producto = numero_producto)
 
-                else:
+            #     else:
 
-                    messages.error(request,'El casco con este numero de lote no existe')
+            #         messages.error(request,'El casco con este numero de lote no existe')
             
-            elif equipo_alturas == '5':
-                ficha_inspeccion = EquiposAccesorioMetalicos.objects.filter(numero_producto = numero_producto).exists()
-                # Si existe un usuario con ese nombre y contraseña
+            # elif equipo_alturas == '5':
+            #     ficha_inspeccion = EquiposAccesorioMetalicos.objects.filter(numero_producto = numero_producto).exists()
+            #     # Si existe un usuario con ese nombre y contraseña
 
-                if ficha_inspeccion:
+            #     if ficha_inspeccion:
 
-                    equipo = EquiposAccesorioMetalicos.objects.get(numero_producto = numero_producto)
-                    internal_code = equipo.codigo_interno
-                    numero_serie = equipo.numero_producto
+            #         equipo = EquiposAccesorioMetalicos.objects.get(numero_producto = numero_producto)
+            #         internal_code = equipo.codigo_interno
+            #         numero_serie = equipo.numero_producto
 
-                    if internal_code:
+            #         if internal_code:
 
-                        messages.info(request, 'La hoja de vida del accesorio metálico con número de serie '+str(numero_serie)+' ya existe')
+            #             messages.info(request, 'La hoja de vida del accesorio metálico con número de serie '+str(numero_serie)+' ya existe')
 
-                    else:
+            #         else:
 
-                        EquiposAccesorioMetalicos.objects.filter(numero_producto=numero_producto ).update(personal_a_cargo = personal_a_cargo, fecha_puesta_en_uso = fecha_puesta_en_uso, codigo_interno = codigo_interno, user = request.user )
-                        messages.success(request, 'Hoja de vida del accesorio metálico con número de serie '+str(numero_serie)+' creada con exito')
-                    # object = EquiposArnes.objects.get(numero_producto = numero_producto)
+            #             EquiposAccesorioMetalicos.objects.filter(numero_producto=numero_producto ).update(personal_a_cargo = personal_a_cargo, fecha_puesta_en_uso = fecha_puesta_en_uso, user = request.user )
+            #             messages.success(request, 'Hoja de vida del accesorio metálico con número de serie '+str(numero_serie)+' creada con exito')
+            #         # object = EquiposArnes.objects.get(numero_producto = numero_producto)
 
-                else:
+            #     else:
 
-                    messages.error(request,'El accesorio metálico con este numero de lote no existe')
+            #         messages.error(request,'El accesorio metálico con este numero de lote no existe')
 
-            elif equipo_alturas == '6':
+            elif equipo_alturas == '7':
                 ficha_inspeccion = EquiposSillasPerchas.objects.filter(numero_producto = numero_producto).exists()
                 # Si existe un usuario con ese nombre y contraseña
 
@@ -1037,12 +1039,13 @@ def crear_hv(request):
 
                     if internal_code:
 
-                        messages.info(request, 'La hoja de vida del de la silla ó percha con número de serie '+str(numero_serie)+' ya existe')
+                        messages.info(request, 'El registro de datos del equipo silla ó percha con número de serie '+str(numero_serie)+' ya existe')
 
                     else:
 
-                        EquiposSillasPerchas.objects.filter(numero_producto=numero_producto ).update(personal_a_cargo = personal_a_cargo, fecha_puesta_en_uso = fecha_puesta_en_uso, codigo_interno = codigo_interno, user = request.user )
-                        messages.success(request, 'Hoja de vida de la silla ó percha con número de serie '+str(numero_serie)+' creada con exito')
+                        EquiposSillasPerchas.objects.filter(numero_producto=numero_producto ).update(personal_a_cargo = personal_a_cargo, fecha_puesta_en_uso = fecha_puesta_en_uso, codigo_interno = codigo_interno, empresa = empresa, correo = correo, telefono = telefono,user = request.user)
+                        messages.success(request, 'El registro de datos del equipo silla ó percha con número de serie '+str(numero_serie)+' creada con exito')
+                        return HttpResponseRedirect(reverse('hv_sheet', args=(numero_producto,equipo_alturas)))
                     # object = EquiposArnes.objects.get(numero_producto = numero_producto)
 
                 else:
@@ -1055,6 +1058,180 @@ def crear_hv(request):
 
     return render(request, "gestion_fichas/crear_hv.html", {'form': form})
 
+@csrf_exempt
+@login_required(login_url="/login/")
+def update_registro(request):
+
+    if request.method == "POST":
+
+        # Añadimos los datos recibidos al formulario
+        form = UpdateHvForm(data=request.POST)
+        # Si el formulario es válido...
+
+        if form.is_valid():
+
+            #show empty form
+
+            # Recuperamos las credenciales validadas
+            numero_producto  = form.cleaned_data['numero_producto']
+            personal_a_cargo = form.cleaned_data['personal_a_cargo']
+            codigo_interno = form.cleaned_data['codigo_interno']
+            empresa = form.cleaned_data['empresa']
+            correo = form.cleaned_data['correo']
+            telefono = form.cleaned_data['telefono']
+            #equipo_alturas = form.cleaned_data.get('equipo_alturas')
+            equipo_alturas = str(numero_producto)[4]
+            form = UpdateHvForm()
+
+            # articulos = EquiposArnes.objects.filter(nombre__icontains =producto)
+            # Verificamos las credenciales del usuario
+            if equipo_alturas == '1':
+                ficha_inspeccion = EquiposArnes.objects.filter(numero_producto = numero_producto).exists()
+                # Si existe un usuario con ese nombre y contraseña
+                print(ficha_inspeccion)
+                if ficha_inspeccion:
+
+                    equipo = EquiposArnes.objects.get(numero_producto = numero_producto)
+                    internal_code = equipo.codigo_interno
+                    numero_serie = equipo.numero_producto
+
+                    if internal_code:
+                        EquiposArnes.objects.filter(numero_producto=numero_producto ).update(personal_a_cargo = personal_a_cargo, codigo_interno = codigo_interno, empresa = empresa, correo = correo, telefono = telefono,user = request.user)
+                        messages.success(request, 'El registro del equipo arnes con número de serie '+str(numero_serie)+' fue actualizado con exito')
+                        return HttpResponseRedirect(reverse('hv_sheet', args=(numero_producto,equipo_alturas)))
+                    else:
+                        messages.info(request, 'El registro del equipo arnes '+str(numero_serie)+' no se ha realizado')
+                        return render(request,'gestion_fichas/hv_por_crear.html')
+                    # object = EquiposArnes.objects.get(numero_producto = numero_producto)
+
+                else:
+
+                    messages.error(request,'El arnes con este numero de lote no existe')
+
+            elif equipo_alturas == '2' or equipo_alturas == '5':
+                ficha_inspeccion = EquiposEslinga.objects.filter(numero_producto = numero_producto).exists()
+                # Si existe un usuario con ese nombre y contraseña
+
+                if ficha_inspeccion:
+
+                    equipo = EquiposEslinga.objects.get(numero_producto = numero_producto)
+                    internal_code = equipo.codigo_interno
+                    numero_serie = equipo.numero_producto
+                    
+                    if internal_code:
+                        EquiposEslinga.objects.filter(numero_producto=numero_producto ).update(personal_a_cargo = personal_a_cargo, codigo_interno = codigo_interno, empresa = empresa, correo = correo, telefono = telefono,user = request.user)
+                        messages.success(request, 'El registro del equipo eslinga con número de serie '+str(numero_serie)+' fue actualizado con exito')
+                        return HttpResponseRedirect(reverse('hv_sheet', args=(numero_producto,equipo_alturas)))
+
+                    else:
+                       messages.info(request, 'El registro del equipo eslinga con número de serie '+str(numero_serie)+' no se ha realizado')
+                       return render(request,'gestion_fichas/hv_por_crear.html')
+                    # object = EquiposArnes.objects.get(numero_producto = numero_producto)
+
+                else:
+
+                    messages.error(request,'La eslinga con este numero de lote no existe')
+            
+            elif equipo_alturas == '6' or equipo_alturas == '8' or equipo_alturas == '9':
+                ficha_inspeccion = EquiposLineasAnclajes.objects.filter(numero_producto = numero_producto).exists()
+                # Si existe un usuario con ese nombre y contraseña
+
+                if ficha_inspeccion:
+
+                    equipo = EquiposLineasAnclajes.objects.get(numero_producto = numero_producto)
+                    internal_code = equipo.codigo_interno
+                    numero_serie = equipo.numero_producto
+
+                    if internal_code:
+                        EquiposLineasAnclajes.objects.filter(numero_producto=numero_producto ).update(personal_a_cargo = personal_a_cargo, codigo_interno = codigo_interno, empresa = empresa, correo = correo, telefono = telefono,user = request.user)
+                        messages.success(request, 'El registro del equipo linea ó anclaje con número de serie '+str(numero_serie)+' fue actualizado con exito')
+                        return HttpResponseRedirect(reverse('hv_sheet', args=(numero_producto,equipo_alturas)))
+                        
+                        
+                    else:
+                        messages.info(request, 'El registro del equipo linea ó anclaje con número de serie '+str(numero_serie)+' no se ha realizado')
+                        return render(request,'gestion_fichas/hv_por_crear.html')
+                    # object = EquiposArnes.objects.get(numero_producto = numero_producto)
+
+                else:
+
+                    messages.error(request,'La linea ó el anclaje arnes con este numero de lote no existe')
+            
+            # elif equipo_alturas == '4':
+            #     ficha_inspeccion = EquiposCascoSegurida.objects.filter(numero_producto = numero_producto).exists()
+            #     # Si existe un usuario con ese nombre y contraseña
+
+            #     if ficha_inspeccion:
+
+            #         equipo = EquiposCascoSegurida.objects.get(numero_producto = numero_producto)
+            #         internal_code = equipo.codigo_interno
+            #         numero_serie = equipo.numero_producto
+
+            #         if internal_code:
+
+            #             messages.info(request, 'La hoja de vida del casco con número de serie '+str(numero_serie)+' ya existe')
+
+            #         else:
+
+            #             EquiposCascoSegurida.objects.filter(numero_producto=numero_producto ).update(personal_a_cargo = personal_a_cargo, fecha_puesta_en_uso = fecha_puesta_en_uso, user = request.user )
+            #             messages.success(request, 'Hoja de vida del casco con número de serie '+str(numero_serie)+' creada con exito')
+            #         # object = EquiposArnes.objects.get(numero_producto = numero_producto)
+
+            #     else:
+
+            #         messages.error(request,'El casco con este numero de lote no existe')
+            
+            # elif equipo_alturas == '5':
+            #     ficha_inspeccion = EquiposAccesorioMetalicos.objects.filter(numero_producto = numero_producto).exists()
+            #     # Si existe un usuario con ese nombre y contraseña
+
+            #     if ficha_inspeccion:
+
+            #         equipo = EquiposAccesorioMetalicos.objects.get(numero_producto = numero_producto)
+            #         internal_code = equipo.codigo_interno
+            #         numero_serie = equipo.numero_producto
+
+            #         if internal_code:
+
+            #             messages.info(request, 'La hoja de vida del accesorio metálico con número de serie '+str(numero_serie)+' ya existe')
+
+            #         else:
+
+            #             EquiposAccesorioMetalicos.objects.filter(numero_producto=numero_producto ).update(personal_a_cargo = personal_a_cargo, fecha_puesta_en_uso = fecha_puesta_en_uso, user = request.user )
+            #             messages.success(request, 'Hoja de vida del accesorio metálico con número de serie '+str(numero_serie)+' creada con exito')
+            #         # object = EquiposArnes.objects.get(numero_producto = numero_producto)
+
+            #     else:
+
+            #         messages.error(request,'El accesorio metálico con este numero de lote no existe')
+
+            elif equipo_alturas == '7':
+                ficha_inspeccion = EquiposSillasPerchas.objects.filter(numero_producto = numero_producto).exists()
+                # Si existe un usuario con ese nombre y contraseña
+
+                if ficha_inspeccion:
+
+                    equipo = EquiposSillasPerchas.objects.get(numero_producto = numero_producto)
+                    internal_code = equipo.codigo_interno
+                    numero_serie = equipo.numero_producto
+
+                    if internal_code:
+                        EquiposSillasPerchas.objects.filter(numero_producto=numero_producto ).update(personal_a_cargo = personal_a_cargo, codigo_interno = codigo_interno, empresa = empresa, correo = correo, telefono = telefono,user = request.user)
+                        messages.success(request, 'El registro del equipo silla ó percha con número de serie '+str(numero_serie)+' fue actualizado con exito')
+                        return HttpResponseRedirect(reverse('hv_sheet', args=(numero_producto,equipo_alturas)))
+                    else:
+                        messages.info(request, 'El registro del equipo silla ó percha con número de serie '+str(numero_serie)+' no se ha realizado')
+                        return render(request,'gestion_fichas/hv_por_crear.html')
+                    # object = EquiposArnes.objects.get(numero_producto = numero_producto)
+                else:
+
+                    messages.error(request,'La silla ó percha con este numero de lote no existe')
+                
+    else:
+
+        form = UpdateHvForm()
+
+    return render(request, "gestion_fichas/update.html", {'form': form})
 
 def hv_por_crear(request):
 
@@ -1421,12 +1598,13 @@ def registrar(request):
                 linea_produccion = form.cleaned_data['linea_produccion']
                 cantidad_productos = form.cleaned_data['cantidad_productos_agregar']
                 fecha_fabricacion = form.cleaned_data['fecha_fabricacion']
-                equipo_alturas = form.cleaned_data.get('equipo_alturas')
+                linea_produccion=linea_produccion.linea_numero
+                #equipo_alturas = form.cleaned_data.get('equipo_alturas')
 
                 # Verificamos las credenciales del usuario
                 form = RegisterEquipmentForm ()
-                check_lote = str(lote_fabricacion)+str(linea_produccion)+str(numero_producto).zfill(2)
-                if equipo_alturas=='1':
+                check_lote = str(lote_fabricacion).zfill(4)+str(linea_produccion)+str(numero_producto).zfill(2)
+                if linea_produccion==1:
                     if EquiposArnes.objects.filter(numero_producto = check_lote).exists() or not(ReferenciasArnes.objects.filter(referencia = referencia_equipo).exists()):
 
                         messages.error(request,'Error, verifique la referencia o el lote del equipo')
@@ -1438,7 +1616,7 @@ def registrar(request):
 
                         if cantidad_productos == 1:
 
-                            producto = str(lote_fabricacion)+str(linea_produccion)+str(numero_producto).zfill(2)
+                            producto = str(lote_fabricacion).zfill(4)+str(linea_produccion)+str(numero_producto).zfill(2)
 
                             equipo_add = EquiposArnes(
                                 numero_producto = producto,
@@ -1448,6 +1626,9 @@ def registrar(request):
                                 personal_a_cargo = '',
                                 veredicto = True,
                                 codigo_interno='',
+                                empresa='',
+                                telefono='',
+                                correo='',
                                 )
 
                             equipo_add.save()
@@ -1455,12 +1636,11 @@ def registrar(request):
                         else:
 
                             with transaction.atomic():
-
-                                for lote in range(numero_producto,cantidad_productos+numero_producto):
+                                for lote in range(int(numero_producto),cantidad_productos+int(numero_producto)):
                                     numero_unico = str(lote)
                                     numero = numero_unico.zfill(2)
 
-                                    producto = str(lote_fabricacion)+str(linea_produccion)+numero
+                                    producto = str(lote_fabricacion).zfill(4)+str(linea_produccion)+numero
 
                                     query = EquiposArnes(
                                             numero_producto = producto,
@@ -1470,6 +1650,9 @@ def registrar(request):
                                             personal_a_cargo = '',
                                             veredicto = True,
                                             codigo_interno='',
+                                            empresa='',
+                                            telefono='',
+                                            correo='',
                                         )
                                     query.save()
 
@@ -1500,7 +1683,7 @@ def registrar(request):
 
                         messages.success(request,'Equipos Insertados con exito')
 
-                elif equipo_alturas=='2':
+                elif linea_produccion==2 or linea_produccion==5:
                     if EquiposEslinga.objects.filter(numero_producto = check_lote).exists() or not(ReferenciasEslingas.objects.filter(referencia = referencia_equipo).exists()):
 
                         messages.error(request,'Error, verifique la referencia o el lote del equipo')
@@ -1512,7 +1695,7 @@ def registrar(request):
 
                         if cantidad_productos == 1:
 
-                            producto = str(lote_fabricacion)+str(linea_produccion)+str(numero_producto).zfill(2)
+                            producto = str(lote_fabricacion).zfill(4)+str(linea_produccion)+str(numero_producto).zfill(2)
 
                             equipo_add = EquiposEslinga(
                                 numero_producto = producto,
@@ -1522,6 +1705,9 @@ def registrar(request):
                                 personal_a_cargo = '',
                                 veredicto = True,
                                 codigo_interno='',
+                                empresa='',
+                                telefono='',
+                                correo='',
                                 )
 
                             equipo_add.save()
@@ -1530,11 +1716,11 @@ def registrar(request):
 
                             with transaction.atomic():
 
-                                for lote in range(numero_producto,cantidad_productos+numero_producto):
+                                for lote in range(int(numero_producto),cantidad_productos+int(numero_producto)):
                                     numero_unico = str(lote)
                                     numero = numero_unico.zfill(2)
 
-                                    producto = str(lote_fabricacion)+str(linea_produccion)+numero
+                                    producto = str(lote_fabricacion).zfill(4)+str(linea_produccion)+numero
 
                                     query = EquiposEslinga(
                                             numero_producto = producto,
@@ -1544,12 +1730,15 @@ def registrar(request):
                                             personal_a_cargo = '',
                                             veredicto = True,
                                             codigo_interno='',
+                                            empresa='',
+                                            telefono='',
+                                            correo='',
                                         )
                                     query.save()
 
                         messages.success(request,'Equipos Insertados con exito')
                 
-                elif equipo_alturas=='3':
+                elif linea_produccion==6 or linea_produccion==8 or linea_produccion==9:
                     if EquiposLineasAnclajes.objects.filter(numero_producto = check_lote).exists() or not(ReferenciasLineasAnclajes.objects.filter(referencia = referencia_equipo).exists()):
 
                         messages.error(request,'Error, verifique la referencia o el lote del equipo')
@@ -1561,7 +1750,7 @@ def registrar(request):
 
                         if cantidad_productos == 1:
 
-                            producto = str(lote_fabricacion)+str(linea_produccion)+str(numero_producto).zfill(2)
+                            producto = str(lote_fabricacion).zfill(4)+str(linea_produccion)+str(numero_producto).zfill(2)
 
                             equipo_add = EquiposLineasAnclajes(
                                 numero_producto = producto,
@@ -1571,6 +1760,9 @@ def registrar(request):
                                 personal_a_cargo = '',
                                 veredicto = True,
                                 codigo_interno='',
+                                empresa='',
+                                telefono='',
+                                correo='',
                                 )
 
                             equipo_add.save()
@@ -1579,11 +1771,11 @@ def registrar(request):
 
                             with transaction.atomic():
 
-                                for lote in range(numero_producto,cantidad_productos+numero_producto):
+                                for lote in range(int(numero_producto),cantidad_productos+int(numero_producto)):
                                     numero_unico = str(lote)
                                     numero = numero_unico.zfill(2)
 
-                                    producto = str(lote_fabricacion)+str(linea_produccion)+numero
+                                    producto = str(lote_fabricacion).zfill(4)+str(linea_produccion)+numero
 
                                     query = EquiposLineasAnclajes(
                                             numero_producto = producto,
@@ -1593,110 +1785,113 @@ def registrar(request):
                                             personal_a_cargo = '',
                                             veredicto = True,
                                             codigo_interno='',
+                                            empresa='',
+                                            telefono='',
+                                            correo='',
                                         )
                                     query.save()
 
                         messages.success(request,'Equipos Insertados con exito')
                 
-                elif equipo_alturas=='4':
-                    if EquiposCascoSegurida.objects.filter(numero_producto = check_lote).exists() or not(ReferenciasCascoSeguridad.objects.filter(referencia = referencia_equipo).exists()):
+                # elif linea_produccion.linea_numero=='4':
+                #     if EquiposCascoSegurida.objects.filter(numero_producto = check_lote).exists() or not(ReferenciasCascoSeguridad.objects.filter(referencia = referencia_equipo).exists()):
 
-                        messages.error(request,'Error, verifique la referencia o el lote del equipo')
-                        return HttpResponseRedirect('/registrar/')
+                #         messages.error(request,'Error, verifique la referencia o el lote del equipo')
+                #         return HttpResponseRedirect('/registrar/')
 
-                    else:
+                #     else:
 
-                        referencia_objeto=ReferenciasCascoSeguridad.objects.get(referencia = referencia_equipo)
+                #         referencia_objeto=ReferenciasCascoSeguridad.objects.get(referencia = referencia_equipo)
 
-                        if cantidad_productos == 1:
+                #         if cantidad_productos == 1:
 
-                            producto = str(lote_fabricacion)+str(linea_produccion)+str(numero_producto).zfill(2)
+                #             producto = str(lote_fabricacion)+str(linea_produccion)+str(numero_producto).zfill(2)
 
-                            equipo_add = EquiposCascoSegurida(
-                                numero_producto = producto,
-                                referencias_casco=referencia_objeto,
-                                user=request.user,
-                                fecha_fabricacion=fecha_fabricacion,
-                                personal_a_cargo = '',
-                                veredicto = True,
-                                codigo_interno='',
-                                )
+                #             equipo_add = EquiposCascoSegurida(
+                #                 numero_producto = producto,
+                #                 referencias_casco=referencia_objeto,
+                #                 user=request.user,
+                #                 fecha_fabricacion=fecha_fabricacion,
+                #                 personal_a_cargo = '',
+                #                 veredicto = True,
+                #                 codigo_interno='',
+                #                 )
 
-                            equipo_add.save()
+                #             equipo_add.save()
 
-                        else:
+                #         else:
 
-                            with transaction.atomic():
+                #             with transaction.atomic():
 
-                                for lote in range(numero_producto,cantidad_productos+numero_producto):
-                                    numero_unico = str(lote)
-                                    numero = numero_unico.zfill(2)
+                #                 for lote in range(numero_producto,cantidad_productos+numero_producto):
+                #                     numero_unico = str(lote)
+                #                     numero = numero_unico.zfill(2)
 
-                                    producto = str(lote_fabricacion)+str(linea_produccion)+numero
+                #                     producto = str(lote_fabricacion)+str(linea_produccion)+numero
 
-                                    query = EquiposCascoSegurida(
-                                            numero_producto = producto,
-                                            referencias_casco=referencia_objeto,
-                                            user=CustomUser.objects.get(username= request.user),
-                                            fecha_fabricacion=fecha_fabricacion,
-                                            personal_a_cargo = '',
-                                            veredicto = True,
-                                            codigo_interno='',
-                                        )
-                                    query.save()
+                #                     query = EquiposCascoSegurida(
+                #                             numero_producto = producto,
+                #                             referencias_casco=referencia_objeto,
+                #                             user=CustomUser.objects.get(username= request.user),
+                #                             fecha_fabricacion=fecha_fabricacion,
+                #                             personal_a_cargo = '',
+                #                             veredicto = True,
+                #                             codigo_interno='',
+                #                         )
+                #                     query.save()
 
-                        messages.success(request,'Equipos Insertados con exito')
+                #         messages.success(request,'Equipos Insertados con exito')
                 
-                elif equipo_alturas=='5':
-                    if EquiposAccesorioMetalicos.objects.filter(numero_producto = check_lote).exists() or not(ReferenciasAccesorioMetalicos.objects.filter(referencia = referencia_equipo).exists()):
+                # elif Linea_number==6:
+                #     if EquiposAccesorioMetalicos.objects.filter(numero_producto = check_lote).exists() or not(ReferenciasAccesorioMetalicos.objects.filter(referencia = referencia_equipo).exists()):
 
-                        messages.error(request,'Error, verifique la referencia o el lote del equipo')
-                        return HttpResponseRedirect('/registrar/')
+                #         messages.error(request,'Error, verifique la referencia o el lote del equipo')
+                #         return HttpResponseRedirect('/registrar/')
 
-                    else:
+                #     else:
 
-                        referencia_objeto=ReferenciasAccesorioMetalicos.objects.get(referencia = referencia_equipo)
+                #         referencia_objeto=ReferenciasAccesorioMetalicos.objects.get(referencia = referencia_equipo)
 
-                        if cantidad_productos == 1:
+                #         if cantidad_productos == 1:
 
-                            producto = str(lote_fabricacion)+str(linea_produccion)+str(numero_producto).zfill(2)
+                #             producto = str(lote_fabricacion)+str(linea_produccion)+str(numero_producto).zfill(2)
 
-                            equipo_add = EquiposAccesorioMetalicos(
-                                numero_producto = producto,
-                                referencias_accesorio_metalicos=referencia_objeto,
-                                user=request.user,
-                                fecha_fabricacion=fecha_fabricacion,
-                                personal_a_cargo = '',
-                                veredicto = True,
-                                codigo_interno='',
-                                )
+                #             equipo_add = EquiposAccesorioMetalicos(
+                #                 numero_producto = producto,
+                #                 referencias_accesorio_metalicos=referencia_objeto,
+                #                 user=request.user,
+                #                 fecha_fabricacion=fecha_fabricacion,
+                #                 personal_a_cargo = '',
+                #                 veredicto = True,
+                #                 codigo_interno='',
+                #                 )
 
-                            equipo_add.save()
+                #             equipo_add.save()
 
-                        else:
+                #         else:
 
-                            with transaction.atomic():
+                #             with transaction.atomic():
 
-                                for lote in range(numero_producto,cantidad_productos+numero_producto):
-                                    numero_unico = str(lote)
-                                    numero = numero_unico.zfill(2)
+                #                 for lote in range(numero_producto,cantidad_productos+numero_producto):
+                #                     numero_unico = str(lote)
+                #                     numero = numero_unico.zfill(2)
 
-                                    producto = str(lote_fabricacion)+str(linea_produccion)+numero
+                #                     producto = str(lote_fabricacion)+str(linea_produccion)+numero
 
-                                    query = EquiposAccesorioMetalicos(
-                                            numero_producto = producto,
-                                            referencias_accesorio_metalicos=referencia_objeto,
-                                            user=CustomUser.objects.get(username= request.user),
-                                            fecha_fabricacion=fecha_fabricacion,
-                                            personal_a_cargo = '',
-                                            veredicto = True,
-                                            codigo_interno='',
-                                        )
-                                    query.save()
+                #                     query = EquiposAccesorioMetalicos(
+                #                             numero_producto = producto,
+                #                             referencias_accesorio_metalicos=referencia_objeto,
+                #                             user=CustomUser.objects.get(username= request.user),
+                #                             fecha_fabricacion=fecha_fabricacion,
+                #                             personal_a_cargo = '',
+                #                             veredicto = True,
+                #                             codigo_interno='',
+                #                         )
+                #                     query.save()
 
-                        messages.success(request,'Equipos Insertados con exito')
+                #         messages.success(request,'Equipos Insertados con exito')
                     
-                elif equipo_alturas=='6':
+                elif linea_produccion==7:
                     if EquiposSillasPerchas.objects.filter(numero_producto = check_lote).exists() or not(ReferenciasSillasPerchas.objects.filter(referencia = referencia_equipo).exists()):
 
                         messages.error(request,'Error, verifique la referencia o el lote del equipo')
@@ -1718,6 +1913,9 @@ def registrar(request):
                                 personal_a_cargo = '',
                                 veredicto = True,
                                 codigo_interno='',
+                                empresa='',
+                                telefono='',
+                                correo='',
                                 )
 
                             equipo_add.save()
@@ -1726,7 +1924,7 @@ def registrar(request):
 
                             with transaction.atomic():
 
-                                for lote in range(numero_producto,cantidad_productos+numero_producto):
+                                for lote in range(int(numero_producto),cantidad_productos+int(numero_producto)):
                                     numero_unico = str(lote)
                                     numero = numero_unico.zfill(2)
 
@@ -1740,6 +1938,9 @@ def registrar(request):
                                             personal_a_cargo = '',
                                             veredicto = True,
                                             codigo_interno='',
+                                            empresa='',
+                                            telefono='',
+                                            correo='',
                                         )
                                     query.save()
 
@@ -1837,8 +2038,6 @@ def UserView(request):
                 inspectores.empresa=request.POST.get('Enterprise')
                 messages.info(request, 'El nombre de la empresa en la que esta laborando fue actualizado a '+str(inspectores.empresa)+'.')
             if len(request.FILES) != 0:
-                if len(inspectores.foto_inspector) > 0 and inspectores.foto_inspector.path != 'media/default.jpg':
-                    os.remove(inspectores.foto_inspector.path) 
                 inspectores.foto_inspector = request.FILES['foto_inspector']
                 messages.info(request,'La foto del inspector fue actualizada.')
             inspectores.save()
@@ -2772,7 +2971,7 @@ def protected_access(request, path):
         if user.is_superuser:
             # If admin, everything is granted
             access_granted = True
-        else:
+        elif user.is_inspector:
             inspectores = Inspectores.objects.get(user_id=request.user.id)
             # For simple user, only their documents can be accessed
                 # add here more allowed documents

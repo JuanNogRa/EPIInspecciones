@@ -1,0 +1,206 @@
+
+{% extends 'gestion_fichas/base.html' %}
+{% load  static %}
+
+{% load myfilters %}
+
+{% block title %}
+Actualizar registro
+
+{% endblock %}
+
+{% block content_main%}
+
+
+<div class="content-main">
+          
+            <h1>Actualizar datos del equipo</h1>
+            <p>Esta es una herramienta para los inspectores para actualizar los datos del equipo.</p>
+            
+            <div class="line"></div>
+
+                {% for message in messages %}
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                            <div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ message }}
+                            </div>
+                        {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+
+                            <div class="alert alert-info alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ message }}
+                            </div>
+                        {% else %}
+                           
+                            <div class="alert alert-success alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ message }}
+                            </div>
+                       
+                        {% endif %}
+                        
+                    
+                {% endfor %}
+
+                <div class="card">
+                    <div class="card-body">
+
+                        <h4 class="card-subtitle">Actualizar datos del equipo</h4>
+                        {% comment %} <h5 class="card-subtitle">made with bootstrap elements</h5> {% endcomment %}
+                        <form class="form pt-3" method = "POST">
+                            {% csrf_token %}
+
+                            <div class="form-group">
+                                <label>Lote de fabricación</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon11"><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_hv.svg' %}" alt =""></img> </span>
+                                    </div>
+                                    {{ form.numero_producto|add:'class="form-control" placeholder="Número del producto"' }}
+                                    
+
+                            {% comment %} {{ form.username|addclass:'form-control'|placeholder:'username'|addautofocus:'autofocus'}} {% endcomment %}
+                                   
+
+                                    {% comment %} <input type="text" class="form-control" placeholder="Número del producto" aria-label="Número del producto" aria-describedby="basic-addon11"> {% endcomment %}
+                                </div>
+                            </div>
+
+                            {% comment %} <div class="form-group">
+                                <label>Número de equipos a agregar</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon11"><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_plus.png' %}" alt =""></img> </span>
+                                    </div>
+                                     {{ form.numero_producto|add:'class="form-control" placeholder="Número del producto"' }} 
+                                     <input type="text" class="form-control" placeholder="Número del producto" aria-label="Número del producto" aria-describedby="basic-addon11"> 
+
+                                    {{ form.cantidad_productos_agregar|addclass:'"form-control'|placeholder:'Productos a adicionar'}} 
+                                    {{ form.cantidad_productos_agregar|add:'class="form-control" placeholder="Productos a agregar"' }}
+
+                                     <input type="text" class="form-control" placeholder="Número del producto" aria-label="Número del producto" aria-describedby="basic-addon11"> 
+                                </div>
+                            </div> {% endcomment %}
+                            
+
+                            <div class="form-group">
+                                <label>Código interno</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon33"><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_pin.png' %}" alt =""></img></span>
+                                    </div>
+                                    {{ form.codigo_interno|add:'class="form-control" placeholder="Código interno del producto inicial"' }}
+                                    
+                                    {% comment %} <input type="text" class="form-control" placeholder="Código interno" aria-label="Password" aria-describedby="basic-addon33"> {% endcomment %}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label  for="exampleInputEmail1">Personal</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon22"><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_personal.png' %}" alt =""></img> </span>
+                                    </div>
+                                    {{ form.personal_a_cargo|add:'class="form-control" placeholder="Personal a cargo del equipo"' }}
+                            
+                                    {% comment %} <input  class="form-control" placeholder="Personal" aria-label="Email" aria-describedby="basic-addon22"> {% endcomment %}
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label  for="exampleInputEmail1">Empresa</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon22"><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_personal.png' %}" alt =""></img> </span>
+                                    </div>
+                                    {{ form.empresa|add:'class="form-control" placeholder="Empresa a la que pertenece"' }}
+                            
+                                    {% comment %} <input  class="form-control" placeholder="Personal" aria-label="Email" aria-describedby="basic-addon22"> {% endcomment %}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label  for="exampleInputEmail1">Correo</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon22"><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_personal.png' %}" alt =""></img> </span>
+                                    </div>
+                                    {{ form.correo|add:'class="form-control" placeholder="Correo de contacto (Opcional)"' }}
+                            
+                                    {% comment %} <input  class="form-control" placeholder="Personal" aria-label="Email" aria-describedby="basic-addon22"> {% endcomment %}
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label  for="exampleInputEmail1">Teléfono</label>
+                                <div class="input-group mb-3">
+                                    
+                                    <div class="input-group-prepend">
+                                        
+                                        <span class="input-group-text" id="basic-addon22"><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_personal.png' %}" alt =""></img> </span>
+                                   
+                                    </div>
+                                   
+                                    {{ form.telefono|add:'class="form-control" placeholder="Teléfono de contacto (Opcional)"' }}
+                            
+                                    {% comment %} <input  class="form-control" placeholder="Personal" aria-label="Email" aria-describedby="basic-addon22"> {% endcomment %}
+                                </div>
+                            </div>
+
+                            
+                            {% comment %} <div class="form-group">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <input type="checkbox" class="custom-control-input" id="checkbox10" value="check">
+                                    <label class="custom-control-label" for="checkbox10">Remember Me</label>
+                                </div>
+                            </div> {% endcomment %}
+                            {% comment %} <a href="{{ MEDIA_URL }}Referencias/PDF/MV-FT-007-_50-12.pdf" >{{ MEDIA_URL }}</a> {% endcomment %}
+
+                            
+                            <div class="text-center">
+
+
+                                    <button type="reset" class="btn btn-dark col-sm-12 col-md-5 mt-2">Cancelar</button>
+                                    {% comment %} <button type="submit" class="btn btn-success mr-2">Crear</button> {% endcomment %}
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-success col-sm-12 col-md-6 mt-2" data-toggle="modal" data-target="#exampleModalCenter">
+                                    Actualizar registro
+                                    </button>
+                                    
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">INFO</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    ¿Desea confirmar la actualización de la información del equipo? 
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-success mr-2">Si, actualizar </button>
+                                    </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        <!-- Modal -->
+                            
+                        </form>
+                        
+
+                    </div>
+                    
+            </div>
+                                  
+
+            
+            
+</div>
+{% endblock %}

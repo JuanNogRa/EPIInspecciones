@@ -4,17 +4,18 @@ from django import forms
 
 from gestion_fichas.models import EquiposArnes, InspeccionAccesorioMetalicos, InspeccionArnes, InspeccionCascoSeguridad, InspeccionEslinga, InspeccionLineasAnclajes, InspeccionSillasPerchas, ReferenciasArnes, ReferenciasEslingas, ReferenciasCascoSeguridad, \
                                     ReferenciasLineasAnclajes, ReferenciasAccesorioMetalicos,  ReferenciasSillasPerchas, EquiposEslinga, EquiposLineasAnclajes, EquiposCascoSegurida, EquiposAccesorioMetalicos, EquiposSillasPerchas, CiudadCodigo
-from gestion_fichas.models import LineasTipo
+from gestion_fichas.models import LineaProducionConfeccion
 from gestion_fichas.models import CustomUser, Inspectores
 
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
-
+from django.contrib.auth.forms import PasswordResetForm
+from django.utils.crypto import get_random_string
 class EquiposArnes_admin(admin.ModelAdmin):
     
     list_display   = (
-        "numero_producto", "user", "fecha_puesta_en_uso", "referencias_arnes_id",
+        "numero_producto", "user", "fecha_puesta_en_uso", "codigo_interno", "empresa","correo","telefono",
         "veredicto", "personal_a_cargo", "fecha_fabricacion", 'image_tag'
         )
 
@@ -131,7 +132,7 @@ class LineasTipo_admin(admin.ModelAdmin):
 
     #form = formfield_for_foreignkey_ReferenciasArnes
 
-    list_display   = ("nombre","descripcion")
+    list_display   = ("linea_numero","nombre")
 
 class Inspector_admin(admin.StackedInline):
     
@@ -388,31 +389,26 @@ class InspeccionSilla_admin(admin.ModelAdmin):
     list_filter    = ("fecha_inspeccion",)
     date_hierarchy = "fecha_inspeccion"
 
-class UserCreationForm(forms.ModelForm):
-    """A form for creating new users. Includes all the required
-    fields, plus a repeated password."""
-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
-    
-    class Meta:
+class UserCreationForm(UserCreationForm):
+    """
+    A UserCreationForm with optional password inputs.
+    """
 
-        fields = '__all__'
+    def __init__(self, *args, **kwargs):
+        super(UserCreationForm, self).__init__(*args, **kwargs)
+        self.fields['password1'].required = False
+        self.fields['password2'].required = False
+        # If one field gets autocompleted but not the other, our 'neither
+        # password or both password' validation will be triggered.
+        self.fields['password1'].widget.attrs['autocomplete'] = 'off'
+        self.fields['password2'].widget.attrs['autocomplete'] = 'off'
 
     def clean_password2(self):
-        # Check that the two password entries match
         password1 = self.cleaned_data.get("password1")
-        password2 = self.cleaned_data.get("password2")
-        if password1 and password2 and password1 != password2:
-            raise forms.ValidationError("Passwords don't match")
+        password2 = super(UserCreationForm, self).clean_password2()
+        if bool(password1) ^ bool(password2):
+            raise forms.ValidationError("Fill out both fields")
         return password2
-
-    def save(self, commit=True):
-        # Save the provided password in hashed format
-        user = super(UserCreationForm, self).save(commit=False)
-        user.set_password(self.cleaned_data["password1"])
-        if commit:
-            user.save()
-        return user
 
 
 class UserChangeForm(forms.ModelForm):
@@ -434,6 +430,11 @@ class UserChangeForm(forms.ModelForm):
 #donde esta el tuto para implementar la extención del formulario 
 # https://cpadiernos.github.io/how-to-add-fields-to-the-user-model-in-django.html 
 class CustomUserAdmin(UserAdmin):
+    """
+    A UserAdmin that sends a password-reset email when creating a new user,
+    unless a password was entered.
+    """
+    add_form = UserCreationForm
     # The forms to add and change user instances
     fieldsets = (
         (None, {
@@ -478,7 +479,27 @@ class CustomUserAdmin(UserAdmin):
     inlines = [
         Inspector_admin
     ]
-    
+    #Se siguio un procedimiento parecido para enviar un token para configurar el password
+    # de los inspectores https://django-authtools.readthedocs.io/en/latest/how-to/invitation-email.html
+    """def save_model(self, request, obj, form, change):
+        if not change and (not form.cleaned_data['password1'] or not obj.has_usable_password()) and form.cleaned_data['is_inspector']:
+            # Django's PasswordResetForm won't let us reset an unusable
+            # password. We set it above super() so we don't have to save twice.
+            obj.set_password(get_random_string())
+            reset_password = True
+        else:
+            reset_password = False
+
+        super(UserAdmin, self).save_model(request, obj, form, change)
+
+        if reset_password:
+            reset_form = PasswordResetForm({'email': obj.email})
+            assert reset_form.is_valid()
+            reset_form.save(
+                request=request,
+                use_https=request.is_secure(),
+                email_template_name='admin/account_creation_subject.html',
+            )"""
     class Meta:
 
             fields = '__all__'
@@ -524,8 +545,6 @@ admin.site.register(ReferenciasAccesorioMetalicos,ReferenciasAccesorioMetalicos_
 
 admin.site.register(ReferenciasSillasPerchas,ReferenciasSillasPerchas_admin)
 
-admin.site.register(LineasTipo,LineasTipo_admin)
-
 admin.site.register(InspeccionArnes,InspeccionArnes_admin)
 
 admin.site.register(InspeccionEslinga,InspeccionEslingas_admin)
@@ -539,3 +558,5 @@ admin.site.register(InspeccionAccesorioMetalicos,InspeccionAccesorio_admin)
 admin.site.register(InspeccionSillasPerchas,InspeccionSilla_admin)
 
 admin.site.register(CiudadCodigo,CiudadCodigo_admin)
+
+admin.site.register(LineaProducionConfeccion,LineasTipo_admin)

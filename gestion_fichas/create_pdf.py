@@ -587,7 +587,7 @@ class ReportSheet:
                 datos_header = (
 
                     ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'], ''),
-                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],''),
+                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),''),
                     ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],''),
                     ("FECHA INSPECCIÓN: ",inspection['fecha_inspeccion'],''),
                     ("RESPONSABLE DE LA INSPECCIÓN: ",inspection['first_name']+" "+ inspection['last_name'],''),
@@ -668,7 +668,7 @@ class ReportSheet:
                 datos_table_2 = (
 
                     ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'],'', ''),
-                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],'', ''),
+                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),'', ''),
                     ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],'', ''),
                     ("FECHA INSPECCIÓN: ",inspection['fecha_inspeccion'],''),
                     ("RESPONSABLE DE LA INSPECCIÓN: ",inspection['first_name']+" "+ inspection['last_name'], ''),
@@ -756,7 +756,7 @@ class ReportSheet:
             datos_table_2 = (
 
                 ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'],'', ''),
-                ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],'', ''),
+                ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),'', ''),
                 ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],'', ''),
                 ("FECHA INSPECCIÓN: ",inspection['fecha_inspeccion'],''),
                 ("RESPONSABLE DE LA INSPECCIÓN: ",inspection['first_name']+" "+ inspection['last_name'], ''),
@@ -827,7 +827,7 @@ class ReportSheet:
             datos_table_2 = (
 
                 ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'],'', ''),
-                ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],'', ''),
+                ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),'', ''),
                 ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],'', ''),
                 ("FECHA INSPECCIÓN: ",inspection['fecha_inspeccion'],''),
                 ("RESPONSABLE DE LA INSPECCIÓN: ",inspection['first_name']+" "+ inspection['last_name'], ''),
@@ -1054,7 +1054,7 @@ class ReportSheet:
                 datos_table_2 = (
 
                     ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'],'', ''),
-                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],'', ''),
+                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),'', ''),
                     ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],'', ''),
                     fecha_inspecciones,
                     responsables,
@@ -1730,7 +1730,7 @@ class ReportSheet_eslingas:
                 datos_header = (
 
                     ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'], ''),
-                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],''),
+                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),''),
                     ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],''),
                     ("FECHA INSPECCIÓN: ",inspection['fecha_inspeccion'],''),
                     ("RESPONSABLE DE LA INSPECCIÓN: ",inspection['first_name']+" "+ inspection['last_name'],''),
@@ -1811,7 +1811,7 @@ class ReportSheet_eslingas:
                 datos_table_2 = (
 
                     ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'],'', ''),
-                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],'', ''),
+                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),'', ''),
                     ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],'', ''),
                     ("FECHA INSPECCIÓN: ",inspection['fecha_inspeccion'],''),
                     ("RESPONSABLE DE LA INSPECCIÓN: ",inspection['first_name']+" "+ inspection['last_name'], ''),
@@ -1899,7 +1899,7 @@ class ReportSheet_eslingas:
             datos_table_2 = (
 
                 ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'],'', ''),
-                ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],'', ''),
+                ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),'', ''),
                 ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],'', ''),
                 ("FECHA INSPECCIÓN: ",inspection['fecha_inspeccion'],''),
                 ("RESPONSABLE DE LA INSPECCIÓN: ",inspection['first_name']+" "+ inspection['last_name'], ''),
@@ -1970,7 +1970,7 @@ class ReportSheet_eslingas:
             datos_table_2 = (
 
                 ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'],'', ''),
-                ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],'', ''),
+                ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),'', ''),
                 ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],'', ''),
                 ("FECHA INSPECCIÓN: ",inspection['fecha_inspeccion'],''),
                 ("RESPONSABLE DE LA INSPECCIÓN: ",inspection['first_name']+" "+ inspection['last_name'], ''),
@@ -2201,7 +2201,7 @@ class ReportSheet_eslingas:
                 datos_table_2 = (
 
                     ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'],'', ''),
-                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],'', ''),
+                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),'', ''),
                     ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],'', ''),
                     fecha_inspecciones,
                     responsables,
@@ -2829,7 +2829,7 @@ class ReportSheet_lineas_anclajes:
                 datos_header = (
 
                     ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'], ''),
-                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],''),
+                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),''),
                     ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],''),
                     ("FECHA INSPECCIÓN: ",inspection['fecha_inspeccion'],''),
                     ("RESPONSABLE DE LA INSPECCIÓN: ",inspection['first_name']+" "+ inspection['last_name'],''),
@@ -2910,7 +2910,7 @@ class ReportSheet_lineas_anclajes:
                 datos_table_2 = (
 
                     ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'],'', ''),
-                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],'', ''),
+                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),'', ''),
                     ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],'', ''),
                     ("FECHA INSPECCIÓN: ",inspection['fecha_inspeccion'],''),
                     ("RESPONSABLE DE LA INSPECCIÓN: ",inspection['first_name']+" "+ inspection['last_name'], ''),
@@ -2998,7 +2998,7 @@ class ReportSheet_lineas_anclajes:
             datos_table_2 = (
 
                 ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'],'', ''),
-                ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],'', ''),
+                ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),'', ''),
                 ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],'', ''),
                 ("FECHA INSPECCIÓN: ",inspection['fecha_inspeccion'],''),
                 ("RESPONSABLE DE LA INSPECCIÓN: ",inspection['first_name']+" "+ inspection['last_name'], ''),
@@ -3069,7 +3069,7 @@ class ReportSheet_lineas_anclajes:
             datos_table_2 = (
 
                 ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'],'', ''),
-                ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],'', ''),
+                ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),'', ''),
                 ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],'', ''),
                 ("FECHA INSPECCIÓN: ",inspection['fecha_inspeccion'],''),
                 ("RESPONSABLE DE LA INSPECCIÓN: ",inspection['first_name']+" "+ inspection['last_name'], ''),
@@ -3298,7 +3298,7 @@ class ReportSheet_lineas_anclajes:
                 datos_table_2 = (
 
                     ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'],'', ''),
-                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],'', ''),
+                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),'', ''),
                     ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],'', ''),
                     fecha_inspecciones,
                     responsables,
@@ -3898,7 +3898,7 @@ class ReportSheet_casco:
                 datos_header = (
 
                     ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'], ''),
-                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],''),
+                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),''),
                     ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],''),
                     ("FECHA INSPECCIÓN: ",inspection['fecha_inspeccion'],''),
                     ("RESPONSABLE DE LA INSPECCIÓN: ",inspection['first_name']+" "+ inspection['last_name'],''),
@@ -3979,7 +3979,7 @@ class ReportSheet_casco:
                 datos_table_2 = (
 
                     ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'],'', ''),
-                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],'', ''),
+                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),'', ''),
                     ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],'', ''),
                     ("FECHA INSPECCIÓN: ",inspection['fecha_inspeccion'],''),
                     ("RESPONSABLE DE LA INSPECCIÓN: ",inspection['first_name']+" "+ inspection['last_name'], ''),
@@ -4067,7 +4067,7 @@ class ReportSheet_casco:
             datos_table_2 = (
 
                 ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'],'', ''),
-                ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],'', ''),
+                ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),'', ''),
                 ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],'', ''),
                 ("FECHA INSPECCIÓN: ",inspection['fecha_inspeccion'],''),
                 ("RESPONSABLE DE LA INSPECCIÓN: ",inspection['first_name']+" "+ inspection['last_name'], ''),
@@ -4138,7 +4138,7 @@ class ReportSheet_casco:
             datos_table_2 = (
 
                 ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'],'', ''),
-                ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],'', ''),
+                ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),'', ''),
                 ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],'', ''),
                 ("FECHA INSPECCIÓN: ",inspection['fecha_inspeccion'],''),
                 ("RESPONSABLE DE LA INSPECCIÓN: ",inspection['first_name']+" "+ inspection['last_name'], ''),
@@ -4366,7 +4366,7 @@ class ReportSheet_casco:
                 datos_table_2 = (
 
                     ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'],'', ''),
-                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],'', ''),
+                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),'', ''),
                     ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],'', ''),
                     fecha_inspecciones,
                     responsables,
@@ -5005,7 +5005,7 @@ class ReportSheet_accesorios:
                 datos_header = (
 
                     ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'], ''),
-                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],''),
+                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),''),
                     ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],''),
                     ("FECHA INSPECCIÓN: ",inspection['fecha_inspeccion'],''),
                     ("RESPONSABLE DE LA INSPECCIÓN: ",inspection['first_name']+" "+ inspection['last_name'],''),
@@ -5086,7 +5086,7 @@ class ReportSheet_accesorios:
                 datos_table_2 = (
 
                     ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'],'', ''),
-                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],'', ''),
+                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),'', ''),
                     ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],'', ''),
                     ("FECHA INSPECCIÓN: ",inspection['fecha_inspeccion'],''),
                     ("RESPONSABLE DE LA INSPECCIÓN: ",inspection['first_name']+" "+ inspection['last_name'], ''),
@@ -5174,7 +5174,7 @@ class ReportSheet_accesorios:
             datos_table_2 = (
 
                 ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'],'', ''),
-                ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],'', ''),
+                ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),'', ''),
                 ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],'', ''),
                 ("FECHA INSPECCIÓN: ",inspection['fecha_inspeccion'],''),
                 ("RESPONSABLE DE LA INSPECCIÓN: ",inspection['first_name']+" "+ inspection['last_name'], ''),
@@ -5245,7 +5245,7 @@ class ReportSheet_accesorios:
             datos_table_2 = (
 
                 ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'],'', ''),
-                ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],'', ''),
+                ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),'', ''),
                 ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],'', ''),
                 ("FECHA INSPECCIÓN: ",inspection['fecha_inspeccion'],''),
                 ("RESPONSABLE DE LA INSPECCIÓN: ",inspection['first_name']+" "+ inspection['last_name'], ''),
@@ -5475,7 +5475,7 @@ class ReportSheet_accesorios:
                 datos_table_2 = (
 
                     ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'],'', ''),
-                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],'', ''),
+                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),'', ''),
                     ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],'', ''),
                     fecha_inspecciones,
                     responsables,
@@ -6141,7 +6141,7 @@ class ReportSheet_sillas:
                 datos_header = (
 
                     ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'], ''),
-                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],''),
+                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),''),
                     ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],''),
                     ("FECHA INSPECCIÓN: ",inspection['fecha_inspeccion'],''),
                     ("RESPONSABLE DE LA INSPECCIÓN: ",inspection['first_name']+" "+ inspection['last_name'],''),
@@ -6222,7 +6222,7 @@ class ReportSheet_sillas:
                 datos_table_2 = (
 
                     ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'],'', ''),
-                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],'', ''),
+                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),'', ''),
                     ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],'', ''),
                     ("FECHA INSPECCIÓN: ",inspection['fecha_inspeccion'],''),
                     ("RESPONSABLE DE LA INSPECCIÓN: ",inspection['first_name']+" "+ inspection['last_name'], ''),
@@ -6311,7 +6311,7 @@ class ReportSheet_sillas:
             datos_table_2 = (
 
                 ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'],'', ''),
-                ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],'', ''),
+                ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),'', ''),
                 ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],'', ''),
                 ("FECHA INSPECCIÓN: ",inspection['fecha_inspeccion'],''),
                 ("RESPONSABLE DE LA INSPECCIÓN: ",inspection['first_name']+" "+ inspection['last_name'], ''),
@@ -6382,7 +6382,7 @@ class ReportSheet_sillas:
             datos_table_2 = (
 
                 ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'],'', ''),
-                ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],'', ''),
+                ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),'', ''),
                 ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],'', ''),
                 ("FECHA INSPECCIÓN: ",inspection['fecha_inspeccion'],''),
                 ("RESPONSABLE DE LA INSPECCIÓN: ",inspection['first_name']+" "+ inspection['last_name'], ''),
@@ -6612,7 +6612,7 @@ class ReportSheet_sillas:
                 datos_table_2 = (
 
                     ('FECHA DE FABRICACIÓN DEL EPI:', equip_info[0]['fecha_fabricacion'],'', ''),
-                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'],'', ''),
+                    ('NUMERO DE PRODUCTO:',  equip_info[0]['numero_producto'].zfill(7),'', ''),
                     ('CÓDIGO INTERNO:',  equip_info[0]['codigo_interno'],'', ''),
                     fecha_inspecciones,
                     responsables,

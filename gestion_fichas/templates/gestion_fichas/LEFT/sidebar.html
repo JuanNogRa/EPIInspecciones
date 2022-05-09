@@ -56,18 +56,18 @@
                     {% if user.is_authenticated %}
                         <div class="input-group icons">
                             {% if request.resolver_match.view_name == "profile" %}
-                                <span class="p-2 col-2 icon-active icon-container" ><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_profile.png' %}" alt =""></img> </span>
-                                {% if user.is_superuser %}
-                                    <a class ="side-bar--a active col-10" href="{% url 'admin:index' %}">{{request.user.get_full_name | title }}</a>
-                                {% else %}
+                                {% if user.is_inspector %}
+				<span class="p-2 col-2 icon-active icon-container" ><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_profile.png' %}" alt =""></img> </span>
                                     <a class ="side-bar--a active col-10" href="{% url 'profile' %}">{{request.user.get_full_name | title }}</a>
+                                {% comment %} {% else %}
+                                    <a class ="side-bar--a active col-10" href="{% url 'admin:index' %}">{{request.user.get_full_name | title }}</a> {% endcomment %}
                                 {% endif %}
                             {% else %}
+				{% if user.is_inspector %}
                                 <span class="p-2 col-2 "><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_profile.png' %}" alt =""></img> </span>
-                                {% if user.is_superuser %}
-                                    <a class ="side-bar--a col-10" href= "{% url 'admin:index' %}" >{{request.user.get_full_name | title }}</a>
-                                {% else %}
                                     <a class ="side-bar--a col-10" href= "{% url 'profile' %}" >{{request.user.get_full_name | title }}</a>
+                                {% comment %} {% else %}
+                                    <a class ="side-bar--a col-10" href= "{% url 'admin:index' %}" >{{request.user.get_full_name | title }}</a> {% endcomment %}
                                 {% endif %}
                                 
                             {% endif %}
@@ -106,7 +106,7 @@
                         {% if user.is_authenticated %}
                             <div class="input-group icons">
                             <span class="p-2 col-2  icon-container" ><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_documents.png' %}" alt =""></img> </span>
-                            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle side-bar--a col-10">HV</a>
+                            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle side-bar--a col-10">Inspeccionar Equipo</a>
                             </div>
                             {% if request.resolver_match.view_name == "buscar_hv" or request.resolver_match.view_name == "crear_hv" %}
                                     <ul class="collapse show list-unstyled" id="pageSubmenu">
@@ -116,10 +116,9 @@
                             
                                 <li>
                                 {% if request.resolver_match.view_name == "buscar_hv" %}
-                                    <a class ="side-bar--a active col-12 " href="{% url 'buscar_hv' %}">Buscar HV de un Equipo</a>
+                                    <a class ="side-bar--a active col-12 " href="{% url 'buscar_hv' %}">Inspeccionar Equipo</a>
                                 {% else %}
-                                    <a class ="side-bar--a col-12" href= "{% url 'buscar_hv' %}" >Buscar HV de un Equipo</a>
-                                
+                                    <a class ="side-bar--a col-12" href= "{% url 'buscar_hv' %}" >Inspeccionar Equipo</a>
                                 {% endif %}
                                 </li>
                         {% else %}
@@ -135,9 +134,9 @@
                             
                                 <li>
                                 {% if request.resolver_match.view_name == "buscar_hv" %}
-                                    <a class ="side-bar--a active col-12 " href="{% url 'buscar_hv' %}">Buscar HV de un Equipo</a>
+                                    <a class ="side-bar--a active col-12 " href="{% url 'buscar_hv' %}">Buscar Equipo</a>
                                 {% else %}
-                                    <a class ="side-bar--a col-12" href= "{% url 'buscar_hv' %}" >Buscar HV de un Equipo</a>
+                                    <a class ="side-bar--a col-12" href= "{% url 'buscar_hv' %}" >Buscar Equipo</a>
                                 
                                 {% endif %}
                                 </li>
@@ -147,10 +146,10 @@
                             <li> 
 
                                 {% if request.resolver_match.view_name == "crear_hv" %}
-                                <a class ="side-bar--a active col-12" href="{% url 'crear_hv' %}">Crear HV de un Equipo</a>
+                                <a class ="side-bar--a active col-12" href="{% url 'update_registro' %}">Actualizar Datos de Equipo</a>
                                 
                                 {% else %}
-                                <a class ="side-bar--a col-12" href= "{% url 'crear_hv' %}" >Crear HV de un Equipo</a>
+                                <a class ="side-bar--a col-12" href= "{% url 'update_registro' %}" >Actualizar Datos de Equipo</a>
                                 {% endif %}
                                 </li>
 

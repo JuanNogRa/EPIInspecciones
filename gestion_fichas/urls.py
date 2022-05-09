@@ -39,6 +39,7 @@ urlpatterns = [
     path('logout', views.logout, name= "logout"),
     path('registrar/',views.registrar, name = "registrar"),
     path('password/',views.change_password, name = "password"),
+    path('update_registro/',views.update_registro, name = "update_registro"),
     url(r'^reporte_ficha_pdf/(?P<id_equipo>[0-9]+)/(?P<flag>[[0-1])/(?P<inspeccion_numero>[[0-9]+)/(?P<equipo_alturas>\w+)/(?P<Activate_photo>\w+)$',ReporteFichaPDF.as_view(), name="reporte_ficha_pdf"),
     #path("protected/", include("protected_media.urls")),
     #path('__debug__/', include(debug_toolbar.urls)),

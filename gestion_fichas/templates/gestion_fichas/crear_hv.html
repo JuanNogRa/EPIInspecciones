@@ -5,7 +5,7 @@
 {% load myfilters %}
 
 {% block title %}
-Hello World
+Crear registro
 
 {% endblock %}
 
@@ -14,8 +14,8 @@ Hello World
 
 <div class="content-main">
           
-            <h1>Crear la hoja de vida de un equipo</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <h1>Registrar datos del nuevo equipo</h1>
+            <p>Esta es una herramienta para los inspectores para que puedan adicionar la información relacionada al producto cuando es puesto en marcha.</p>
             
             <div class="line"></div>
 
@@ -46,19 +46,11 @@ Hello World
                 <div class="card">
                     <div class="card-body">
 
-                        <h4 class="card-subtitle">Creación hoja de vida del producto</h4>
+                        <h4 class="card-subtitle">Actualizar datos del equipo</h4>
                         {% comment %} <h5 class="card-subtitle">made with bootstrap elements</h5> {% endcomment %}
                         <form class="form pt-3" method = "POST">
                             {% csrf_token %}
-                            <div class="form-group">
-                                <label>Seleccione el equipo de altura</label>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon11"><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_height_equipment.png' %}" alt =""></img> </span>
-                                    </div>
-                                    {{ form.equipo_alturas|add:'class="form-control" placeholder="Selección de equipo"' }}
-                                </div>
-                            </div>   
+
                             <div class="form-group">
                                 <label>Lote de fabricación</label>
                                 <div class="input-group mb-3">
@@ -75,21 +67,21 @@ Hello World
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            {% comment %} <div class="form-group">
                                 <label>Número de equipos a agregar</label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon11"><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_plus.png' %}" alt =""></img> </span>
                                     </div>
-                                    {% comment %} {{ form.numero_producto|add:'class="form-control" placeholder="Número del producto"' }} {% endcomment %}
-                                    {% comment %} <input type="text" class="form-control" placeholder="Número del producto" aria-label="Número del producto" aria-describedby="basic-addon11"> {% endcomment %}
+                                     {{ form.numero_producto|add:'class="form-control" placeholder="Número del producto"' }} 
+                                     <input type="text" class="form-control" placeholder="Número del producto" aria-label="Número del producto" aria-describedby="basic-addon11"> 
 
-                                    {% comment %} {{ form.cantidad_productos_agregar|addclass:'"form-control'|placeholder:'Productos a adicionar'}} {% endcomment %}
+                                    {{ form.cantidad_productos_agregar|addclass:'"form-control'|placeholder:'Productos a adicionar'}} 
                                     {{ form.cantidad_productos_agregar|add:'class="form-control" placeholder="Productos a agregar"' }}
 
-                                    {% comment %} <input type="text" class="form-control" placeholder="Número del producto" aria-label="Número del producto" aria-describedby="basic-addon11"> {% endcomment %}
+                                     <input type="text" class="form-control" placeholder="Número del producto" aria-label="Número del producto" aria-describedby="basic-addon11"> 
                                 </div>
-                            </div>
+                            </div> {% endcomment %}
                             
 
                             <div class="form-group">
@@ -103,6 +95,7 @@ Hello World
                                     {% comment %} <input type="text" class="form-control" placeholder="Código interno" aria-label="Password" aria-describedby="basic-addon33"> {% endcomment %}
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label>Fecha de puesta en marcha</label>
                                 <div class="input-group mb-3">
@@ -145,7 +138,7 @@ Hello World
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon22"><img class="icon-sidebar " src = "{% static 'gestion_fichas/img/icons/icon_personal.png' %}" alt =""></img> </span>
                                     </div>
-                                    {{ form.correo|add:'class="form-control" placeholder="Correo de contacto"' }}
+                                    {{ form.correo|add:'class="form-control" placeholder="Correo de contacto (Opcional)"' }}
                             
                                     {% comment %} <input  class="form-control" placeholder="Personal" aria-label="Email" aria-describedby="basic-addon22"> {% endcomment %}
                                 </div>
@@ -161,7 +154,7 @@ Hello World
                                    
                                     </div>
                                    
-                                    {{ form.telefono|add:'class="form-control" placeholder="Teléfono de contacto"' }}
+                                    {{ form.telefono|add:'class="form-control" placeholder="Teléfono de contacto (Opcional)"' }}
                             
                                     {% comment %} <input  class="form-control" placeholder="Personal" aria-label="Email" aria-describedby="basic-addon22"> {% endcomment %}
                                 </div>
@@ -184,7 +177,7 @@ Hello World
                                     {% comment %} <button type="submit" class="btn btn-success mr-2">Crear</button> {% endcomment %}
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-success col-sm-12 col-md-6 mt-2" data-toggle="modal" data-target="#exampleModalCenter">
-                                    Crear hoja de vida
+                                    Crear registro
                                     </button>
                                     
                             </div>
@@ -199,7 +192,7 @@ Hello World
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                    ¿Desea confirmar la creación de la hoja de vida? 
+                                    ¿Desea confirmar la creación del registro del equipo? 
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

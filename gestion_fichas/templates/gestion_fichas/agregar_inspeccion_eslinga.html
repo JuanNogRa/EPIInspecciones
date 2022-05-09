@@ -5,7 +5,7 @@
 {% load myfilters %}
 {% block title %}
 
-Hello World
+Inspección eslingas
 
 {% endblock %}
 {% block css_style %}
@@ -21,6 +21,9 @@ Hello World
 
 
 <div class="content-main">
+            <h1>Adicionar la ficha de inspección de eslingas para detección de caída, restricción y posicionamiento</h1>
+                    
+            <div class="line"></div>
             <!--PEN CONTENT     -->
             <div class="content">
             <!--content inner-->
@@ -66,7 +69,7 @@ Hello World
                                                 <h4 class="card-title">Inspector {{request.user.get_full_name|title}}</h4>
                                                 <div class="form-row mt-4">
                                                     <div class="col-12 col-sm-4 mt-4 mt-sm-0">
-                                                    <label>Código interno</label>
+                                                    <label>Numero de lote</label>
                                                     {% comment %} <input class="multisteps-form__input form-control "  type="text" placeholder="código interno" required/> {% endcomment %}
                                                     </div>
                 
@@ -95,12 +98,12 @@ Hello World
                                                         {% comment %} <input id ="numero_producto" class="multisteps-form__input form-control" type="text" placeholder="Lote del producto"/> {% endcomment %}
                                                         </div>
                                                     <div class="col-12 col-sm-4 mt-4 mt-sm-0">
-                                                        <label>Línea</label>
+                                                        <label>Tipo</label>
                                                         {% comment %} <input class="multisteps-form__input form-control "  type="text" placeholder="código interno" required/> {% endcomment %}
                                                         </div>
                     
                                                         <div class="col-12 col-sm-6">
-                                                            <label for="linea">{{equipo.referencias_eslingas.linea}}</label>
+                                                            <label for="linea">{{equipo.referencias_eslingas.tipo}}</label>
                                                         {% comment %} <input id ="numero_producto" class="multisteps-form__input form-control" type="text" placeholder="Lote del producto"/> {% endcomment %}
                                                         </div>
                                                     
